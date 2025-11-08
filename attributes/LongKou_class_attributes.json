@@ -1,0 +1,55 @@
+{
+  "Corn": {
+    "crop_type": "corn",
+    "vegetation_type": "grain",
+    "vegetation_color": "green",
+    "land_surface": "varied"
+  },
+  "Cotton": {
+    "crop_type": "cotton",
+    "vegetation_type": "fiber_crop",
+    "vegetation_color": "green",
+    "land_surface": "varied"
+  },
+  "Sesame": {
+    "crop_type": "sesame",
+    "vegetation_type": "oilseed_crop",
+    "vegetation_color": "green",
+    "land_surface": "varied"
+  },
+  "Broad-leaf soybean": {
+    "crop_type": "soybean",
+    "leaf_type": "broad",
+    "vegetation_color": "green",
+    "land_surface": "varied"
+  },
+  "Narrow-leaf soybean": {
+    "crop_type": "soybean",
+    "leaf_type": "narrow",
+    "vegetation_color": "green",
+    "land_surface": "varied"
+  },
+  "Rice": {
+    "crop_type": "rice",
+    "vegetation_type": "grain",
+    "vegetation_color": "green",
+    "land_surface": "varied"
+  },
+  "Water": {
+    "land_type": "water_body",
+    "water_type": "varied",
+    "water_color": "varied",
+    "land_surface": "varied"
+  },
+  "Roads and houses": {
+    "land_type": "mixed_use_area",
+    "structures": "houses",
+    "structures_color": "assorted",
+    "land_surface": "varied"
+  },
+  "Mixed weed": {
+    "vegetation_type": "weed",
+    "vegetation_color": "varied",
+    "land_surface": "varied"
+  }
+}
