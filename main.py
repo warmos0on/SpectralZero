@@ -1,4 +1,5 @@
 import argparse
+#用于解析命令行参数
 import numpy as np
 import torch
 import torch.utils.data
@@ -16,12 +17,13 @@ def entry(args, log: loger.Logger):
     seed = args["random_seed"]
     # Fixed Seed
     utils.fixed_seed(seed)
-    
+    # 设置numpy打印选项，显示所有数据，不换行
     np.set_printoptions(threshold=np.inf, linewidth=np.inf)
     # 读取数据集，返回HSI, ground truth, label-classes对
     HSI, gt, label_value = datasets.get_dataset(dataset_name=args["dataset"])
     # 返回seen unseen的label-classes对
     label_value, seen_label_name, unseen_label_name = utils.reloc_class(label_value, args["unseen_classes"])
+    # 更新args，添加class_num和bands
     args.update({'class_num': np.max(gt), 'bands': HSI.shape[-1]})
     # 获取text embedding和新的args
     text_embedding, args, train_att = extract(label_value, args)
@@ -88,11 +90,14 @@ def entry(args, log: loger.Logger):
     
 
 if __name__ == "__main__":
+    # 解析命令行参数
     args = argparse.ArgumentParser(description="Dataset Choise")
+    # 数据集选择
     args.add_argument("--dataset", type=str, default="Houston", choices=["Indian", "Houston", "LongKou"])
+    #将命令行参数转换为字典格式，方便后续使用
     args = vars(args.parse_args())
 
     params = utils.get_config(f"./config/{args['dataset']}.json")
-
+    # 设置日志记录器
     logs = loger.Logger(minimum_level="INFO", log_path=r"./log_" + params["dataset"] + ".txt")
     entry(params, logs)

@@ -212,7 +212,11 @@ class SpectralZero(nn.Module):
         cosine_similar = logit_scale * ((1 - self.spectral_ratio) * spatital_cossim + self.spectral_ratio * spectral_cossim)
 
         if self.training:
-            cls_loss = self.ce_loss(cls_head, label.long())
+            # --- 把原来那行 cls_loss 换成下面这两行 ---
+            fixed_label = label.long() - 2
+            cls_loss = self.ce_loss(cls_head, fixed_label)
+            # ------------------------------------------
+            
             clip_label = torch.arange(cosine_similar.size(0)).long().to(device)
             clip_loss = self.ce_loss(cosine_similar, clip_label)
             return cls_loss, clip_loss, cls_head

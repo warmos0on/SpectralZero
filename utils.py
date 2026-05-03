@@ -16,7 +16,15 @@ def read_mat(mat_dir: str) \
     -----------------------------------------
     Returns: ndarray data.
     """
-    mat = io.loadmat(mat_dir)
+    try:
+        mat = io.loadmat(mat_dir)
+    except NotImplementedError:
+        # 遇到 v7.3 格式报错时，自动切换为 mat73 库来强行解析
+        import mat73
+        mat = mat73.loadmat(mat_dir)
+    except Exception as e:
+        print(f"数据读取遭遇未知错误: {e}")
+        raise e
     for data in mat.values():
         if type(data) == np.ndarray:
             numpy_data = np.array(data)
