@@ -1,5 +1,4 @@
 import torch
-import torch.optim as optim
 import numpy as np
 
 import utils
@@ -8,20 +7,22 @@ import os
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 
 
-def train_pipeline(model, text_projection, train_dataset, epoch, hyperparams):
+def train_pipeline(model, text_projection, train_dataset, epoch, hyperparams, optimizer):
     model.train()
     LEARNING_RATE, device = hyperparams["lr"], hyperparams["device"]
     lambda_clip = hyperparams["lambda_clip"]
-    
-    optimizer = optim.AdamW(model.parameters(), lr=LEARNING_RATE)
+
     pre, tar = [], []
     
     for batch_data, batch_label in train_dataset:
         optimizer.zero_grad()
-        
+
         batch_data, batch_label = batch_data.to(device), (batch_label - 1).int().to(device)
-        text_input = text_projection[batch_label.long()]
-        
+        if hyperparams.get("use_unseen_negatives", True):
+            # 训练时把完整文本矩阵（seen+unseen）作为类别空间，unseen 仅作负类
+            text_input = text_projection
+        else:
+            text_input = text_projection[batch_label.long()]
         cls_loss, clip_loss, pred = model.forward(batch_data, text_input, batch_label)
         loss = lambda_clip * clip_loss + (1 - lambda_clip) * cls_loss
         
@@ -30,7 +31,7 @@ def train_pipeline(model, text_projection, train_dataset, epoch, hyperparams):
         pre.extend(torch.argmax(pred, dim=1).cpu().numpy())
         tar.extend(batch_label.cpu().numpy())
     # print('loss: {:.6f}, loss_cls: {:.6f}, loss_clip: {:.6f}'.format(loss.item(), cls_loss.item(), clip_loss.item()))
-    train_OA = np.sum(pre == tar) / len(tar) * 100
+    train_OA = np.sum(np.array(pre) == np.array(tar)) / len(tar) * 100
     train_msg = "[epoch: {:4}]  Train Accuracy: {:.5f} | train sample number: {:6}".format(epoch, train_OA, len(tar))
     print(train_msg)
     return model, np.array(pre), np.array(tar)

@@ -178,7 +178,12 @@ class SpectralZero(nn.Module):
         self.device = hyper["device"]
         dataset = hyper["dataset"]
 
-        self.spectral_ratio = hyper["spectral_ratio"]
+        self.spectral_ratio = hyper.get("spectral_ratio", 0.2)
+        self.dynamic_fusion = hyper.get("dynamic_fusion", True)
+        self.fusion_temperature = hyper.get("fusion_temperature", 0.07)
+        self.fusion_prior_strength = hyper.get("fusion_prior_strength", 1.0)
+        self.fusion_min_weight = hyper.get("fusion_min_weight", 0.05)
+        self.latest_spectral_weight = None
         self.visual = SpectralEx(1, 8, 16, vision_patch_size, inchannel, hyper["vision_dim"], dataset)
         self.final_pro = FinalOut(hyper["vision_dim"], embed_dim, num_classes, hyper["spectral_dim"])
 
@@ -196,6 +201,37 @@ class SpectralZero(nn.Module):
     def encode_image(self, image):
         return self.visual(image.type(self.dtype))
 
+    def _branch_reliability(self, cosine_sim):
+        class_num = cosine_sim.size(1)
+        if class_num == 1:
+            return torch.ones(cosine_sim.size(0), 1, device=cosine_sim.device, dtype=cosine_sim.dtype)
+
+        temperature = max(float(self.fusion_temperature), 1e-6)
+        prob = F.softmax(cosine_sim / temperature, dim=1)
+        top2 = torch.topk(prob, k=2, dim=1).values
+        confidence = top2[:, 0]
+        margin = top2[:, 0] - top2[:, 1]
+        entropy = -(prob * torch.log(prob.clamp_min(1e-8))).sum(dim=1) / np.log(class_num)
+        global_reliability = (confidence + margin + (1.0 - entropy)) / 3.0
+        reliability = 0.5 * global_reliability.unsqueeze(1) + 0.5 * prob
+        return reliability.clamp(1e-6, 1.0)
+
+    def _dynamic_fuse(self, spatital_cossim, spectral_cossim):
+        spatial_reliability = self._branch_reliability(spatital_cossim)
+        spectral_reliability = self._branch_reliability(spectral_cossim)
+
+        prior_strength = max(float(self.fusion_prior_strength), 1e-6)
+        spatial_prior = max(1.0 - float(self.spectral_ratio), 1e-6) ** prior_strength
+        spectral_prior = max(float(self.spectral_ratio), 1e-6) ** prior_strength
+
+        spatial_score = spatial_reliability * spatial_prior
+        spectral_score = spectral_reliability * spectral_prior
+        spectral_weight = spectral_score / (spatial_score + spectral_score).clamp_min(1e-8)
+        min_weight = min(max(float(self.fusion_min_weight), 0.0), 0.49)
+        spectral_weight = spectral_weight.clamp(min_weight, 1.0 - min_weight)
+        self.latest_spectral_weight = spectral_weight.detach()
+        return (1.0 - spectral_weight) * spatital_cossim + spectral_weight * spectral_cossim
+
     def forward(self, image, text_project: torch.Tensor, label):
         device = self.device
         spatital_feature, spectral_feature = self.encode_image(image)
@@ -209,16 +245,22 @@ class SpectralZero(nn.Module):
         logit_scale = self.logit_scale.exp()
         spatital_cossim = spatital_project @ text_project.t()
         spectral_cossim = spectral_project @ text_project.t()
-        cosine_similar = logit_scale * ((1 - self.spectral_ratio) * spatital_cossim + self.spectral_ratio * spectral_cossim)
+        if self.dynamic_fusion:
+            fused_cossim = self._dynamic_fuse(spatital_cossim, spectral_cossim)
+        else:
+            fused_cossim = (1 - self.spectral_ratio) * spatital_cossim + self.spectral_ratio * spectral_cossim
+            self.latest_spectral_weight = None
+        cosine_similar = logit_scale * fused_cossim
 
         if self.training:
-            # --- 把原来那行 cls_loss 换成下面这两行 ---
-            fixed_label = label.long() - 2
-            cls_loss = self.ce_loss(cls_head, fixed_label)
-            # ------------------------------------------
-            
-            clip_label = torch.arange(cosine_similar.size(0)).long().to(device)
-            clip_loss = self.ce_loss(cosine_similar, clip_label)
+            cls_loss = self.ce_loss(cls_head, label.long())
+            if self.hyperparams.get("use_unseen_negatives", True):
+                # 列空间 = 完整文本（seen+unseen），正样本列 = 真实 seen 类索引
+                clip_loss = self.ce_loss(cosine_similar, label.long())
+            else:
+                # 仅 seen 文本对齐（原始协议），正样本列 = batch 内样本顺序
+                clip_label = torch.arange(cosine_similar.size(0)).long().to(device)
+                clip_loss = self.ce_loss(cosine_similar, clip_label)
             return cls_loss, clip_loss, cls_head
         else:
             _, pred = torch.max(F.softmax(cosine_similar, dim=1), dim=1)

@@ -160,6 +160,6 @@ def reloc_class(classes: dict, unseen_class: list):
 
 
 def get_config(dirs: str):
-    with open(dirs, "r") as fig:
+    with open(dirs, "r", encoding="utf-8-sig") as fig:
         params = json.loads(fig.read())
     return params

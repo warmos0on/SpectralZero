@@ -1,10 +1,10 @@
 {
-  "dataset": "Houston",
+  "dataset": "LongKou",
   "dataroot": "./data",
   "train_num": 0.2,
   "attribute_dir": "./attributes/",
   "pretrain_loc": "./extract_text/ViT-L-14.pt",
-  "random_seed": 114514,    
+  "random_seed": 114514,
   "device": "cuda:0",
   "flip_augmentation": true,
   "radiation_augmentation": true,
@@ -22,11 +22,14 @@
   "dropout": 0.1,
   "spectral_dim": 128,
   "multi_args": true,
-  "unseen_classes": ["Healthy grass", "Synthetic grass", "Water"],
+  "unseen_classes": ["Corn", "Cotton", "Water"],
   "spectral_ratio": 0.2,
   "dynamic_fusion": true,
   "fusion_temperature": 0.07,
   "fusion_prior_strength": 1.0,
   "fusion_min_weight": 0.05,
+  "use_zscore": true,
+  "use_balanced_sampler": true,
+  "use_unseen_negatives": false,
   "only_name": false
 }
