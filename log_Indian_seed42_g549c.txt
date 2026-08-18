@@ -1,0 +1,78 @@
+[08-02 19:52:53] [INFO]: unseen per AA [100.], kappa is nan
+[08-02 19:53:08] [INFO]: unseen per AA [100.], kappa is nan
+[08-02 19:53:22] [INFO]: unseen per AA [100.], kappa is nan
+[08-02 19:53:36] [INFO]: unseen per AA [100.], kappa is nan
+[08-02 19:53:36] [CRITICAL]: Current experment have been finished.
+
+[08-02 20:07:13] [INFO]: unseen per AA [100.], kappa is nan
+[08-02 20:07:27] [INFO]: unseen per AA [100.], kappa is nan
+[08-02 20:07:41] [INFO]: unseen per AA [100.], kappa is nan
+[08-02 20:07:55] [INFO]: unseen per AA [100.], kappa is nan
+[08-02 20:07:55] [CRITICAL]: Current experment have been finished.
+
+[08-02 20:27:10] [INFO]: unseen per AA [100.], kappa is nan
+[08-02 20:27:44] [INFO]: unseen per AA [100.], kappa is nan
+[08-02 20:28:17] [INFO]: unseen per AA [100.], kappa is nan
+[08-02 20:28:53] [INFO]: unseen per AA [100.], kappa is nan
+[08-02 20:28:53] [CRITICAL]: Current experment have been finished.
+
+[08-03 03:46:42] [INFO]: unseen per AA [100.], kappa is nan
+[08-03 03:46:57] [INFO]: unseen per AA [100.], kappa is nan
+[08-03 03:47:11] [INFO]: unseen per AA [100.], kappa is nan
+[08-03 03:47:25] [INFO]: unseen per AA [100.], kappa is nan
+[08-03 03:47:25] [CRITICAL]: Current experment have been finished.
+
+[08-03 03:52:46] [INFO]: unseen per AA [100.], kappa is nan
+[08-03 03:53:00] [INFO]: unseen per AA [100.], kappa is nan
+[08-03 03:53:15] [INFO]: unseen per AA [100.], kappa is nan
+[08-03 03:53:29] [INFO]: unseen per AA [100.], kappa is nan
+[08-03 03:53:29] [CRITICAL]: Current experment have been finished.
+
+[08-03 04:12:43] [INFO]: unseen per AA [100.], kappa is nan
+[08-03 04:13:14] [INFO]: unseen per AA [100.], kappa is nan
+[08-03 04:13:45] [INFO]: unseen per AA [100.], kappa is nan
+[08-03 04:14:21] [INFO]: unseen per AA [100.], kappa is nan
+[08-03 04:14:21] [CRITICAL]: Current experment have been finished.
+
+[08-05 15:01:50] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 15:02:21] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 15:02:52] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 15:03:23] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 15:03:23] [CRITICAL]: Current experment have been finished.
+
+[08-05 15:41:48] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 15:42:18] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 15:42:49] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 15:43:13] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 15:43:13] [CRITICAL]: Current experment have been finished.
+
+[08-05 18:53:16] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 18:53:47] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 18:54:18] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 18:54:41] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 18:54:41] [CRITICAL]: Current experment have been finished.
+
+[08-05 18:56:54] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 18:57:24] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 18:57:56] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 18:58:28] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 18:58:28] [CRITICAL]: Current experment have been finished.
+
+[08-05 20:21:30] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 20:21:30] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 20:22:02] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 20:22:02] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 20:22:33] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 20:22:33] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 20:23:05] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 20:23:05] [CRITICAL]: Current experment have been finished.
+
+[08-05 20:23:05] [INFO]: unseen per AA [100.], kappa is nan
+[08-05 20:23:05] [CRITICAL]: Current experment have been finished.
+
+[08-18 15:17:08] [INFO]: unseen per AA [100.], kappa is nan
+[08-18 15:17:54] [INFO]: unseen per AA [100.], kappa is nan
+[08-18 15:18:39] [INFO]: unseen per AA [100.], kappa is nan
+[08-18 15:19:30] [INFO]: unseen per AA [100.], kappa is nan
+[08-18 15:19:30] [CRITICAL]: Current experment have been finished.
+

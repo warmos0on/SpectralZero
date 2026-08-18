@@ -1,0 +1,921 @@
+===== PAGE 1 =====
+IEEETRANSACTIONSONGEOSCIENCEANDREMOTESENSING,VOL.64,2026 5507016
+SpectralZero: Text-Driven Spectral–Spatial
+Alignment for Zero-Shot Hyperspectral
+Image Classification
+Yang Xia , Xia Yue , Xuanzhi Liu , Ning Chen , Hui Liu , Jun Yue , Member, IEEE,
+and Leyuan Fang , Senior Member, IEEE
+Abstract—Recently, deep learning-based hyperspectral image classificationtasks,exhibitingsuperiorrecognitionaccuracyand
+(HSI) classification methods have witnessed significant advance- generalizationperformance.Thecodewillbeavailableathttps://
+ments. However, existing approaches predominantly focus on github.com/xiayang124/SpectralZero
+feature modeling for seen classes during the training phase,
+Index Terms—Cross-modal alignment, hyperspectral image
+whiletheexplorationofgeneralizationandtransfermechanisms
+(HSI) classification, zero-shot classification.
+toward unseen land-cover categories remains limited. As a
+result,thesemethodsexhibitpooradaptabilityandgeneralization NOMENCLATURE
+performanceinzero-shotscenarios.Toaddressthischallenge,we
+propose a novel zero-shot HSI classification framework called
+D HSI dataset D with image I and label
+SpectralZero that leverages the strong generalization capabil-
+ity of large language models (LLMs) to compensate for the set L.
+absence of semantic information in unseen classes. Moreover, I HSI I ∈RH×W×C.
+our framework explicitly captures the synergistic relationship H Height of the HSI.
+between spatial and spectral features to facilitate knowledge
+W Width of the HSI.
+transfer from seen to unseen categories. Specifically, the pro-
+C Number of spectral bands.
+posed framework comprises two key modules: semantic prompt
+enrichment (SPE) and spectral–spatial union extraction (SSUE).
+LN Setofallclasslabels,LN ={l1,l2,...,lN}.
+SPEutilizesLLMstogeneratefine-grainedsemanticdescriptions p Patch size; each patch is of size p×p.
+of land-cover classes, mitigating the semantic representation IP Image patch cropped from I, IP ∈
+deficiency caused by the lack of samples in unseen categories. Rp×p×C.
+SSUE introduces two separate branches to independently model
+S Seen classes.
+spatialstructuresandspectralreflectancecharacteristics,thereby
+enhancing the model’s capacity to extract joint spatial–spectral U Unseen classes.
+representations. A major advantage of our method lies in its IP HSI patch from the seen classes subset.
+S
+ability to accurately classify unseen classes without requiring IP HSIpatchfromtheunseenclassessubset.
+U
+any samples during training or inference. Experiments on DP Patch-level dataset constructed from D,
+multiple public HSI datasets demonstrate that our approach
+DP ={IP,L}.
+consistently outperforms state-of-the-art methods in zero-shot
+DP Seen classes subset, DP ={IP,LK}.
+S S S S
+Received2November2025;revised10January2026;accepted25February DP Unseen classes subset, DP ={IP,LM}.
+U U U U
+2026. Date of publication 2 March 2026; date of current version 12 March K Number of seen classes.
+2026. This work was supported in part by the National Natural Science
+M Number of unseen classes.
+Foundation of China under Grant 62505008, Grant 62425109, and Grant
+U22B2014; in part by the Science and Technology Plan Project Fund of LK Label set of seen classes, LK =
+S S
+HunanProvinceunderGrant2022RSC3064;andinpartbyHunanProvincial {l1,l2,...,lK}.
+NaturalScienceFoundationofChinaunderGrant2025JJ40059.(YangXiaand LM L S abe S l set S of unseen classes, LM =
+XiaYuecontributedequallytothiswork.)(Correspondingauthor:NingChen.) U U
+Yang Xia and Xuanzhi Liu are with the Department of Geomatics Engi- {l1,l2,...,lM}.
+U U U
+neering,ChangshaUniversityofScienceandTechnology,Changsha410114, f Pretrained CLIP text encoder.
+t
+China(e-mail:xiayang0302@gmail.com;lxz031125@gmail.com).
+ot Textual semantic feature extracted by f.
+XiaYueiswiththeSchoolofComputerScienceandEngineering,Central t
+SouthUniversity,Changsha410083,China(e-mail:yuexia486@gmail.com). ospe Spectral feature extracted by the spectral
+Ning Chen is with the Institute of Remote Sensing and Geographic branch.
+Information System, Peking University, Beijing 100871, China (e-mail:
+ospa Spatial feature extracted by the spatial
+chenning0115@pku.edu.cn).
+HuiLiuiswiththeSchoolofRemoteSensingandGeomaticsEngineering, branch in SSUE.
+NanjingUniversityofInformationScienceandTechnology,Nanjing210044, Sspe Spectral cross-modal embedding space.
+China(e-mail:huil@pku.edu.cn).
+Sspa Spatial cross-modal embedding space.
+Jun Yue is with the School of Automation, Central South University,
+Changsha410083,China(e-mail:junyue@csu.edu.cn). Mspe Similarity matrix in the spectral embed-
+Leyuan Fang is with the School of Artificial Intelligence and Robotics, ding space.
+Hunan University, Changsha 410082, China, and also with the Peng Cheng
+Mspa Similarity matrix in the spatial
+Laboratory,Shenzhen518000,China(e-mail:fangleyuan@gmail.com).
+DigitalObjectIdentifier10.1109/TGRS.2026.3669516 embedding space.
+1558-0644©2026IEEE.Allrightsreserved,includingrightsfortextanddatamining,andtrainingofartificialintelligenceand
+similartechnologies.Personaluseispermitted,butrepublication/redistributionrequiresIEEEpermission.
+Seehttps://www.ieee.org/publications/rights/index.htmlformoreinformation.
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 2 =====
+5507016 IEEETRANSACTIONSONGEOSCIENCEANDREMOTESENSING,VOL.64,2026
+M Unified similarity matrix after weighted or even complete absence of labeled samples for certain
+fusion of Mspe and Mspa. classes [11]. Moreover, surface variations induced by geo-
+M jth similarity score in the denominator logical activities or biological evolution, though effectively
+j
+of (3). captured by sensors, are difficult to annotate continuously
+oi Spectral–spatial joint feature. due to the high labor demands of long-term manual labeling,
+pcls Confidence (probability) vector for seen thereby exacerbating the emergence of zero-shot scenarios. In
+class prediction. such cases, traditional classification models often struggle to
+ospe p Projected spectral feature in the accuratelymodelthefeaturerepresentationsofunseenclasses,
+spectral–text space. leading to their misclassification as known categories and
+ospa p Projectedspatialfeatureinthespatial–text significantly impairing overall classification performance and
+space. generalization. Consequently, developing HSI classification
+ot p Projected text feature in the alignment methods that are robust under limited-sample or even zero-
+space. shot conditions has become an urgent and critical research
+W Spectral projection matrix. challenge.
+spe
+W Spatial projection matrix. To alleviate the issue of high annotation costs, researchers
+spa
+W Text projection matrix. haveproposedseverallimited-sampleHSIclassificationmeth-
+t
+ods. The goal of limited-sample classification is to achieve
+considerable classification performance but relying solely on
+I. INTRODUCTION
+very limited labeled HSI samples (e.g., as few as ten samples
+HYPERSPECTRAL images (HSI) offer rich spectral and per class for training). Liu et al. [12] constructed a 3D-CNN
+spatialinformation,providingsuperiordiscriminationof toextractHSIfeaturesandlearnametricspace,andcombined
+land-covertypescomparedtotraditionalmultispectralorRGB it with a nearest-neighbor classifier at the testing stage to
+imagery [1]. Their continuous high-resolution spectral bands perform HSI classification, achieving significant performance
+enable effective differentiation of visually similar classes, improvement in limited-sample scenarios. To mitigate the risk
+such as synthetic and natural grass, improving classification of model overfitting under limited data conditions, Xue et al.
+accuracy and reliability. HSI classification facilitates joint [13] proposed a more lightweight network architecture and
+spectral–spatialfeaturerepresentation,supportingapplications introduced positive and negative samples across different
+like water body classification [2], plant monitoring [3], and scales to enhance the generalization capability of the model.
+mineral identification [4]. However, the high dimensionality Moreover, considering that natural images (such as ImageNet
+of HSI poses significant challenges for feature extraction and [14]) possess substantially richer labeled data compared to
+classification, making efficient utilization of such data a key HSI, Li et al. [15] first pretrained a general spatial feature
+research focus. extractionnetworkusingnaturalimages,subsequentlytraining
+Early HSI classification methods primarily relied on man- a dedicated spectral classification branch with limited HSI
+ually designed spectral–spatial feature extraction techniques, samples. Nevertheless, these methods remain inadequate for
+employing classical machine learning algorithms such as effectively addressing situations in which certain categories
+support vector machines (SVMs) [5], random forests (RFs) are entirely absent from the training labels.
+[6], and K-nearest neighbors (K-NNs) [7]. However, these In recent years, zero-shot classification—originally intro-
+approaches,constrainedbyexpertheuristics,oftenfailtoyield duced in [16] to recognize unseen categories via language-
+optimal representations. With the advent of deep learning, based attributes—has garnered increasing attention. In this
+neural networks have shown a remarkable capacity for auto- paradigm,thelabelspacesoftrainingandtestingaremutually
+mated feature learning, significantly advancing classification exclusive, where the seen classes represent the categories
+performance. Chen et al. [8] introduced a 3-D convolutional available during training and the unseen classes denote novel
+neural network (3D-CNN) to jointly exploit spectral and categories that have never been observed by the model
+spatial information, achieving superior results. Zhong et al. but can be inferred through learned semantic relationships.
+[9] enhanced model stability and expressiveness through Mainstream approaches leverage image–text datasets such
+deeper architectures and residual connections. More recently, as ImageNet [14], CUB [17], and AwA [18], projecting
+Hong et al. [10] adopted the transformer’s global atten- visual and textual features into a shared semantic space to
+tion mechanism to model long-range spectral dependencies, enablecross-modalalignment.Representativemethodsinclude
+effectively addressing the locality limitations of conven- semantic output codes [19], which map images into seman-
+tionalconvolutionalmodelsandfurtherboostingclassification tic embeddings for nearest-neighbor classification, and deep
+accuracy. learning-based approaches [20], [21] that exploit large-scale
+Despite the significant progress achieved in HSI classifica- data to learn complex semantic relations. Generative models
+tion, existing models still heavily rely on large amounts of suchasGAN-basedframeworks[22]furtherimprovegeneral-
+labeled data for training and evaluation. In practical applica- ization by synthesizing features for unseen classes. However,
+tions, a single HSI scene often covers extensive geographic thesemodelsoftenrelyonlimitedtrainingdataandsmall-scale
+areas and contains diverse and complex land-cover types. architectures, constraining their semantic modeling capacity.
+The prohibitively high cost of manual annotation renders With advances in GPU computing and the rise of large-
+comprehensive labeling infeasible, resulting in severe scarcity scale pretrained models, traditional datasets are increasingly
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 3 =====
+XIAetal.:SpectralZero:TEXT-DRIVENSPECTRAL–SPATIALALIGNMENT 5507016
+inadequate.Toaddressthis,CLIP[23]wasproposed,leverag-
+ing large-scale web-sourced image–text pairs and contrastive
+learning to construct a unified semantic space, which has
+since been extended to tasks like semantic segmentation [24],
+image generation [25], [26], point cloud classification [27],
+andanomalydetection[28].Nonetheless,theseapproachesare
+primarily developed for RGB imagery and lack the capacity
+to capture rich spectral features in HSI, limiting their gener-
+alization in such domains.
+Several early efforts have explored zero-shot classification
+in HSI. Yue et al. [31] proposed a spectral–spatial recon-
+struction method to enhance discrimination between seen and
+unseen classes. However, this approach treats all unseen cat-
+egories as a single group, lacking fine-grained differentiation.
+Pang et al. [32] introduced a CLIP-based pseudo-labeling
+framework that mitigates noise through augmentation and
+refinement, improving stability without requiring manual
+annotation. Yet its exploitation of textual semantics remains
+limited, constraining visual-semantic representation learning.
+To further exploit the semantic transfer capability inherent in
+textual information, Zhang et al. [30] proposed using textual
+descriptionsasauxiliaryinformationtofacilitateclassification
+capability transfer between different datasets. Although this
+approach effectively leverages side information, it still relies Fig. 1. Difference among three models. (a) Prompt learning-based zero-
+on class labels during training and is restricted to scenarios shotclassification(suchasHyperFree[29]),whichstillrequiresclass-related
+samplesaspromptsfortesting;(b)domaingeneralization(see[30]),whichis
+whereclassesacrossdatasetsareidentical,makingitchalleng-
+conductedwithinthesamedatasetandcategorysettings;and(c)text-guidance
+ing to extend to zero-shot classification settings. To overcome zero-shot classification (ours), where the train and test classes are disjoint,
+dataset-specific training dependencies, Li et al. [29] devel- and the model identifies different land-cover categories through cross-class
+knowledgetransfer.
+opedHyperFree,whichutilizesaspectral-widedictionaryand
+minimal prompts to generalize across HSI datasets. Despite
+its effectiveness, HyperFree still depends on class-specific decoupled spectral feature extraction pathway, where global
+promptsatinference,thusfailingtoidentifyunseencategories spatial pooling suppresses structural interference, and dual
+in strict zero-shot settings. A comparison of these approaches projectionspacescomputeimage–textsimilaritymatricesfrom
+has been shown in Fig. 1. In summary, the current research spatialandspectralfeaturesindependently.Thesearefusedvia
+on zero-shot classification of HSI remains at an exploratory proportional weighting to form a unified similarity matrix for
+stage and faces several notable limitations. contrastivelearning,therebyimprovingcross-modalalignment
+1) MostmainstreamZSCmethodsareprimarilytrainedon and unseen class classification. Together, the SPE module and
+RGBimagery,failingtofullymodelandexploittherich SSUE module synergistically strengthen the model’s capacity
+spectral information inherent to HSIs, thereby limiting for semantic modeling and spectral representation, facilitating
+theirgeneralizationcapabilityinhyperspectralscenarios. robust generalization to novel categories.
+2) Existing HSI-ZSC models (see [32]) exhibit 1) This article proposes a novel HSI classification frame-
+inadequate integration and utilization of auxiliary work called SpectralZero tailored for zero-shot sce-
+information—such as textual semantics or class narios. By leveraging the generalization capability of
+attribute descriptions—thus, underutilizing the potential large language models (LLMs), the framework effec-
+ofsemanticknowledgeinenhancingclassdiscrimination tively addresses the information deficiency of unseen
+and knowledge transfer. classes. Furthermore, it exploits spatial–spectral fea-
+To tackle the aforementioned challenges, this article pro- tures to facilitate knowledge transfer from seen to
+poses a novel framework for HSI zero-shot classification, unseencategories.Experimentalresultsonmultiplepub-
+termed semantic-driven spectral–spatial alignment (Spec- licly available datasets demonstrate that the proposed
+tralZero).SpectralZeroenableseffectiverecognitionofunseen framework outperforms existing zero-shot classification
+land-cover categories by leveraging labeled samples from methods,validatingitseffectivenessandgeneralizability.
+seen classes and associated auxiliary semantics, addressing 2) An SPE module is introduced to generate fine-grained
+limitations due to data scarcity or annotation costs. The semantic descriptions of land-cover classes based on
+framework comprises two key components: the semantic LLMs, mitigating the lack of visual information for
+prompt enrichment (SPE) module and the spectral–spatial unseen categories. In addition, the module embeds
+union extraction (SSUE) module. SPE module enriches cat- auxiliary semantic information into a unified semantic
+egory representations with visual attribute descriptions to space via the CLIP model, thereby constructing implicit
+enhance semantic generalization. SSUE module introduces a semantic associations between seen and unseen classes.
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 4 =====
+5507016 IEEETRANSACTIONSONGEOSCIENCEANDREMOTESENSING,VOL.64,2026
+Fig.2. FrameworkoftheproposedSpectralZero.TheSPEmoduleencodesrichnaturallanguagedescriptionsintosemanticfeaturesandprojectstheminto
+bothspatialandspectralembeddingspaces.TheSSUEmoduledecouplesimagefeaturesintospatialandspectralcomponents,whicharethenalignedwith
+the corresponding semantic features. The similarity matrices from the two aligned spaces are fused and used to compute the loss during training. During
+testing,classificationisperformedbyselectingtheclassindexcorrespondingtothemaximumvalueinthefusedsimilaritymatrix.
+This significantly enhances the model’s capacity for the image, and C is the number of spectral bands. The set of
+semantic modeling and recognition, providing critical labels is denoted as LN = {l1,l2,...,lN}. To facilitate model
+support for zero-shot classification tasks. trainingandevaluation,weextractimagepatchesofsize p×p
+3) An SSUE module is designed to improve the model’s centered on specific pixels from image I in dataset D, and
+abilitytoextractspatialandspectralfeaturesunderzero- associate them with corresponding class labels to construct
+shotconditions.Themoduleconsistsoftwoindependent a subset DP = {IP,L}, where IP ∈ Rp×p×C. According to
+branches: a spatial branch for capturing structural infor- the zero-shot classification setting, the subset DP is further
+mation of land covers, and a spectral branch for divided into seen classes subset DP = {IP,LK} and unseen
+S S S
+explicitly modeling the rich reflectance characteristics classes subset DP = {IP,LM}, where S and U denote the
+U U U
+inherent in hyperspectral data. These features are then seen and unseen classes, K and M denote the number of
+deeply fused to generate a unified embedding capa- seen and unseen classes, respectively. Each sample from seen
+ble of jointly expressing spatial and spectral attributes, classes subset contains an image patch IP ∈ Rp×p×C, a
+S
+such as color and material properties, thereby signifi- label set LK = {l1,l2,...,lK} ∈ LN. The construction of the
+S S S S
+cantlyenhancingclassificationperformanceinzero-shot unseen class subset is similar to that of the seen classes,
+scenarios. including image patches IP ∈ Rp×p×C, the unseen label set
+U
+LM ={l1,l2,...,lM}∈LN.
+U U U U
+II. METHODOLOGY This article focuses on the strict zero-shot classification
+setting, where the label sets of seen and unseen classes are
+Thissectionpresentstheoverallarchitectureoftheproposed
+disjoint and satisfying
+SpectralZeroframeworkandprovidesadetaileddescriptionof
+its two core components: SPE module and SSUE module. In
+LK ∩LM =∅. (1)
+addition,SectionII-Dfurtherelaboratesontheimplementation S U
+details of the model. The overall pipeline of SpectralZero is
+The goal of strict zero-shot classification is to ensure that
+illustrated in Fig. 2.
+no unseen class samples participate in training. Under this
+constraint, only the seen class subset DP is used as training
+S
+A. Overview data to learn a mapping function
+Given an HSI dataset D = {I,L}, where I ∈ RH×W×C
+denotes an HSI, H and W represent the height and width of f :IP →IP (2)
+S U
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 5 =====
+XIAetal.:SpectralZero:TEXT-DRIVENSPECTRAL–SPATIALALIGNMENT 5507016
+TABLEI matrix is then optimized via the InfoNCE loss function [33].
+HYPERPARAMETERDEFINITIONS The formula of the InfoNCE loss is defined as follows:
+exp(M/τ)
+L =−log (3)
+InfoNCE PB
+exp
+(cid:0)
+M /τ
+(cid:1)
+j=1 j
+where τ is a learnable temperature parameter that controls the
+smoothness of the contrast during training and B is the batch
+size.
+During the testing phase, the semantic-enhanced texts and
+HSI data from the unseen class dataset are, respectively, fed
+into the SPE module and the SSUE module to obtain the
+corresponding text features and dual-branch spectral–spatial
+features. These three features are then aligned to generate a
+fused similarity matrix, as illustrated in Fig. 3(b). The model
+determinesthepredictedclassofeachsamplebyselectingthe
+indexofthemaximumvalueineachrowofthefusedsimilarity
+matrix,therebycompletingthezero-shotclassificationtaskfor
+HSI.
+B. SPE Module
+This section introduces the SPE module, which expands
+Fig.3. Similaritymatrixoftheproposedmodelinboththetrainingandtesting class labels into attribute-level natural language descriptions
+stages. (a) Training stage. The features from the two different modalities with scale-consistent cues to enhance textual expressiveness
+are aligned using cosine similarity to generate a similarity matrix. Higher
+similaritycorrespondstoadarkercolorinthematrix.(b)Testingstage.The for cross-modal alignment. Specifically, taking the IP dataset,
+similaritymatrixisgeneratedinthesamemannerasinthetrainingstage,and we first define multiple visual attribute dimensions for every
+prediction results are obtained by selecting the indices corresponding to the class, including shape (e.g., land surface), object type (e.g.,
+maximumvalues.
+crop type), and color (represent spectral information, e.g.,
+vegetation color), and provide relevant visual descriptions for
+such that the function f enables accurate classification on the eachattribute.Fine-grainedclassdescriptionsaregeneratedby
+unseen subset DP. For clarity, we summarize key notations a pretrained LLM using a fixed prompt template and no post-
+U
+and hyperparameters in Nomenclature and Table I. processing (e.g., cleaning or filtering) and no manual curation
+First, the proposed SpectralZero framework consists of two areapplied.Foreachdataset,weusethesameprompttemplate
+main stages: training and testing. During the training stage, to ensure consistent semantic generation across classes and
+the class name and corresponding HSI data IP from the datasets. Then, using a class-prepending strategy, the class
+S
+seen classes are input into the SPE module and the SSUE nameiscombinedwitheachvisualattributedescriptionwhich
+module, respectively. Specifically, the SPE module leverages are listed in Table II to generate a comprehensive SPE text
+the rich knowledge and contextual reasoning capability of T that systematically conveys attribute-level class semantics,
+pretrained LLMs, guided by in-context prompts, to automati- the prompting template and the attribute processing flow are
+cally generate semantically enhanced textual descriptions that shown in Fig. 4.
+provide richer visual-semantic expressions than the original To enhance the expressive ability of semantic prompts
+class names. Subsequently, these semantic-enhanced texts are and ensure the accuracy and richness of the generated texts
+fed into the pretrained CLIP text encoder f to accurately in capturing visual attributes of land-cover categories, SPE
+t
+extract textual semantic features ot with stronger discrimina- further utilizes a pretrained LLM to automatically generate
+tivecapability.Meanwhile,theSSUEmoduleinitiallyextracts fine-grained attribute descriptions covering multiple visual
+featuresfromtheHSIpatch,andtheresultinglow-dimensional dimensions,suchascolor,shape,material,andstructure,based
+features are separated into spectral and spatial branches. Each on class names and in-context prompts. Importantly, the text
+branchindependentlyperforms1-Dspectralfeatureextraction generation for seen and unseen classes uses only the class
+and spatial feature extraction with auxiliary classification, names and dataset-agnostic domain knowledge, and does not
+outputting spectral features ospe and spatial features ospa, access any pixels, masks, statistics, geographic metadata, or
+respectively. Subsequently, the extracted spatial features ospa image-derived cues from the target datasets. Thus, no visual
+and spectral features ospe are jointly input into the image or dataset-specific information from unseen classes is leaked
+projection to align with textual semantic features ot, thereby into training. This strategy not only significantly expands the
+constructing two cross-modal embedding spaces, Sspa and semantic representation capacity of textual prompts but also
+Sspe. These visual projections are matched with text semantic establishesmorepreciseanddiscriminativedistinctionsamong
+projections ot to generate two similarity matrices, Mspa and classes within the semantic embedding space. By leveraging
+Mspe, as depicted in Fig. 3(a). Finally, a weighted fusion this semantic enrichment mechanism, the generated textual
+strategy is applied to combine these two similarity matrices descriptions achieve higher quality alignment with visual fea-
+into a unified similarity matrix M. This unified similarity tures in the semantic space, thereby effectively enhancing the
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 6 =====
+5507016 IEEETRANSACTIONSONGEOSCIENCEANDREMOTESENSING,VOL.64,2026
+TABLEII
+VISUALATTRIBUTEDESCRIPTIONS(IPDATASETFOREXAMPLE)
+output features are inherently entangled in terms of spatial
+informationandspectralresponses.Whensuchentangledrep-
+resentations are directly projected into a unified cross-modal
+embedding space, variations in spatial context may interfere
+with spectral semantics, resulting in semantic misalignment
+andreduceddiscriminabilityofcross-modalalignment.Mean-
+while, this coupling makes it difficult to explicitly and
+controllably adjust the relative contributions of spatial and
+spectral information during alignment. Therefore, we pro-
+pose the SSUE module to decouple the initial features and
+separately extract spatial information and spectral response
+characteristics, providing a more controllable representational
+basis for subsequent alignment and fusion. The proposed
+module comprises four subcomponents: a preliminary image
+Fig.4. Semanticenhancementtextgenerationworkflow.Wefirstprovidethe encoder, a 1-D spectral extraction branch, a spatial extrac-
+LLMwithapromptcontainingkeytermsandaskittogenerateattribute-level tion and classification branch, and a dual-branch alignment
+descriptions, such as shape, color, and vegetation category. These attributes
+similarity-weighted fusion mechanism.
+arethenconcatenatedwithapredefinedtemplatetoformanenrichedsemantic
+prompt,whichissubsequentlyfedintotheCLIPtextencodertoobtainreliable The preliminary image encoder is adopted from [30], com-
+textualfeaturerepresentations. prising multiple 3-D convolutional blocks designed to extract
+spectral–spatial joint features oi from input images. However,
+model’sunderstandingofimagecontentanditsdiscriminative this representation inherently mixes spatial and spectral infor-
+performance in zero-shot scenarios. Fig. 5 further illustrates mation, adversely affecting the precise extraction of image
+theprocessbywhichthemodeltransfersknowledgefromseen spectral features. Thus, we introduce a single-dimensional
+to unseen classes through linguistic information. spectral extraction branch (SSEB) within the SSUE module,
+Topreciselycapturethevisual-semanticinformationembed- aiming to reduce interference from spatial image features
+dedintheSPEtext,wefurtherintroducetheCLIPtextencoder and enhance the spectral extraction capability of the model.
+which is frozen to encode the enriched descriptions. The Specifically, this spectral extraction branch initially performs
+CLIPmodel,trainedonlarge-scaleimage–textpairs,possesses dimensionality reduction on preliminary features oi (extracted
+strong capabilities in textual understanding and semantic rep- by the preliminary image encoder) through a 3D-CNN layer,
+resentation. By leveraging the pretrained CLIP text encoder, generatingintermediatefeatureswithdimensionsC(cid:48)×H(cid:48)×W(cid:48).
+the model can extract accurate and discriminative textual Subsequently, global pooling is applied to aggregate these
+semantic features. Subsequently, the extracted textual features intermediate features along spatial dimensions into a 1-D
+are projected by a mapping head into two separate cross- spectral feature vector ospe. Next, the spectral vector under-
+modal embedding spaces within SSUE. These embeddings goes feature refinement through 1D-CNN layers to extract
+are then aligned with the spatial and spectral features of the local spectral features, followed by additional BN layers for
+image, respectively, to enable feature alignment and cross- capturing nonlinear spectral characteristics. Finally, the resul-
+modal classification. tant spectral features ospe are projected into the spatial–text
+cross-modalunionembeddingspaceSspeforsubsequentcross-
+C. Spectral–Spatial Union Feature Extraction Module modal alignment and similarity-weighted fusion.
+Although the preliminary 3D-CNN demonstrates strong Concurrently, to effectively extract and classify spatial fea-
+capability in learning spectral–spatial joint representations, its tures, the spectral–spatial joint features oi obtained by the
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 7 =====
+XIAetal.:SpectralZero:TEXT-DRIVENSPECTRAL–SPATIALALIGNMENT 5507016
+Fig.5. Visualizationoftheprojectionspacewherevisualandtextfeaturesarealigned.Visualfeaturesandtextualfeaturesaremappedintoasharedprojection
+space. Within this space, green shapes represent visual information and orange shapes denote textual information, with different geometric shapes used to
+distinguishdifferentcategories.Themappedseenandunseenclassessharevisualandtextualsemanticinformation,whichservesasanchorsforknowledge
+transfer.Meanwhile,underthealignmentconstraints,visualandtextualfeaturesfromthesamecategorymaintainhighsimilarity,whereasvisualfeaturesare
+pushedawayfromtextualfeaturesofdifferentcategories.
+preliminary image encoder are flattened into a 1-D feature spectral–textsimilaritymatrixMspe andspatial–textsimilarity
+vectoroi.Thisvectoristhensimultaneouslyprocessedthrough matrixMspa arecomputed.Tofurtherfusespectralandspatial
+two parallel pathways as follows. information, we employ a proportional weighting strategy to
+1) It is input to a fully connected classifier layer, yielding combine these two matrices into a fused similarity matrix M
+a class confidence vector pcls for seen classes. Cross- M=(1−λ )·sim (cid:0) ospa p,ot p(cid:1) +λ ·sim (cid:0) ospe p,ot p(cid:1) .
+sim sim
+entropy loss L is employed with ground-truth labels
+CE (6)
+for supervised training to facilitate optimization of the
+The resulting fused similarity matrix M is subsequently uti-
+preliminary image encoder.
+lizedtocomputetheInfoNCE[33]lossformodeloptimization
+2) Thevectorisprojectedintothespatial–textcross-modal
+duringtraining.Here,λ isatunablehyperparametertermed
+union embedding space Sspa, thus, supporting sub- the spectral similarity f s u im sion coefficient, with a value range
+sequent cross-modal feature alignment and similarity-
+of λ ∈[0,1]. sim(·) denotes the cosine similarity operation
+sim
+weighted fusion.
+used to measure similarity between two vectors. In the above,
+In the dual-branch similarity-weighted fusion mechanism, ospa p andospe p denotethespatialandspectralfeaturesafter
+the model simultaneously extracts image and textual features, projection,respectively,andot p denotestheprojectedtextual
+ultimately obtaining multimodal representations composed of features.Finally,theInfoNCElossiscombinedwiththecross-
+spectral, spatial, and textual semantic features. The spectral entropylossthroughweightedsummation,yieldingtheoverall
+featuresandtextualsemanticfeaturesareprojectedintoauni- loss function
+fied spectral–text cross-modal alignment space via projection
+L =λ ·L +(1−λ )·L (7)
+transformations total loss CE loss InfoNCE
+ospe p =W ·ospe where λ loss is a hyperparameter controlling the loss weight,
+spe termed the loss fusion coefficient, with a value range of
+ot p =W ·ot (4)
+t λ ∈[0,1]. This parameter dynamically balances supervised
+loss
+where ospe p and ot p represent the projected spectral and classification learning and contrastive learning during the
+text features, respectively, and W and W are the corre- training process.
+spe t
+sponding projection matrices for spectral and textual features.
+Similarly, spatial features and text features are projected into D. Implementation
+the spatial–text cross-modal alignment space as follows: To clearly illustrate the training implementation process of
+ospa p =W ·ospa the proposed model, Algorithm 1 presents the pseudocode for
+spa
+thecompletetrainingprocedureofthemodelcomposedofthe
+ot p =W ·ot (5)
+t SPEmoduleandSSUEmodule.IntheSPEmodule,themodel
+where ospa p denotes the projected spatial features, and W performs preliminary encoding of the image and separately
+spa
+represents the spatial feature projection matrix. These two extracts spectral and spatial features. The spectral features
+cross-modal spaces separately enable high-level alignment are encoded and projected through an independent branch,
+between HSI and text in the spectral and spatial dimen- while the spatial features are utilized both for generating aux-
+sions. After completing cross-modal feature alignment, the iliaryclassificationsignalsandforspatial-semanticalignment.
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 8 =====
+5507016 IEEETRANSACTIONSONGEOSCIENCEANDREMOTESENSING,VOL.64,2026
+Algorithm 1 SpectralZero With SPE Module and SSUE seen class for training, while all samples from unseen classes
+Module are used for testing. To ensure a fair and comprehensive
+Input: Training datasets DP =˚ IP,LM(cid:9) evaluation, we adopt random rotation for the unseen classes
+S S S
+Output: Trained model across folds and then keep the resulting splits fixed for all
+1: for all sample-pair (i s ,l s ) in D S P do experiments, such that each class is treated as unseen exactly
+2: // SSUE module once.
+3: // Extract initial visual feature a) Indian Pines: The IP dataset was collected by the
+4: oi ←visualEncoder(i s ) AVIRISsensorin1992.ItconsistsofanHSIofsize145×145
+5: // Extract spectral feature with 224 spectral bands, covering the electromagnetic spec-
+6: ospe ←singleSpectralExtract(oi) trum from 0.4 to 2.5 µm. Since some bands are located in
+7: // Extract spatial feature and classification signal water absorption regions, 24 bands (104–108, 150–163, and
+8: (ospa,pcls)←spatialFeatureExtract(oi) 220) were removed following standard practice, resulting in
+9: // Auxiliary classification signal 200effectivebands.Theimagemainlycoversagriculturaland
+10: L CE ←crossEntropyLoss(pcls,l s ) vegetation areas, with approximately two-thirds consisting of
+11: ospa p ←spatialProjectionHead(oi) crop-related land covers and the remaining one-third predom-
+12: ospe p ←spectralProjectionHead(ospe) inantly forests or mixed vegetation. A total of 16 classes are
+13: included, such as “Woods” and “Grass Trees.” We selected
+14: // SPE module 13 classes for the training set, while the remaining three
+15: t s ←generateEnrichmentText(Name,Attributes) classes were designated as the test set. The false-color image
+16: ot ←CLIPTextEncoder(t s ) and class labels are shown in Fig. 6.
+17: ot p ←textProjectionHead(ot) // Text projection b) Houston 2013: The Houston dataset is one of the
+18: benchmark datasets utilized in our study. It was acquired by
+19: // Alignment (spatial–text and spectral-text) the ITRES CASI-1500 sensor in 2013 over the University of
+20: Mspa ←cosineSimilarity(ot p,ospa p) Houston campus and its surrounding areas, comprising 144
+21: Mspe ←cosineSimilarity(ot p,ospe p) spectral bands ranging from 0.38 to 1.05 µm. The image
+22: dimension is 349×1905 pixels with a spatial resolution of
+23: // Similarity fusion 2.5 m. This dataset primarily represents typical urban land-
+24: M ←(1−λ sim )Mspa+λ sim Mspe cover types, with 15 annotated classes, including “Highway”
+25: L InfoNCE ←InfoNCELoss(M) and “Commercial.” We selected 12 classes as the training set,
+26: // Fusion loss and the remaining three classes were reserved for the test set.
+27: L total ←λ loss L CE +(1−λ loss )L InfoNCE Thefalse-colorimageandclasslabelsareillustratedinFig.7.
+28: c) WHU-Hi-LongKou [34], [35]: The WHHL dataset
+29: // Update was acquired in 2018 over Longkou Town, Hubei Province,
+30: L total .backward() China,usingaHeadwallNano-Hyperspechyperspectralimag-
+31: update(model.parameter) ing system mounted on an uncrewed aerial vehicle (UAV)
+32: end for platform at approximately 500-m altitude. The collected
+images underwent radiometric calibration and geometric
+correction, ensuring good physical consistency and spatial
+The SSUE module extracts semantic features using a frozen
+accuracy. The WHHL image consists of 270 spectral bands
+CLIP text encoder and maps them into a unified semantic
+covering a range from 0.4 to 1.0 µm, with dimensions of
+space for dual-path alignment with the image features. Based
+550×400 pixels and a spatial resolution of 0.463 m. This
+on this, two similarity matrices are constructed and fused
+datasetpredominantlycoversagriculturalareas,annotatedwith
+via weighted combination, and the model is optimized for
+9 typical land-cover classes such as “Rice” and “Cotton.” We
+image–text alignment capability using the InfoNCE [33] loss,
+selected six classes for the training set, while the remaining
+whiletheauxiliaryclassificationsignalissimultaneouslyfused
+three classes were used for testing. The false-color image and
+for end-to-end training. This implementation process provides
+class labels are depicted in Fig. 8.
+a unified training foundation for subsequent experimental
+2) Evaluation Metrics: To comprehensively evaluate the
+settings and multimodel comparisons. The specific hyperpa-
+model’s performance on zero-shot classification, four stan-
+rameter configurations will be further detailed in Section III.
+dard metrics are employed: overall accuracy (OA), average
+accuracy (AA), Kappa coefficient, per-class accuracy, and
+III. EXPERIMENTS
+coefficientofvariation(CV).OAquantifiesthemodel’sgener-
+A. Experimental Settings
+alizationbycomputingtheratioofcorrectlypredictedsamples
+1) Datasets: We conducted experiments on three public tothetotalnumberofunseenclasssamples.Per-classaccuracy
+datasets to validate the effectiveness of our model capacity in assessesclass-specificrecognitionbymeasuringtheproportion
+HSI classification: the Indian Pines (IP) dataset, the Houston of correct predictions within each class, while AA reflects
+2013 (Houston) dataset, and the WHU-Hi-LongKou (WHHL) overall class-wise balance by averaging per-class accuracy
+[34], [35] dataset. Dataset configurations are summarized in across all categories. The Kappa coefficient further evaluates
+Table III, we randomly select 20% of the samples from each the statistical consistency between predicted and true labels,
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 9 =====
+XIAetal.:SpectralZero:TEXT-DRIVENSPECTRAL–SPATIALALIGNMENT 5507016
+TABLEIII
+SETTINGSFORTHEIP,HOUSTON,ANDWHHLDATASETS(TRAINON20%OFSEENCLASSES;THREE
+UNSEENCLASSESPERFOLDFORTESTING,NONOVERLAPPINGROTATIONS)
+Fig.6. False-colorimageanditscorrespondingground-truthmapoftheIP
+dataset.
+effectivelyaccountingforchanceagreementandenhancingthe
+Fig. 7. False-color image and its corresponding ground-truth map of the
+robustness of performance evaluation. To further demonstrate Houstondataset.
+the stability of our model, we evaluate potential per-class bias
+using the CV. CV is defined as the ratio between the standard
+deviation and the mean of the per-class accuracies, which can
+be expressed as
+σ
+CV= (8)
+µ
+where σ and µ denote the standard deviation and mean of
+the per-class accuracies, respectively. A lower CV implies
+more balanced per-class performance, indicating better model
+stability.
+3) TrainingDetails: SpectralZeroisimplementedbasedon
+the PyTorch framework. The experiments are conducted on
+Fig. 8. False-color image and its corresponding ground-truth map of the
+a machine equipped with an Intel1 Xeon1 Platinum 8352V
+WHHLdataset.
+CPU@2.10 GHz and a 24-GB NVIDIA GeForce RTX 4090
+GPU, with 90 GB of system memory. We use GPT-4 as the
+LLM to generate SPE texts. rate, number of training epochs, optimizer selection, and the
+4) Parameter Setting: In this section, we describe sev- temperature coefficient used in contrastive loss. To balance
+eral hyperparameter settings that have a relatively minor training efficiency with memory constraints, the batch size is
+impact on model performance, including batch size, learning uniformly set to 1024 and the train sample is set to 20% for
+all datasets. Based on the characteristics of each dataset, we
+1Registeredtrademark. adopt different initial learning rates: 0.0001 for IP, 0.0002 for
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 10 =====
+5507016 IEEETRANSACTIONSONGEOSCIENCEANDREMOTESENSING,VOL.64,2026
+TABLEIV
+ZERO-SHOTCLASSIFICATIONRESULTSOFEXPERIMENTSONTHEIPDATASET
+Houston, and 0.00002 for WHHL. Regarding training epochs, the generator and combines them with seen class sam-
+the maximum number of epochs is set to 100 for IP, 150 for ples to train a downstream classifier, thereby enabling
+Houston, and 50 for WHHL. The model is evaluated every recognition of unseen categories.
+10epochsforIPandHouston,andevery5epochsforWHHL. 2) APN [37] achieves zero-shot classification by aligning
+Since the final performance is selected as the best among local image features with class attribute features, while
+all evaluation points, minor adjustments to the number of also leveraging global image feature information for
+epochs have a negligible influence on the final results. We final discrimination.
+employ the AdamW optimizer [36] across all datasets, which 3) CE-GZSL [38] proposes a hybrid generalized zero-shot
+decouples weight decay from the gradient-based parameter classification framework that integrates feature genera-
+updates, thereby improving model generalization. The tem- tion with discriminative embedding. By mapping both
+perature coefficient in the contrastive loss remains learnable real and synthesized samples into a contrastive embed-
+throughouttrainingandisinitializedto0.1forIPandHouston ding space and combining class-level and instance-level
+and to 0.17 for WHHL. To further improve model robustness, supervision, the model enhances classification perfor-
+we apply flip augmentation and random noise augmentation mance. Given that the original implementation supports
+toalldatasetsduringtraining.Forpatchconstruction,inorder the ZSC setting, we train and evaluate this model
+to enhance feature extraction quality, we set the patch size to under the strict zero-shot classification configuration for
+15, 11, and 13 for IP, Houston, and WHHL, respectively. comparison.
+4) ACMR[39]modelsthedatadistributionbyconstructing
+both visual VAEs and textual VAEs, and introduces an
+B. Performance Analysis
+IEM module to prevent latent space collapse and to
+In our comparative experiments, we include not only enhance cross-modal information integration between
+traditional zero-shot classification models but also sev- visual and textual modalities.
+eral representative methods specifically designed for HSI 5) TheSPECIAL[32]modelhasbeendetailedinSectionI.
+zero-shot classification. The selected baselines include: AsthemostrecentlyproposedmethodforHSIzero-shot
+f-CLSWGAN [22], APN [37], CE-GZSL [38], ACMR [39], classification, it demonstrates significant advantages in
+and SPECIAL [32]. both performance and methodological design, making it
+1) f-CLSWGAN [22] as a representative approach in the a strong baseline for comparison.
+field of zero-shot classification, f-CLSWGAN jointly
+trains a feature generator and a discriminator, incor- To ensure a fair comparison, all methods are evaluated
+porating an auxiliary classification loss to enhance the with the same SPE text as input; unless otherwise noted, all
+discriminability of the generated features. Ultimately, remaining hyperparameters and implementation details follow
+thismethodsynthesizesfeaturesforunseenclassesusing thebest-performingsettingsreportedintheirrespectivepapers.
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 11 =====
+XIAetal.:SpectralZero:TEXT-DRIVENSPECTRAL–SPATIALALIGNMENT 5507016
+TABLEV
+ZERO-SHOTCLASSIFICATIONRESULTSOFEXPERIMENTSONTHEHOUSTONDATASET
+TABLEVI
+ZERO-SHOTCLASSIFICATIONRESULTSOFEXPERIMENTSONTHEWHHLDATASET
+Tables IV–VI present the experimental results of the pro- in scenarios with fewer training samples (such as IP and
+posed method and several existing zero-shot classification Houston), which may be due to its high dependency on
+models on three HSI datasets: IP, Houston, and WHHL. The data scale; however, its performance improves on the WHHL
+evaluation metrics include OA, AA, per-class classification dataset, where more training samples are available. Overall,
+results, and the Kappa coefficient. the proposed method outperforms the second-best mod-
+As shown in Tables IV–VI, SpectralZero achieves the els by 23.34% (APN), 12.72% (APN), and 6.71% (APN)
+best zero-shot classification overall performance on all three in OA on the IP, Houston, and WHHL datasets, respec-
+datasets. Among the baseline methods, APN demonstrates tively. For the AA, our method achieves improvements of
+stable performance across multiple categories, achieving par- 32.64% (APN), 20.00% (APN), and 12.79% (f-CLSWGAN)
+ticularly high OA and AA on the three datasets. On the over the respective second-best models on the IP, Hous-
+contrary, CE-GZSL, ACMR, and SPECIAL exhibit certain ton, and WHHL datasets, fully demonstrating the signifi-
+limitations in classification performance for most cate- cant advantage of our method in zero-shot generalization
+gories. The f-CLSWGAN model performs less competitively capability.
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 12 =====
+5507016 IEEETRANSACTIONSONGEOSCIENCEANDREMOTESENSING,VOL.64,2026
+Fig. 10. Confusion matrices of the proposed model on (a) IP, (b) Houston,
+and (c) WHHL datasets. The rows denote the ground-truth classes and the
+columnsdenotethepredictedclasses.Thematricesareshownincountform:
+diagonalentriesindicatethenumberofcorrectlyclassifiedsamplesforeach
+class,whileoff-diagonalentriesindicatethenumberofsamplesmisclassified
+intootherclasses,reflectinginterclassconfusion.Darkercolorsindicatehigher
+values. This confusion matrix is computed from the first split in the three-
+class rotation protocol for each dataset and is provided to visually illustrate
+typicalconfusionpatterns.
+Fig. 9. CV across models on three datasets. Lower values on the y-axis
+indicategreaterrobustness.
+To rigorously assess class-level bias and robustness across
+Furthermore,basedontheper-classresultsinTablesIV–VI, datasets, we adopt the CV, which has been defined as in
+we analyze the class-level performance across different (8), as a stability metric to quantify per-class classification
+datasets.OntheIPdataset,ourmethodachieveshighrecogni- accuracy,theresultsareshowninFig.9.Acrossmostsettings,
+tionaccuracyformostclasses,e.g.,99.84%forCornNotilland our method attains lower CV values on all three datasets,
+100.00% for Corn. Nevertheless, a few classes exhibit notable indicating more stable and less biased per-class performance.
+failures, such as 0.00% accuracy for StoneSteTow in Group 3 In summary, the proposed model enhances the perception
+and0.00%forAlfalfainGroup4.Thisphenomenonismainly of spectral differences between categories by independently
+attributedtotherelativelylimitednumberofeffectivesamples extracting spectral information from mixed features and con-
+for these classes (fewer than 20), as well as pronounced structing a semantic alignment pathway, complemented by
+intraclassvariationsinfine-grainedspectral–spatialrepresenta- fine-grained textual descriptions. For categories with highly
+tions for Alfalfa and Stone Steel Tower, which can destabilize similarspatialstructures(e.g.,“wheat”and“oats”),theability
+classprototypesandtheprojectedfeaturedistribution,thereby to model spectral information enables more accurate dif-
+weakening the discriminability of cross-modal alignment. ferentiation; for categories that rely on color and spectral
+On the Houston dataset, the performance shows a more descriptions (e.g., “HayWindrowed”), semantic prompt texts
+pronounceddivergenceinclassdifficulty.Ontheonehand,our further strengthen the model’s understanding and representa-
+methodperformsstronglyonclasseswithrelativelyconsistent tion of spectral-semantic features, thereby improving overall
+materialresponsesandclearspatialstructures,suchashealthy classification performance.
+grass and highway, both reaching 100.00%, indicating that To further analyze the classification capability of the pro-
+these classes are more likely to form stable and alignable posed model for each category, Fig. 10 presents the confusion
+cross-modal semantic anchors. On the other hand, under matrices of our method on the three datasets. As can be
+complex urban scenarios, some classes remain challenging observedfromthefigure,mostclassificationresultsarehighly
+and even suffer extreme failures—for example, commercial concentrated along the main diagonal, indicating that the
+achieves only 36.53%, and soil drops to 0.20%. This is fun- model can accurately distinguish between different classes
+damentally due to stronger intraclass heterogeneity and more in each dataset and achieves strong overall classification
+severe background mixing effects for these classes. Taking performance. Meanwhile, the number of misclassifications
+Soil as an example, it is often interwoven with bare land, in the off-diagonal regions of the confusion matrices is
+construction areas, or road-edge materials, leading to mixed relatively small, demonstrating that the model still main-
+spectralresponsesandoverlapwithotherhard-surfaceclasses, tains good discriminative ability when dealing with classes
+which substantially increases the discrimination difficulty. that have similar spectral characteristics or spatial struc-
+OntheWHHLdataset,theper-classresultsalsorevealclear tures. These results validate the effectiveness and robustness
+class-wise disparities. Our method attains high accuracy on of our approach in complex scenarios, and further confirm
+classes such as water and corn, while broad-leaf soybean, the generalization capability of the model under zero-shot
+mixed weed, and roads and house exhibit evident failures. settings.
+This behavior is closely related to their spatial distribution
+patterns: these difficult classes often appear as narrow strip-
+C. Model Analysis
+like regions or boundary-transition areas and are tightly
+adjacent to neighboring land-cover types, making patch-level 1) Ablation Study: To further evaluate the effectiveness
+representations more susceptible to surrounding background of incorporating spectral information and semantic prompt-
+interference, which in turn induces misclassifications and enhanced texts in the similarity fusion weighting, we design
+exacerbates interclass confusion. several ablation experiment scenarios as follows.
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 13 =====
+XIAetal.:SpectralZero:TEXT-DRIVENSPECTRAL–SPATIALALIGNMENT 5507016
+TABLEVII
+ABLATIONSTUDYRESULTS(%)ONTHEIPDATASETS,HOUSTONDATASETS,ANDWHHLDATASETSWITHALLCLASSESUNDERZERO-SHOTSETTINGS
+1) Setting 1: Only baseline model, with no spectral–text
+cross-modal alignment space and no SSEB for feature
+extraction.
+2) Setting 2 (Ablation of SPE Module): Replace the SPE
+text with the original class name. This setting is used
+to evaluate the contribution of rich textual prompts in
+representing visual features.
+3) Setting 3 (Ablation of SSUE Module): Set similarity
+fusion coefficient λ to 0. This setting is used to
+sim
+analyzethecontributionofthespectralfeatureextraction
+capability in the SSUE module to model performance.
+4) Setting 4: Full SpectralZero model.
+The results of the ablation experiments are shown in Fig. 11. Experimental results on the three datasets under different spectral
+similarityfusioncoefficients.
+Table VII. Based on these results, the following conclusions
+can be drawn.
+1) Comparing the Setting 4 with the Setting 2, we observe
+improvements in OA of 2.93%, 3.32%, and 1.60%, and
+improvements in AA of 0.69%, 4.38%, and 0.80% on
+theIP,Houston,andWHHLdatasets,respectively.These
+resultsdemonstratethatsemanticprompt-enhancedtexts
+playasignificantroleinimprovingthemodel’sabilityto
+expressthevisualcharacteristicsofland-covertypesand
+effectively facilitate semantic alignment between image
+and text features.
+2) Comparing the Setting 4 with the Setting 3, OA is
+improvedby0.63%,3.32%,and2.09%,AAisimproved
+by 0.43%, 2.03%, and 4.36% on the IP, Houston,
+Fig.12. Experimentalresultsonthethreedatasetsunderdifferentlossfusion
+and WHHL datasets, respectively. Overall, these results
+weights.
+validate the effectiveness of the SSUE module in con-
+structing semantic alignment in the spectral dimension,
+which is particularly evident in datasets with high spec- 1) Spectral Similarity Fusion Coefficient λ : This coeffi-
+sim
+tral discriminability. cientisusedtoadjustthelinearfusionratiobetweenthe
+3) Compared with Setting 1, Setting 4 achieves significant spectral–text similarity matrix Sspe and the spatial–text
+performance improvements on all three datasets, with similaritymatrixSspa,withλ ∈[0,1].Toevaluatethe
+sim
+OA improvements of 3.99%(IP), 3.73% (Houston), and impact of this hyperparameter on model performance,
+2.86% (WHHL), and AA improvements of 4.55% (IP), wesetλ tosevenvalues:[0, 0.2, 0.4, 0.5, 0.6, 0.8, 1]
+sim
+3.36% (Houston), and 4.50% (WHHL). These results for ablation analysis, while keeping other parameters
+fully demonstrate that the proposed dual-branch align- at their optimal configurations to eliminate confound-
+mentsimilarityweightingfusionstrategycaneffectively
+ing factors. As shown in Fig. 11, according to the
+enhance the model’s discriminative power and general- experimental results, the model achieves optimal clas-
+izationperformanceinHSIzero-shotclassificationtasks. sificationperformanceatλ valuesof0.2,0.5,and0.6
+sim
+2) HyperparameterAnalysis: Thissectionpresentsananal- on the Houston, IP, and WHHL datasets, respectively.
+ysisofseveralkeyhyperparametersthathaveacriticalimpact This result indicates that the fusion weighting of cross-
+on the experimental results of the model, including the simi- modalsimilarityhasasignificantimpactonthemodel’s
+larity fusion coefficient, the number of training samples, and performance, and that the optimal value differs across
+the loss weights. datasets.
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 14 =====
+5507016 IEEETRANSACTIONSONGEOSCIENCEANDREMOTESENSING,VOL.64,2026
+TABLEVIII
+HYPERPARAMETERSETTINGSFORSSUE
+2) Loss Fusion Weight λ : This parameter is used to model’s recognition ability for unseen classes. To achieve
+loss
+adjust the linear weighting ratio between the InfoNCE effectivetransferofsemanticknowledge,weintroducetheSPE
+loss and the auxiliary loss (cross-entropy loss) in the module, which extends the original class labels into natural
+totallossfunction.Bytuningthevalueofλ ,itispos- language descriptions with visual attributes. These serve as
+loss
+sible to balance the contributions of different loss terms semanticanchorsfortransfer,effectivelybridgingthesemantic
+and prevent one loss term from dominating the opti- gapbetweentextualandimagefeatures,andprovidingamore
+mization process, thereby suppressing the optimization application-oriented mode of expression. To jointly model
+effect of other supervisory signals. To analyze the effect the spectral and spatial features of images, we design the
+of this parameter on model performance, we set λ SSUE module, which explicitly decouples spectral features
+loss
+to six values [0, 0.2, 0.4, 0.6, 0.8, 1] for analysis. The frommixedfeaturesforindependentextractionandprojection,
+experimental results are shown in Fig. 12. According while utilizing spatial features for auxiliary classification and
+to the results, the model achieves optimal performance alignment. The two types of visual features are mapped into
+at λ values of 0.4, 0.4, and 1 on the Houston, IP, two independent embedding spaces and aligned with seman-
+loss
+andWHHLdatasets,respectively.Theseresultsindicate tic features. Finally, a linear weighted fusion of similarity
+that the coordination between different loss terms has matrices guides the cross-modal contrastive learning process.
+a significant impact on both the training efficiency and Experimental results demonstrate that the proposed frame-
+final performance of the model. work achieves superior classification performance compared
+3) Other Parameters: In addition to the main hyperpa- to existing methods on three publicly available HSI datasets,
+rameter settings, several structural parameters are also verifying its effectiveness and generalizability.
+configured in the model implementation, which are In future work, we will further explore more practical
+provided in Table VIII, including the kernel size for settings, such as extending the model to the generalized
+3D convolution, the use of bias terms, and the stride zero-shot classification task in real-world scenarios where
+settings for max-pooling operations. On the Houston land-cover boundaries are ambiguous and unseen classes are
+dataset,the3Dconvolutionkernelsize issetto(3,1,1) unpredictable. We will also focus on improving cross-dataset
+with corresponding padding of (1, 0, 0), and bias terms generalization to better meet the transferability requirements
+are enabled during training. For both the IP and WHHL of HSI applications.
+datasets,aunifiedkernelsizeof(3,3,3)andpaddingof
+(1,1,1)areadopted.Regardingmax-poolingoperations,
+REFERENCES
+a pooling stride of (1, 2, 2) is used for the Houston
+dataset to preserve more spectral information, while a [1] Z.Ai,H.Luo,andJ.Wang,“Alightweightmultistreamframeworkfor
+salientobjectdetectioninopticalremotesensing,”IEEETrans.Geosci.
+stride of (4, 2, 2) is used for the IP and WHHL datasets
+RemoteSens.,vol.63,2025,Art.no.5617915.
+to further compress the spatial dimension and improve [2] X. Luo, H. Xie, X. Tong, and H. Pan, “A water extraction method
+processingefficiency.Finally,projectiondimdenotesthe basedonairbornehyperspectralimagesinhighlycomplexurbanarea,”
+inProc.Int.WorkshopRemoteSens.Intell.Process.(RSIP),May2017,
+output dimensionality of the projection heads that map
+pp.1–4.
+the spectral and spatial branch features into the shared [3] R. Rayhana, Z. Ma, Z. Liu, G. Xiao, Y. Ruan, and J. S. Sangha, “A
+embedding space, which is set to 768 for all datasets. review on plant disease detection using hyperspectral imaging,” IEEE
+Trans.AgriFoodElectron.,vol.1,no.2,pp.108–134,Dec.2023.
+[4] G.Notesco,E.BenDor,andA.Brook,“MineralmappingofMakhtesh
+RamoninIsraelusinghyperspectralremotesensingdayandnightLWIR
+IV. CONCLUSION
+images,” in Proc. 6th Workshop Hyperspectral Image Signal Process.,
+Evol.RemoteSens.(WHISPERS),Jun.2014,pp.1–4.
+ThisarticleproposesanHSIclassificationmethodforzero-
+[5] F. Melgani and L. Bruzzone, “Classification of hyperspectral remote
+shot classification which called SpectralZero, aiming to fully sensing images with support vector machines,” IEEE Trans. Geosci.
+exploit the semantic information in HSI and enhance the RemoteSens.,vol.42,no.8,pp.1778–1790,Aug.2004.
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 15 =====
+XIAetal.:SpectralZero:TEXT-DRIVENSPECTRAL–SPATIALALIGNMENT 5507016
+[6] J.Ham,Y.Chen,M.M.Crawford,andJ.Ghosh,“Investigationofthe [28] J.Jeong,Y.Zou,T.Kim,D.Zhang,A.Ravichandran,andO.Dabeer,
+randomforestframeworkforclassificationofhyperspectraldata,”IEEE “WinCLIP:Zero-/few-shotanomalyclassificationandsegmentation,”in
+Trans.Geosci.RemoteSens.,vol.43,no.3,pp.492–501,Mar.2005. Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun.
+[7] X. Jia and J. A. Richards, “Cluster-space classification: A fast 2023,pp.19606–19616.
+K-nearest neighbour classification for remote sensing hyperspectral [29] J. Li et al., “HyperFree: A channel-adaptive and tuning-free foun-
+data,”inProc.IEEEWorkshopAdv.Techn.Anal.RemotelySensedData, dation model for hyperspectral remote sensing imagery,” in Proc.
+Oct.2003,pp.407–410. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2025,
+[8] Y.Chen,H.Jiang,C.Li,X.Jia,andP.Ghamisi,“Deepfeatureextrac- pp.23048–23058.
+tion and classification of hyperspectral images based on convolutional [30] Y. Zhang, M. Zhang, W. Li, S. Wang, and R. Tao, “Language-aware
+neural networks,” IEEE Trans. Geosci. Remote Sens., vol.54, no.10, domain generalization network for cross-scene hyperspectral image
+pp.6232–6251,Oct.2016. classification,” IEEE Trans. Geosci. Remote Sens., vol.61, 2023, Art.
+[9] Z. Zhong, J. Li, Z. Luo, and M. Chapman, “Spectral–spatial residual no.5501312.
+network for hyperspectral image classification: A 3-D deep learn- [31] J. Yue, L. Fang, and M. He, “Spectral–spatial latent reconstruction
+ing framework,” IEEE Trans. Geosci. Remote Sens., vol.56, no.2, for open-set hyperspectral image classification,” IEEE Trans. Image
+pp.847–858,Feb.2018. Process.,vol.31,pp.5227–5241,2022.
+[10] D.Hongetal.,“SpectralFormer:Rethinkinghyperspectralimageclassi- [32] L. Pang, J. Yao, K. Li, J. Zhou, D. Meng, and X. Cao,
+ficationwithtransformers,”IEEETrans.Geosci.RemoteSens.,vol.60, “SPECIAL: Zero-shot hyperspectral image classification with CLIP,”
+2022,Art.no.5518615. 2025,arXiv:2501.16222.
+[11] X. Yue, A. Liu, N. Chen, S. Xia, J. Yue, and L. Fang, “HyperMLL: [33] A.vandenOord,Y.Li,andO.Vinyals,“Representationlearningwith
+Towardrobusthyperspectralimageclassificationwithmultisourcelabel contrastivepredictivecoding,”2018,arXiv:1807.03748.
+learning,” IEEE Trans. Geosci. Remote Sens., vol.62, 2024, Art. no. [34] Y.Zhong,X.Hu,C.Luo,X.Wang,J.Zhao,andL.Zhang,“WHU-hi:
+5526515. UAV-borne hyperspectral with high spatial resolution (H2) benchmark
+[12] B.Liu,X.Yu,A.Yu,P.Zhang,G.Wan,andR.Wang,“Deepfew-shot datasetsandclassifierforprecisecropidentificationbasedondeepcon-
+learning for hyperspectral image classification,” IEEE Trans. Geosci. volutionalneuralnetworkwithCRF,”RemoteSens.Environ.,vol.250,
+RemoteSens.,vol.57,no.4,pp.2290–2304,Apr.2019. Dec.2020,Art.no.112012.
+[13] Z.Xue,Y.Zhou,andP.Du,“S3Net:Spectral–spatialSiamesenetwork [35] Y.Zhongetal.,“Mini-UAV-bornehyperspectralremotesensing:From
+for few-shot hyperspectral image classification,” IEEE Trans. Geosci. observationandprocessingtoapplications,”IEEEGeosci.RemoteSens.
+RemoteSens.,vol.60,2022,Art.no.5531219. Mag.,vol.6,no.4,pp.46–62,Dec.2018.
+[36] I. Loshchilov and F. Hutter, “Decoupled weight decay regularization,”
+[14] J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li, and L. Fei-Fei,
+inProc.Int.Conf.Learn.Represent.(ICLR),2017.
+“ImageNet: A large-scale hierarchical image database,” in Proc.
+IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2009, [37] W.Xu,Y.Xian,J.Wang,B.Schiele,andZ.Akata,“Attributeprototype
+networkforzero-shotlearning,”inProc.Adv.NeuralInf.Process.Syst.,
+pp.248–255.
+2020,pp.21969–21980.
+[15] Z. Li et al., “Few-shot hyperspectral image classification with self-
+[38] Z. Han, Z. Fu, S. Chen, and J. Yang, “Contrastive embedding for
+supervisedlearning,”IEEETrans.Geosci.RemoteSens.,vol.61,2023,
+generalizedzero-shotlearning,”inProc.IEEE/CVFConf.Comput.Vis.
+Art.no.5517917.
+PatternRecognit.(CVPR),Jun.2021,pp.2371–2381.
+[16] C. H. Lampert, H. Nickisch, and S. Harmeling, “Learning to
+[39] Z. Fang, X. Zhu, C. Yang, Z. Han, J. Qin, and X.-C. Yin,
+detect unseen object classes by between-class attribute transfer,”
+“Learningalignedcross-modalrepresentationforgeneralizedzero-shot
+in Proc. IEEE Conf. Comput. Vis. Pattern Recognit., Jun. 2009,
+classification,” in Proc. AAAI Conf. Artif. Intell. (AAAI), Jun. 2022,
+pp.951–958.
+pp.6605–6613.
+[17] C. Wah, S. Branson, P. Welinder, P. Perona, and S. Belongie,
+“Thecaltech-UCSDbirds-200–2011dataset,”CaliforniaInst.Technol.,
+Pasadena,CA,USA,Tech.Rep.CNS-TR-2011-001,2011.
+[18] Y. Xian, C. H. Lampert, B. Schiele, and Z. Akata, “Zero-shot
+learning—A comprehensive evaluation of the good, the bad and
+the ugly,” IEEE Trans. Pattern Anal. Mach. Intell., vol.41, no.9,
+pp.2251–2265,Sep.2019.
+[19] M.Palatuccietal.,“Zero-shotlearningwithsemanticoutputcodes,”in Yang Xia was born in Hubei, China, in 2003.
+Proc.22ndInt.Conf.NeuralInf.Process.Syst.,Vancouver,BC,Canada: He received the bachelor’s degree in surveying
+CurranAssociates,2009,pp.1410–1418. and mapping engineering from the Department of
+[20] J.L.Ba,K.Swersky,S.Fidler,andR.Salakhutdinov,“Predictingdeep Geomatics Engineering, School of Transportation,
+zero-shot convolutional neural networks using textual descriptions,” in Changsha University of Science and Technology,
+Proc.IEEEInt.Conf.Comput.Vis.(ICCV).Santiago,Chile:IEEE,Dec. Changsha, China, in 2025, where he is currently
+2015,pp.4247–4255. pursuingthemaster’sdegreeinphotogrammetryand
+[21] R.Socher,M.Ganjoo,C.D.Manning,A.Y.Ng,M.C.D.,andN.A.Y., remote sensing with the Department of Surveying
+“Zero-shot learning through cross-modal transfer,” in Proc. Int. Conf. and Mapping Science and Technology, School of
+NeuralInf.Process.Syst.,vol.26,2013,pp.935–943. AeronauticEngineering.
+[22] Y. Xian, T. Lorenz, B. Schiele, and Z. Akata, “Feature generating Hisresearchinterestsencompasscomputervision,
+networks for zero-shot learning,” in Proc. IEEE/CVF Conf. Comput. machine learning, HSI classification, few-shot learning, and zero-shot
+Vis.PatternRecognit.,Jun.2018,pp.5542–5551. learning.
+[23] A. Radford et al., “Learning transferable visual models from natural
+languagesupervision,”inProc.Int.Conf.Mach.Learn.,vol.139,2021,
+pp.8748–8763.
+[24] T.LuddeckeandA.Ecker,“Imagesegmentationusingtextandimage
+prompts,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit.
+(CVPR),Jun.2022,pp.7076–7086.
+[25] O. Patashnik, Z. Wu, E. Shechtman, D. Cohen-Or, and D. Lischin-
+ski, “StyleCLIP: Text-driven manipulation of StyleGAN imagery,” XiaYuereceivedthebachelor’sdegreeincomputer
+in Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV), Oct. 2021, science from Central South University, Changsha,
+pp.2065–2074. China,in2020,wheresheiscurrentlypursuingthe
+[26] G. Kim, T. Kwon, and J. C. Ye, “DiffusionCLIP: Text-guided Ph.D.degreewiththeSchoolofComputerScience
+diffusion models for robust image manipulation,” in Proc. andEngineering.
+IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2022, Her research interests include machine learning,
+pp.2416–2425. remotesensing,andHSIprocessing.
+[27] R. Zhang et al., “PointCLIP: Point cloud understanding by CLIP,” in
+Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun.
+2022,pp.8552–8562.
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.
+===== PAGE 16 =====
+5507016 IEEETRANSACTIONSONGEOSCIENCEANDREMOTESENSING,VOL.64,2026
+Xuanzhi Liu was born in Hunan, China, in 2003. Jun Yue (Member, IEEE) received the B.Eng.
+He is currently pursuing the B.E. degree in remote degree ingeodesy fromWuhan University,Wuhan,
+sensingscienceandtechnologywiththeDepartment China, in 2013, and the Ph.D. degree in GIS from
+ofGeomaticsEngineering,SchoolofTransportation, PekingUniversity,Beijing,China,in2018.
+Changsha University of Science and Technology, He is currently an Assistant Professor with the
+Changsha,China. School of Automation, Central South University,
+He has developed a strong interest in intelligent Changsha, China. His research interests include
+image analysis and has been actively strengthen- satellite image understanding, pattern recognition,
+ing his skills through coursework and independent andfew-shotlearning.
+study. His research interests include computer Dr. Yue serves as a reviewer for IEEETRANS-
+vision,machinelearning,HSIclassification,domain ACTIONS ON IMAGE PROCESSING, IEEE TRANS-
+generalization,andzero-shotlearning. ACTIONS ON NEURAL NETWORKS AND LEARNING SYSTEMS, IEEE
+TRANSACTIONS ON GEOSCIENCE AND REMOTE SENSING, ISPRS Journal
+ofPhotogrammetryandRemoteSensing, IEEEGEOSCIENCEANDREMOTE
+SENSING LETTERS, IEEE TRANSACTIONS ON BIOMEDICAL ENGINEER-
+ING,InformationFusion,andInformationSciences.
+Ning Chen received the B.S. and M.S. degrees in
+GIS from the School of Earth and Space Sciences,
+PekingUniversity,Beijing,China,in2016and2019,
+respectively.
+He is currently an Assistant Engineer with the
+Institute of Remote Sensing and Geographic Infor-
+mation System, Peking University. His research
+interests include satellite image understanding, rec-
+ommendation systems, large-scale sparse learning,
+andpatternrecognition.
+Mr.ChenservesasareviewerforIEEETRANS-
+ACTIONS ON GEOSCIENCE AND REMOTE SENSING, IEEE GEOSCIENCE
+ANDREMOTESENSINGLETTERS,andIEEESENSORSJOURNAL.
+Leyuan Fang (Senior Member, IEEE) received
+Hui Liu received the B.S. degree from the School the Ph.D. degree from the College of Electrical
+of Mathematics and Statistics, Xidian University, and Information Engineering, Hunan University,
+Xi’an, China, in 2014, and the Ph.D. degree from Changsha,China,in2015.
+the Institute of Remote Sensing and Geographical From August 2016 to September 2017, he was
+InformationSystems,SchoolofEarthandSpaceSci- a Post-Doctoral Researcher at the Department of
+ences,PekingUniversity,Beijing,China,in2020. BiomedicalEngineering,DukeUniversity,Durham,
+She was a Visiting Scholar at the Department NC, USA. He is currently a Professor with the
+ofGeographyandGeoinformationScience,George School of Artificial Intelligence and Robotics,
+Mason University, Fairfax, VA, USA, from 2018 Hunan University. His research interests include
+to 2019, and a Post-Doctoral Research Fellow at sparserepresentationandmultiresolutionanalysisin
+the Institute of Remote Sensing and Geographical remotesensingandmedicalimageprocessing.
+Information Systems, Peking University, from 2020 to 2022. She is now Dr. Fang was a recipient of one Second-Grade National Award from the
+a Lecturer and a Master Tutor with Nanjing University of Information NatureandScienceProgressofChinain2019.HeisanAssociateEditorof
+Science and Technology, Nanjing, China. She is focusing on research about IEEETRANSACTIONSONIMAGEPROCESSING, IEEETRANSACTIONSON
+spatiotemporal modeling, GIScience, deep learning, and its application in GEOSCIENCEANDREMOTESENSING, IEEETRANSACTIONSONNEURAL
+remotesensingareas. NETWORKSANDLEARNINGSYSTEMS,andNeurocomputing.
+Authorized licensed use limited to: NORTHWESTERN POLYTECHNICAL UNIVERSITY. Downloaded on March 28,2026 at 13:05:42 UTC from IEEE Xplore. Restrictions apply.

@@ -1,0 +1,14 @@
+=== Indian Pines Results Summary ===
+
+Paper Overall: OA=97.34%  AA=81.45%  Kappa=0.8778
+
+Group  Unseen                                                  Paper AA%    Our Best AA% Kappa     
+----------------------------------------------------------------------------------------------------
+G1     Corn-notill, Hay-windrowed, Woods                       87.41        76.68        0.6651    
+G2     Grass-trees, Buildings-Grass-Trees-Drives, Soybean-mintill 86.24        85.68        0.7603    
+G3     Grass-pasture-mowed, Stone-Steel-Towers, Corn-mintill   65.71        96.58        0.8851    
+G4     Corn, Alfalfa, Grass-pasture                            64.53        67.00        0.8042    
+G5     Wheat, Oats, Soybean-notill                             97.25        98.42        0.8855    
+G6     Soybean-clean                                           99.85        pending      -         
+
+Note: Overall mean pending G6 completion

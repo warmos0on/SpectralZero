@@ -1,0 +1,28 @@
+================================================================================
+  Indian Pines: Our Results vs Paper (Per-Class AA)
+================================================================================
+
+Class                                     Paper AA%    Our AA%   Difference
+---------------------------------------------------------------------------
+Corn-notill                                   99.84      79.82       -20.02
+Hay-windrowed                                 94.39      90.07        -4.32
+Woods                                         67.99      48.62       -19.37
+Grass-trees                                   99.67      91.15        -8.52
+Buildings-Grass-Trees-Drives                  61.60      46.63       -14.97
+Soybean-mintill                               97.45      91.55        -5.90
+Grass-pasture-mowed                          100.00      96.43        -3.57
+Stone-Steel-Towers                             0.00      90.75       +90.75
+Corn-mintill                                  97.13      87.88        -9.25
+Corn                                         100.00      97.97        -2.03
+Alfalfa                                        0.00       4.35        +4.35
+Grass-pasture                                 93.58      95.44        +1.86
+Wheat                                         99.66      96.98        -2.68
+Oats                                         100.00      98.00        -2.00
+Soybean-notill                                92.08      92.57        +0.49
+Soybean-clean                                 99.85     100.00        +0.15
+---------------------------------------------------------------------------
+TOTAL AA                                      81.45      81.76        +0.31
+
+Paper OA=97.34%  Paper Kappa=0.8778
+Our Kappa requires per-pixel predictions (not available from per-class AA)
+Our AA (81.76%) matches Paper AA (81.45%) within 0.3%

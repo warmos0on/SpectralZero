@@ -1,0 +1,26 @@
+﻿=== Indian 璇氬疄璇勬祴锛堝浐瀹氭渶鍚?checkpoint, seeds=[42], epochs=20锛?==
+  G1 seed=42: OA=86.98 AA=75.50 Kappa=0.7806
+  G1 鐢ㄦ椂 54s
+  G2 seed=42: OA=89.48 AA=69.11 Kappa=0.7683
+  G2 鐢ㄦ椂 53s
+  G3 seed=42: OA=72.26 AA=60.21 Kappa=0.2761
+  G3 鐢ㄦ椂 64s
+  G4 seed=42: OA=90.99 AA=67.05 Kappa=0.8140
+  G4 鐢ㄦ椂 64s
+  G5 seed=42: OA=81.79 AA=67.28 Kappa=0.4817
+  G5 鐢ㄦ椂 62s
+  G6 seed=42: OA=100.00 AA=100.00 Kappa=nan
+  G6 鐢ㄦ椂 66s
+
+====================================================================================================
+Group  Unseen                                               Last-cp OA (mean卤std)    AA                 Kappa       
+G1     Corn-notill, Hay-windrowed, Woods                    86.98卤0.00          75.50卤0.00      0.7806卤0.0000 | per-AA 99.9 92.3 34.3
+G2     Grass-trees, Buildings-Grass-Trees-Drives, Soybean-mintill 89.48卤0.00          69.11卤0.00      0.7683卤0.0000 | per-AA 92.2 15.5 99.7
+G3     Grass-pasture-mowed, Stone-Steel-Towers, Corn-mintill 72.26卤0.00          60.21卤0.00      0.2761卤0.0000 | per-AA 100.0 1.1 79.5
+G4     Corn, Alfalfa, Grass-pasture                         90.99卤0.00          67.05卤0.00      0.8140卤0.0000 | per-AA 100.0 6.5 94.6
+G5     Wheat, Oats, Soybean-notill                          81.79卤0.00          67.28卤0.00      0.4817卤0.0000 | per-AA 10.2 95.0 96.6
+G6     Soybean-clean                                        100.00卤0.00          100.00卤0.00      nan卤nan | per-AA 100.0
+
+>>> 澶氱被缁勫钩鍧囷紙鍥哄畾鏈€鍚?cp锛? OA=84.30锛堢粍鍐呰法seed std鍧囧€?0.00锛?AA=67.83 Kappa=0.6241
+
+鎬昏€楁椂 364s

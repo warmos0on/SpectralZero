@@ -1,0 +1,89 @@
+=== Indian Pines G6 ===
+Unseen: Soybean-clean
+
+论文 per_AA: [99.85]
+论文 AA 均值: 99.85%
+
+注: 单类时 Kappa 无意义 (nan)
+
+--- seed=1024 ---
+  cp 1: per_AA=[100.0], kappa=nan
+  cp 2: per_AA=[100.0], kappa=nan
+  cp 3: per_AA=[100.0], kappa=nan
+  cp 4: per_AA=[100.0], kappa=nan
+  cp 5: per_AA=[100.0], kappa=nan
+  cp 6: per_AA=[100.0], kappa=nan
+  cp 7: per_AA=[100.0], kappa=nan
+  cp 8: per_AA=[100.0], kappa=nan
+  cp 9: per_AA=[100.0], kappa=nan
+  cp10: per_AA=[100.0], kappa=nan
+  cp11: per_AA=[100.0], kappa=nan
+  cp12: per_AA=[100.0], kappa=nan
+
+--- seed=123 ---
+  cp 1: per_AA=[100.0], kappa=nan
+  cp 2: per_AA=[100.0], kappa=nan
+  cp 3: per_AA=[100.0], kappa=nan
+  cp 4: per_AA=[100.0], kappa=nan
+  cp 5: per_AA=[100.0], kappa=nan
+  cp 6: per_AA=[100.0], kappa=nan
+  cp 7: per_AA=[100.0], kappa=nan
+  cp 8: per_AA=[100.0], kappa=nan
+  cp 9: per_AA=[100.0], kappa=nan
+  cp10: per_AA=[100.0], kappa=nan
+  cp11: per_AA=[100.0], kappa=nan
+  cp12: per_AA=[100.0], kappa=nan
+  cp13: per_AA=[100.0], kappa=nan
+  cp14: per_AA=[100.0], kappa=nan
+  cp15: per_AA=[100.0], kappa=nan
+
+--- seed=42 ---
+  cp 1: per_AA=[100.0], kappa=nan
+  cp 2: per_AA=[100.0], kappa=nan
+  cp 3: per_AA=[100.0], kappa=nan
+  cp 4: per_AA=[100.0], kappa=nan
+  cp 5: per_AA=[100.0], kappa=nan
+  cp 6: per_AA=[100.0], kappa=nan
+  cp 7: per_AA=[100.0], kappa=nan
+  cp 8: per_AA=[100.0], kappa=nan
+  cp 9: per_AA=[100.0], kappa=nan
+  cp10: per_AA=[100.0], kappa=nan
+  cp11: per_AA=[100.0], kappa=nan
+  cp12: per_AA=[100.0], kappa=nan
+  cp13: per_AA=[100.0], kappa=nan
+  cp14: per_AA=[100.0], kappa=nan
+  cp15: per_AA=[100.0], kappa=nan
+
+--- seed=456 ---
+  cp 1: per_AA=[100.0], kappa=nan
+  cp 2: per_AA=[100.0], kappa=nan
+  cp 3: per_AA=[100.0], kappa=nan
+  cp 4: per_AA=[100.0], kappa=nan
+  cp 5: per_AA=[100.0], kappa=nan
+  cp 6: per_AA=[100.0], kappa=nan
+  cp 7: per_AA=[100.0], kappa=nan
+  cp 8: per_AA=[100.0], kappa=nan
+  cp 9: per_AA=[100.0], kappa=nan
+  cp10: per_AA=[100.0], kappa=nan
+  cp11: per_AA=[100.0], kappa=nan
+  cp12: per_AA=[100.0], kappa=nan
+  cp13: per_AA=[100.0], kappa=nan
+  cp14: per_AA=[100.0], kappa=nan
+  cp15: per_AA=[100.0], kappa=nan
+
+--- seed=789 ---
+  cp 1: per_AA=[100.0], kappa=nan
+  cp 2: per_AA=[100.0], kappa=nan
+  cp 3: per_AA=[100.0], kappa=nan
+  cp 4: per_AA=[100.0], kappa=nan
+  cp 5: per_AA=[100.0], kappa=nan
+  cp 6: per_AA=[100.0], kappa=nan
+  cp 7: per_AA=[100.0], kappa=nan
+  cp 8: per_AA=[100.0], kappa=nan
+  cp 9: per_AA=[100.0], kappa=nan
+  cp10: per_AA=[100.0], kappa=nan
+  cp11: per_AA=[100.0], kappa=nan
+  cp12: per_AA=[100.0], kappa=nan
+  cp13: per_AA=[100.0], kappa=nan
+  cp14: per_AA=[100.0], kappa=nan
+  cp15: per_AA=[100.0], kappa=nan

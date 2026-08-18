@@ -1,0 +1,66 @@
+[epoch:    1]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:    2]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:    3]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:    4]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:    5]  Train Accuracy: 0.00000 | train sample number:   1939
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+[epoch:    6]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:    7]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:    8]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:    9]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:   10]  Train Accuracy: 0.00000 | train sample number:   1939
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+[epoch:   11]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:   12]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:   13]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:   14]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:   15]  Train Accuracy: 0.00000 | train sample number:   1939
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+[epoch:   16]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:   17]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:   18]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:   19]  Train Accuracy: 0.00000 | train sample number:   1939
+[epoch:   20]  Train Accuracy: 0.00000 | train sample number:   1939
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+
+[STDERR]
+C:\Users\39448\anaconda3\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:620: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\39448\anaconda3\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:620: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\39448\anaconda3\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:991: RuntimeWarning: invalid value encountered in scalar divide
+  k = xp.sum(w_mat * confusion) / xp.sum(w_mat * expected)
+C:\Users\39448\anaconda3\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:620: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\39448\anaconda3\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:620: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\39448\anaconda3\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:991: RuntimeWarning: invalid value encountered in scalar divide
+  k = xp.sum(w_mat * confusion) / xp.sum(w_mat * expected)
+C:\Users\39448\anaconda3\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:620: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\39448\anaconda3\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:620: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\39448\anaconda3\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:991: RuntimeWarning: invalid value encountered in scalar divide
+  k = xp.sum(w_mat * confusion) / xp.sum(w_mat * expected)
+C:\Users\39448\anaconda3\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:620: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\39448\anaconda3\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:620: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\39448\anaconda3\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:991: RuntimeWarning: invalid value encountered in scalar divide
+  k = xp.sum(w_mat * confusion) / xp.sum(w_mat * expected)

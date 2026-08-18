@@ -1,0 +1,21 @@
+=== WHHL (LongKou) G3 ===
+Unseen: Narrow-leaf soybean, Mixed weed, Roads and houses
+Status: Partial (killed early)
+
+Paper per_AA: [95.5, 18.76, 26.0]
+Paper AA mean: 46.75%
+
+Checkpoint  1: AA=25.18%  Kappa=-0.1237  [55.72, 15.87, 3.95]
+Checkpoint  2: AA=30.74%  Kappa=-0.0540  [63.12, 27.5, 1.59]
+Checkpoint  3: AA=31.30%  Kappa=-0.0494  [59.05, 31.68, 3.16]
+Checkpoint  4: AA=35.70%  Kappa=0.0156  [76.29, 11.4, 19.42]
+Checkpoint  5: AA=27.51%  Kappa=-0.0915  [50.86, 29.26, 2.42]
+Checkpoint  6: AA=38.10%  Kappa=0.0305  [97.9, 14.85, 1.56]
+
+--- Best ---
+AA avg: 38.10%  Kappa: 0.0305
+Per-class comparison:
+  Class                            Ours    Paper     Diff
+  Narrow-leaf soybean            97.90%   95.50%    +2.40
+  Mixed weed                     14.85%   18.76%    -3.91
+  Roads and houses                1.56%   26.00%   -24.44

@@ -1,0 +1,21 @@
+=== CLIP 文本原型可分性校验（token 数 + 组内两两余弦相似度）===
+[v1_natural] G1 unseen=['Corn-notill', 'Hay-windrowed', 'Woods'] max_tokens=56 pairs=3 unseen_sim_mean=0.7941 min=0.7819 all16_sim_mean=0.7594
+[v1_natural] G2 unseen=['Grass-trees', 'Buildings-Grass-Trees-Drives', 'Soybean-mintill'] max_tokens=56 pairs=3 unseen_sim_mean=0.6855 min=0.5867 all16_sim_mean=0.7594
+[v1_natural] G3 unseen=['Grass-pasture-mowed', 'Stone-Steel-Towers', 'Corn-mintill'] max_tokens=56 pairs=3 unseen_sim_mean=0.6390 min=0.5917 all16_sim_mean=0.7594
+[v1_natural] G4 unseen=['Corn', 'Alfalfa', 'Grass-pasture'] max_tokens=56 pairs=3 unseen_sim_mean=0.8070 min=0.7938 all16_sim_mean=0.7594
+[v1_natural] G5 unseen=['Wheat', 'Oats', 'Soybean-notill'] max_tokens=56 pairs=3 unseen_sim_mean=0.8058 min=0.7797 all16_sim_mean=0.7594
+[v1_natural] G6 unseen=['Soybean-clean'] max_tokens=56 pairs=0 unseen_sim_mean=nan min=nan all16_sim_mean=0.7594
+[physical] G1 unseen=['Corn-notill', 'Hay-windrowed', 'Woods'] max_tokens=73 pairs=3 unseen_sim_mean=0.7437 min=0.7296 all16_sim_mean=0.7472
+[physical] G2 unseen=['Grass-trees', 'Buildings-Grass-Trees-Drives', 'Soybean-mintill'] max_tokens=73 pairs=3 unseen_sim_mean=0.7386 min=0.6716 all16_sim_mean=0.7472
+[physical] G3 unseen=['Grass-pasture-mowed', 'Stone-Steel-Towers', 'Corn-mintill'] max_tokens=73 pairs=3 unseen_sim_mean=0.6838 min=0.6405 all16_sim_mean=0.7472
+[physical] G4 unseen=['Corn', 'Alfalfa', 'Grass-pasture'] max_tokens=73 pairs=3 unseen_sim_mean=0.7195 min=0.6946 all16_sim_mean=0.7472
+[physical] G5 unseen=['Wheat', 'Oats', 'Soybean-notill'] max_tokens=73 pairs=3 unseen_sim_mean=0.7833 min=0.7508 all16_sim_mean=0.7472
+[physical] G6 unseen=['Soybean-clean'] max_tokens=73 pairs=0 unseen_sim_mean=nan min=nan all16_sim_mean=0.7472
+
+=== 对比（越低越可分） ===
+G1: unseen_sim natural=0.7941 -> physical=0.7437 (delta=-0.0504) | all16 sim delta=-0.0122
+G2: unseen_sim natural=0.6855 -> physical=0.7386 (delta=+0.0531) | all16 sim delta=-0.0122
+G3: unseen_sim natural=0.6390 -> physical=0.6838 (delta=+0.0448) | all16 sim delta=-0.0122
+G4: unseen_sim natural=0.8070 -> physical=0.7195 (delta=-0.0876) | all16 sim delta=-0.0122
+G5: unseen_sim natural=0.8058 -> physical=0.7833 (delta=-0.0225) | all16 sim delta=-0.0122
+G6: unseen_sim natural=nan -> physical=nan (delta=+nan) | all16 sim delta=-0.0122

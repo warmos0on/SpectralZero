@@ -1,0 +1,5 @@
+﻿$env:KMP_DUPLICATE_LIB_OK='TRUE'
+$env:PYTHONIOENCODING='utf-8'
+$py='C:\Users\39448\anaconda3\envs\SpectralZero\python.exe'
+& $py run_honest_eval.py --dataset Indian --seeds 42 --epochs 20 --checkpoints 5 --ablation "use_zscore=0,use_balanced_sampler=0" 2>&1 | Out-File -Encoding utf8 'result_IP\ablation_B_negonly_run.txt'
+& $py run_honest_eval.py --dataset Indian --seeds 42 --epochs 20 --checkpoints 5 --ablation "use_unseen_negatives=0" 2>&1 | Out-File -Encoding utf8 'result_IP\ablation_C_noneg_run.txt'

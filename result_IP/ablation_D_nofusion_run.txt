@@ -1,0 +1,26 @@
+=== Indian 诚实评测（固定最后 checkpoint, seeds=[42], epochs=20）===
+  G1 seed=42: OA=88.21 AA=75.27 Kappa=0.7996
+  G1 用时 136s
+  G2 seed=42: OA=91.04 AA=73.96 Kappa=0.8038
+  G2 用时 105s
+  G3 seed=42: OA=77.25 AA=67.82 Kappa=0.3460
+  G3 用时 125s
+  G4 seed=42: OA=90.47 AA=66.11 Kappa=0.8043
+  G4 用时 115s
+  G5 seed=42: OA=85.71 AA=74.41 Kappa=0.5844
+  G5 用时 126s
+  G6 seed=42: OA=100.00 AA=100.00 Kappa=nan
+  G6 用时 132s
+
+====================================================================================================
+Group  Unseen                                               Last-cp OA (mean±std)    AA                 Kappa       
+G1     Corn-notill, Hay-windrowed, Woods                    88.21±0.00          75.27±0.00      0.7996±0.0000 | per-AA 99.9 97.7 28.2
+G2     Grass-trees, Buildings-Grass-Trees-Drives, Soybean-mintill 91.04±0.00          73.96±0.00      0.8038±0.0000 | per-AA 93.3 29.0 99.6
+G3     Grass-pasture-mowed, Stone-Steel-Towers, Corn-mintill 77.25±0.00          67.82±0.00      0.3460±0.0000 | per-AA 100.0 20.4 83.0
+G4     Corn, Alfalfa, Grass-pasture                         90.47±0.00          66.11±0.00      0.8043±0.0000 | per-AA 100.0 4.3 94.0
+G5     Wheat, Oats, Soybean-notill                          85.71±0.00          74.41±0.00      0.5844±0.0000 | per-AA 31.2 95.0 97.0
+G6     Soybean-clean                                        100.00±0.00          100.00±0.00      nan±nan | per-AA 100.0
+
+>>> 多类组平均（固定最后 cp）: OA=86.54（组内跨seed std均值 0.00） AA=71.51 Kappa=0.6676
+
+总耗时 739s

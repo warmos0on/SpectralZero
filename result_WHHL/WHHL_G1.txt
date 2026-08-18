@@ -1,0 +1,28 @@
+=== WHHL (LongKou) G1 ===
+Unseen: Corn, Cotton, Water
+Status: Partial (killed early)
+
+Paper per_AA: [99.26, 85.4, 100.0]
+Paper AA mean: 94.89%
+
+Checkpoint  1: AA=87.26%  Kappa=0.9276  [96.59, 65.2, 99.99]
+Checkpoint  2: AA=86.89%  Kappa=0.8601  [82.24, 78.44, 99.99]
+Checkpoint  3: AA=83.90%  Kappa=0.8497  [82.21, 69.48, 100.0]
+Checkpoint  4: AA=77.23%  Kappa=0.8327  [86.26, 45.43, 100.0]
+Checkpoint  5: AA=87.55%  Kappa=0.9246  [95.62, 67.05, 99.99]
+Checkpoint  6: AA=87.02%  Kappa=0.8605  [82.43, 78.63, 99.99]
+Checkpoint  7: AA=83.32%  Kappa=0.8840  [90.82, 59.14, 99.99]
+Checkpoint  8: AA=77.41%  Kappa=0.8613  [92.36, 39.88, 100.0]
+Checkpoint  9: AA=70.28%  Kappa=0.7299  [73.48, 37.37, 99.98]
+Checkpoint 10: AA=71.39%  Kappa=0.8608  [97.98, 16.19, 99.99]
+Checkpoint 11: AA=85.51%  Kappa=0.9309  [99.1, 57.51, 99.93]
+Checkpoint 12: AA=69.10%  Kappa=0.8135  [90.81, 16.52, 99.97]
+Checkpoint 13: AA=76.92%  Kappa=0.8703  [94.32, 36.47, 99.98]
+
+--- Best ---
+AA avg: 87.55%  Kappa: 0.9246
+Per-class comparison:
+  Class                            Ours    Paper     Diff
+  Corn                           95.62%   99.26%    -3.64
+  Cotton                         67.05%   85.40%   -18.35
+  Water                          99.99%  100.00%    -0.01

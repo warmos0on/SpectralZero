@@ -1,0 +1,22 @@
+================================================================================
+  WHHL (LongKou) - Our Results vs Paper (Per-Class AA)
+================================================================================
+
+Paper Overall: OA=76.46%  AA=67.74%  Kappa=0.5948
+Our Overall AA: 66.04%  (9 classes, 1 seed only)
+
+Class                           Paper AA%    Our AA%       Diff
+-----------------------------------------------------------------
+Corn                                99.26      95.62      -3.64
+Cotton                              85.40      67.05     -18.35
+Water                              100.00      99.99      -0.01
+Sesame                              93.70      61.06     -32.64
+Broad-leaf soybean                   1.47      61.98     +60.51
+Rice                                89.50      94.38      +4.88
+Narrow-leaf soybean                 95.50      97.90      +2.40
+Mixed weed                          18.76      14.85      -3.91
+Roads and houses                    26.00       1.56     -24.44
+-----------------------------------------------------------------
+TOTAL AA                            67.73      66.04      -1.69
+
+Note: Single seed (42) only. G3 training was interrupted early.

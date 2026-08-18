@@ -1,0 +1,30 @@
+=== WHHL (LongKou) G2 ===
+Unseen: Sesame, Broad-leaf soybean, Rice
+Status: Complete
+
+Paper per_AA: [93.7, 1.47, 89.5]
+Paper AA mean: 61.56%
+
+Checkpoint  1: AA=63.11%  Kappa=0.3768  [45.85, 69.77, 73.7]
+Checkpoint  2: AA=63.43%  Kappa=0.3515  [37.77, 64.94, 87.57]
+Checkpoint  3: AA=66.74%  Kappa=0.5308  [32.63, 82.72, 84.87]
+Checkpoint  4: AA=59.39%  Kappa=0.4412  [11.41, 76.7, 90.06]
+Checkpoint  5: AA=57.90%  Kappa=0.2288  [33.9, 48.28, 91.53]
+Checkpoint  6: AA=59.88%  Kappa=0.4003  [13.18, 71.61, 94.86]
+Checkpoint  7: AA=72.47%  Kappa=0.3725  [61.06, 61.98, 94.38]
+Checkpoint  8: AA=56.74%  Kappa=0.3097  [13.95, 61.57, 94.71]
+Checkpoint  9: AA=56.22%  Kappa=0.1991  [27.49, 44.39, 96.79]
+Checkpoint 10: AA=54.54%  Kappa=0.1082  [55.92, 12.77, 94.93]
+Checkpoint 11: AA=67.87%  Kappa=0.3083  [51.22, 54.91, 97.47]
+Checkpoint 12: AA=55.71%  Kappa=0.1585  [34.77, 35.68, 96.67]
+Checkpoint 13: AA=65.70%  Kappa=0.2652  [51.45, 49.61, 96.04]
+Checkpoint 14: AA=67.57%  Kappa=0.2679  [57.49, 48.18, 97.03]
+Checkpoint 15: AA=49.38%  Kappa=0.0930  [29.23, 20.88, 98.03]
+
+--- Best ---
+AA avg: 72.47%  Kappa: 0.3725
+Per-class comparison:
+  Class                            Ours    Paper     Diff
+  Sesame                         61.06%   93.70%   -32.64
+  Broad-leaf soybean             61.98%    1.47%   +60.51
+  Rice                           94.38%   89.50%    +4.88

@@ -1,0 +1,38 @@
+=== Indian 诚实评测（固定最后 checkpoint, seeds=[42, 123, 456], epochs=20）===
+  G1 seed=42: OA=72.06 AA=71.40 Kappa=0.5791
+  G1 seed=123: OA=89.21 AA=82.97 Kappa=0.8234
+  G1 seed=456: OA=85.08 AA=72.53 Kappa=0.7484
+  G1 用时 397s
+  G2 seed=42: OA=80.26 AA=54.20 Kappa=0.5014
+  G2 seed=123: OA=85.20 AA=59.36 Kappa=0.6580
+  G2 seed=456: OA=82.50 AA=55.21 Kappa=0.5794
+  G2 用时 324s
+  G3 seed=42: OA=93.93 AA=94.50 Kappa=0.7734
+  G3 seed=123: OA=97.83 AA=97.90 Kappa=0.9112
+  G3 seed=456: OA=89.38 AA=70.58 Kappa=0.4875
+  G3 用时 395s
+  G4 seed=42: OA=85.12 AA=61.97 Kappa=0.7050
+  G4 seed=123: OA=58.62 AA=47.96 Kappa=0.3020
+  G4 seed=456: OA=86.55 AA=62.10 Kappa=0.7262
+  G4 用时 400s
+  G5 seed=42: OA=80.20 AA=91.74 Kappa=0.5486
+  G5 seed=123: OA=92.65 AA=95.83 Kappa=0.7941
+  G5 seed=456: OA=97.83 AA=92.07 Kappa=0.9315
+  G5 用时 385s
+  G6 seed=42: OA=100.00 AA=100.00 Kappa=nan
+  G6 seed=123: OA=100.00 AA=100.00 Kappa=nan
+  G6 seed=456: OA=100.00 AA=100.00 Kappa=nan
+  G6 用时 403s
+
+====================================================================================================
+Group  Unseen                                               Last-cp OA (mean±std)    AA                 Kappa       
+G1     Corn-notill, Hay-windrowed, Woods                    82.12±7.31          75.63±5.21      0.7170±0.1022 | per-AA 99.9 72.5 54.5
+G2     Grass-trees, Buildings-Grass-Trees-Drives, Soybean-mintill 82.65±2.02          56.26±2.23      0.5796±0.0639 | per-AA 62.9 5.9 100.0
+G3     Grass-pasture-mowed, Stone-Steel-Towers, Corn-mintill 93.71±3.45          87.66±12.16      0.7240±0.1764 | per-AA 100.0 66.3 96.7
+G4     Corn, Alfalfa, Grass-pasture                         76.76±12.84          57.34±6.64      0.5777±0.1951 | per-AA 97.5 0.7 73.8
+G5     Wheat, Oats, Soybean-notill                          90.23±7.40          93.21±1.86      0.7581±0.1584 | per-AA 97.7 93.3 88.6
+G6     Soybean-clean                                        100.00±0.00          100.00±0.00      nan±nan | per-AA 100.0
+
+>>> 多类组平均（固定最后 cp）: OA=85.09（组内跨seed std均值 6.60） AA=74.02 Kappa=0.6713
+
+总耗时 2303s

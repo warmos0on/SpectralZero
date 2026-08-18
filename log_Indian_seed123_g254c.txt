@@ -1,0 +1,48 @@
+[08-02 20:18:02] [INFO]: unseen per AA [100.    0.   99.5], kappa is 0.34386
+[08-02 20:18:16] [INFO]: unseen per AA [100.   0. 100.], kappa is 0.37797
+[08-02 20:18:29] [INFO]: unseen per AA [100.     0.    95.14], kappa is 0.38099
+[08-02 20:18:43] [INFO]: unseen per AA [100.     0.    99.38], kappa is 0.43894
+[08-02 20:18:43] [CRITICAL]: Current experment have been finished.
+
+[08-03 04:00:34] [INFO]: unseen per AA [100.     0.    99.63], kappa is 0.34692
+[08-03 04:00:49] [INFO]: unseen per AA [100.     0.    99.88], kappa is 0.35686
+[08-03 04:01:03] [INFO]: unseen per AA [100.     0.    89.15], kappa is 0.30599
+[08-03 04:01:17] [INFO]: unseen per AA [100.     0.    92.89], kappa is 0.44151
+[08-03 04:01:17] [CRITICAL]: Current experment have been finished.
+
+[08-05 15:25:05] [INFO]: unseen per AA [100.   0. 100.], kappa is 0.35631
+[08-05 15:25:36] [INFO]: unseen per AA [100.     3.23 100.  ], kappa is 0.39034
+[08-05 15:26:06] [INFO]: unseen per AA [100.    13.98  96.01], kappa is 0.44377
+[08-05 15:26:36] [INFO]: unseen per AA [100.    33.33  96.01], kappa is 0.61798
+[08-05 15:26:36] [CRITICAL]: Current experment have been finished.
+
+[08-05 18:36:47] [INFO]: unseen per AA [ 75.   0. 100.], kappa is 0.27855
+[08-05 18:37:17] [INFO]: unseen per AA [100.   0. 100.], kappa is 0.35631
+[08-05 18:37:42] [INFO]: unseen per AA [96.43 50.54 99.  ], kappa is 0.70534
+[08-05 18:38:10] [INFO]: unseen per AA [100.    94.62  96.51], kappa is 0.85923
+[08-05 18:38:10] [CRITICAL]: Current experment have been finished.
+
+[08-05 18:40:18] [INFO]: unseen per AA [100.     0.    98.38], kappa is 0.31439
+[08-05 18:40:45] [INFO]: unseen per AA [100.     0.    94.01], kappa is 0.24386
+[08-05 18:41:17] [INFO]: unseen per AA [100.     9.68  79.05], kappa is 0.27853
+[08-05 18:41:48] [INFO]: unseen per AA [100.     2.15  91.4 ], kappa is 0.42145
+[08-05 18:41:48] [CRITICAL]: Current experment have been finished.
+
+[08-05 20:04:01] [INFO]: unseen per AA [ 96.43   0.   100.  ], kappa is 0.34559
+[08-05 20:04:02] [INFO]: unseen per AA [ 78.57   0.   100.  ], kappa is 0.29006
+[08-05 20:04:32] [INFO]: unseen per AA [100.   0. 100.], kappa is 0.35631
+[08-05 20:04:33] [INFO]: unseen per AA [100.   0. 100.], kappa is 0.35631
+[08-05 20:05:03] [INFO]: unseen per AA [100.    56.99  92.52], kappa is 0.58924
+[08-05 20:05:03] [INFO]: unseen per AA [100.    26.88  99.75], kappa is 0.57632
+[08-05 20:05:34] [INFO]: unseen per AA [100.    48.39  92.02], kappa is 0.58884
+[08-05 20:05:34] [CRITICAL]: Current experment have been finished.
+
+[08-05 20:05:34] [INFO]: unseen per AA [100.   95.7  98. ], kappa is 0.91116
+[08-05 20:05:34] [CRITICAL]: Current experment have been finished.
+
+[08-18 14:52:28] [INFO]: unseen per AA [100.   0. 100.], kappa is 0.35631
+[08-18 14:53:11] [INFO]: unseen per AA [100.   0. 100.], kappa is 0.36733
+[08-18 14:53:54] [INFO]: unseen per AA [100.     8.6   97.76], kappa is 0.43515
+[08-18 14:54:37] [INFO]: unseen per AA [100.     1.08  94.14], kappa is 0.38669
+[08-18 14:54:37] [CRITICAL]: Current experment have been finished.
+

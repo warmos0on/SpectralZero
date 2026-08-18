@@ -1,0 +1,11 @@
+=== Indian 诚实评测（固定最后 checkpoint, seeds=[42], epochs=20）===
+  G1 seed=42: OA=61.12 AA=57.36 Kappa=0.4205
+  G1 用时 61s
+  G2 seed=42: OA=89.39 AA=68.11 Kappa=0.7670
+  G2 用时 57s
+  G3 seed=42: OA=87.65 AA=65.79 Kappa=0.3801
+  G3 用时 67s
+  G4 seed=42: OA=91.38 AA=65.29 Kappa=0.8201
+  G4 用时 66s
+  G5 seed=42: OA=79.87 AA=63.80 Kappa=0.4346
+  G5 用时 62s
