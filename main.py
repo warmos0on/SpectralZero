@@ -30,9 +30,10 @@ def entry(args, log: loger.Logger):
     # 获取text embedding和新的args
     text_embedding, args, train_att = extract(label_value, args)
     # 将label重新映射以满足cross entropy loss
-    seen_gt, _ = utils.fix_label(seen_label_name, gt)
+    # fix_label 现为纯函数，重映射后的标签从返回的字典取（原先靠它就地改写 label_value["seen"]）
+    seen_gt, seen_label_name = utils.fix_label(seen_label_name, gt)
     seen_max = len(seen_label_name)
-    unseen_gt, _ = utils.fix_label(unseen_label_name, gt, shift=seen_max)
+    unseen_gt, unseen_label_name = utils.fix_label(unseen_label_name, gt, shift=seen_max)
     gt = seen_gt + unseen_gt
     # 获取训练和测试集使用数据的数量
     train_num, test_num = utils.get_train_test_num(gt=gt, train_num=args["train_num"])
@@ -52,12 +53,13 @@ def entry(args, log: loger.Logger):
     HSI = np.pad(HSI, ((padding, padding), (padding, padding), (0, 0)), 'symmetric')
     padding_gt = np.pad(gt, ((padding, padding), (padding, padding)), 'constant')
     
-    seen_label, _ = utils.get_seen_unseen_class(label_value)
+    seen_label = np.array(list(seen_label_name.values()), dtype=int)
     
     train_gt, test_gt, test_seen_gt = utils.split_gt(padding_gt, train_num, test_num, seen_label)
 
     # 逐波段 z-score 标准化：统计量只来自训练(seen)像素，避免 unseen 信息泄漏
-    if args.get("use_zscore", True):
+    # 创新开关默认 False（opt-in）：默认 True 会让漏写该 key 的 config 静默启用创新（CLAUDE.md 红线 1）
+    if args.get("use_zscore", False):
         train_mask = train_gt > 0
         train_pixels = HSI[train_mask].astype(np.float32)
         band_mean = train_pixels.mean(axis=0)
@@ -71,7 +73,7 @@ def entry(args, log: loger.Logger):
 
     g = torch.Generator()
     g.manual_seed(seed)
-    if args.get("use_balanced_sampler", True):
+    if args.get("use_balanced_sampler", False):
         # 类别平衡采样：按训练样本数反比加权，缓解类别极度不均衡
         train_labels = np.array(train_dataset.labels, dtype=np.int64)
         class_counts = np.bincount(train_labels - 1, minlength=seen_max).astype(np.float64)
@@ -125,6 +127,8 @@ def entry(args, log: loger.Logger):
 
             print(unseen_msg)
             print(per_unseen_AA_msg)
+            # OA/AA 必须同时落盘：此前只写 per-AA 行，日志里拿不到主指标（CLAUDE.md 红线 7）
+            log.INFO_log(unseen_msg)
             log.INFO_log(per_unseen_AA_msg)
     log.CRITICAL_log("Current experment have been finished.\n")
     

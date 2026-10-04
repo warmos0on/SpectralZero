@@ -102,7 +102,7 @@ def get_dataset(dataset_name, dataset_loc="./data/"):
             "Bitumen": 7,
         }
     else:
-        ValueError("Wrong dataset name!")
+        raise ValueError("Wrong dataset name!")
     nan_mask = np.isnan(HSI.sum(axis=-1))
     if np.count_nonzero(nan_mask) > 0:
         print("There are some NaN data in the HSI. The program will mask them as zero.")
@@ -150,13 +150,12 @@ class HyperProcess(torch.utils.data.Dataset):
 
     @staticmethod
     def radiation_noise(data, alpha_range=(0.9, 1.1), beta=1 / 18):
-        random_use = np.random.randint(0, 1, size=(1,))
-        if random_use == 0:
-            return data
-        else:
-            alpha = np.random.uniform(*alpha_range)
-            noise = np.random.normal(loc=0., scale=1.0, size=data.shape)
-            return alpha * data + beta * noise
+        # 原实现 randint(0, 1) 恒为 0，导致本函数永远原样返回 —— config 里的
+        # radiation_augmentation: true 其实从未生效。改为真实辐射噪声。
+        # 注意：修复后该增强会真的改变输入分布，跑论文基线时须在实验记录中声明（见 CLAUDE.md）。
+        alpha = np.random.uniform(*alpha_range)
+        noise = np.random.normal(loc=0., scale=1.0, size=data.shape)
+        return alpha * data + beta * noise
 
     def mixture_noise(self, data, label, beta=1 / 25):
         alpha1, alpha2 = np.random.uniform(0.01, 1., size=2)

@@ -11,8 +11,10 @@ for ds_name in ["Indian", "LongKou"]:
     HSI, gt, label_value = datasets.get_dataset(dataset_name=ds_name)
     unseen = cfg["unseen_classes"]
     label_value, seen_names, unseen_names = utils.reloc_class(label_value, unseen)
-    seen_label, _ = utils.get_seen_unseen_class(label_value)
-    seen_gt, _ = utils.fix_label(seen_names, gt)
+    # 必须先 fix_label 再取 seen_label：split_gt 判 "label in label_list" 用的是重映射后 1..N，
+    # 而原始 gt id 集合与 1..N 不一致（如 Indian 缺 2/11/15），拿原始 id 会把 3 个类误判进 test 集
+    seen_gt, seen_names = utils.fix_label(seen_names, gt)
+    seen_label = np.array(list(seen_names.values()), dtype=int)
     train_num, test_num = utils.get_train_test_num(gt=seen_gt, train_num=cfg["train_num"])
     for seed in [42, 123, 456]:
         utils.fixed_seed(seed)

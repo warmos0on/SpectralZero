@@ -15,10 +15,16 @@ def train_pipeline(model, text_projection, train_dataset, epoch, hyperparams, op
     pre, tar = [], []
     
     for batch_data, batch_label in train_dataset:
+        batch_data, batch_label = batch_data.to(device), (batch_label - 1).int().to(device)
+        # BatchNorm1d 在训练模式下无法对单样本 batch 求统计量（会直接抛错）；
+        # 训练集长度 ≡ 1 (mod batch_size) 时末位 batch 为 1，跳过并计入日志。
+        # 测试端不再丢样本：model_sz 已改用显式 squeeze(1)，batch=1 可正常前向。
+        if batch_label.size(0) == 1:
+            print(f"[epoch: {epoch:4}] 跳过末位单样本训练 batch（BatchNorm1d 限制）")
+            continue
         optimizer.zero_grad()
 
-        batch_data, batch_label = batch_data.to(device), (batch_label - 1).int().to(device)
-        if hyperparams.get("use_unseen_negatives", True):
+        if hyperparams.get("use_unseen_negatives", False):
             # 训练时把完整文本矩阵（seen+unseen）作为类别空间，unseen 仅作负类
             text_input = text_projection
         else:
@@ -50,8 +56,6 @@ def test_pipeline(model, text_projection, test_dataset, test_seen_dataset, hyper
     index = 0
     for batch_data, batch_label in test_dataset:
         batch_size = len(batch_label)
-        if batch_size == 1: continue
-        
         batch_label, batch_data = (batch_label - 1).int().to(device), batch_data.to(device)
         pred, cls_ = model.forward(batch_data, text_projection, batch_label)
 

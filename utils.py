@@ -72,12 +72,15 @@ def get_train_test_num(gt, train_num, least=15):
     elif train_num == 1:
         pass
     elif train_num > 1:
-        train_num = int(train_num)
+        # 原实现在循环内改写 train_num：某个类配额不足（per_class_num <= train_num）时会把值
+        # 降为 int(per_class_num/2)，其后所有类都继承这个缩小值 —— 结果依赖类别遍历顺序。
+        # 改用每类局部变量，各类配额互不影响。
+        fixed_num = int(train_num)
         for classes in range(class_num):
             per_class_num = np.sum(gt == classes + 1)
-            train_num = train_num if per_class_num > train_num else int(per_class_num / 2)
-            train_list[classes] = train_num
-            test_list[classes] = per_class_num - train_num
+            real_num = fixed_num if per_class_num > fixed_num else int(per_class_num / 2)
+            train_list[classes] = real_num
+            test_list[classes] = per_class_num - real_num
     else:
         raise ValueError("Wrong train num!")
     return train_list, test_list
@@ -119,15 +122,22 @@ def split_gt(gt, train_list, test_list, label_list):
 
 
 def fix_label(label_name: dict, gt: np.ndarray, shift=0):
+    """
+    把 label_name 里的原始类 id 重映射为 1..N（带 shift）。
+
+    原实现就地改写传入的 label_name 字典，调用方靠这个副作用从 label_value 里取回重映射后的
+    标签。现改为纯函数：返回 (重映射后的 label 图, 新的 label_name 字典)。
+    """
     index = 1 + shift
     label = np.zeros_like(gt, dtype=int)
     mask = np.isin(gt, list(label_name.values())).astype(int)
+    new_label_name = dict()
     for key, value in label_name.items():
         current_mask = (gt == value) & (mask == 1)
         label[current_mask] = index
-        label_name[key] = index
+        new_label_name[key] = index
         index += 1
-    return label, np.max(label)
+    return label, new_label_name
 
 
 def torch_gpu_to_numpy(data: torch.Tensor):

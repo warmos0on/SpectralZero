@@ -126,9 +126,10 @@ class SpectralEx(nn.Module):
             x = self.maxpool2(x)
             final_patch = x.shape[-1]
             x_spectral = self.spectral_lower(x)
-            x_spectral = torch.squeeze(x_spectral)
+            # 显式 squeeze(1)（原为无参 squeeze）：batch=1 时无参 squeeze 会连 batch 维一起塌掉
+            x_spectral = x_spectral.squeeze(1)
             x_spectral = self.global_pool(x_spectral)
-            x_spectral = torch.squeeze(x_spectral).unsqueeze(1)
+            x_spectral = x_spectral.flatten(1).unsqueeze(1)
             x_spectral = x_spectral.view((x_spectral.shape[0], -1))
             s = x_spectral.size()[1]
         return final_patch, s
@@ -143,9 +144,11 @@ class SpectralEx(nn.Module):
         spatital_features = features.view(features.shape[0], -1)
         spatital_features = self.mlp(spatital_features)
         spectral_feature = self.spectral_lower(x)
-        spectral_feature = torch.squeeze(spectral_feature)
+        # 显式 squeeze(1)（原为无参 squeeze）：batch=1 时无参 squeeze 会连 batch 维一起塌掉，
+        # 这正是测试端此前要靠 `batch_size == 1: continue` 丢弃样本绕开的根因
+        spectral_feature = spectral_feature.squeeze(1)
         spectral_feature = self.global_pool(spectral_feature)
-        spectral_feature = torch.squeeze(spectral_feature).unsqueeze(1)
+        spectral_feature = spectral_feature.flatten(1).unsqueeze(1)
         spectral_feature = self.spectral_block(spectral_feature)
         spectral_feature = spectral_feature.view((spectral_feature.shape[0], -1))
         spectral_feature = self.spectral_mlp(spectral_feature)
@@ -179,7 +182,9 @@ class SpectralZero(nn.Module):
         dataset = hyper["dataset"]
 
         self.spectral_ratio = hyper.get("spectral_ratio", 0.2)
-        self.dynamic_fusion = hyper.get("dynamic_fusion", True)
+        # 创新开关一律默认 False（opt-in）：默认 True 会让任何漏写该 key 的 config 静默启用创新，
+        # 从而在看起来是「论文版基线」的运行里混入非论文设定（见 CLAUDE.md 红线 1）
+        self.dynamic_fusion = hyper.get("dynamic_fusion", False)
         self.fusion_temperature = hyper.get("fusion_temperature", 0.07)
         self.fusion_prior_strength = hyper.get("fusion_prior_strength", 1.0)
         self.fusion_min_weight = hyper.get("fusion_min_weight", 0.05)
@@ -254,7 +259,7 @@ class SpectralZero(nn.Module):
 
         if self.training:
             cls_loss = self.ce_loss(cls_head, label.long())
-            if self.hyperparams.get("use_unseen_negatives", True):
+            if self.hyperparams.get("use_unseen_negatives", False):
                 # 列空间 = 完整文本（seen+unseen），正样本列 = 真实 seen 类索引
                 clip_loss = self.ce_loss(cosine_similar, label.long())
             else:

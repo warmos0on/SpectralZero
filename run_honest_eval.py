@@ -39,7 +39,9 @@ def run_one_group(dataset, unseen, seed, epochs, checkpoints, ablation=None):
         f"--unseen \"{unseen_str}\" --epochs {epochs} --checkpoints {checkpoints}"
     )
     for item in (ablation or []):
-        cmd += f" --{item}"
+        # main.py 的 --use_xxx 声明为 type=int，必须带值：
+        # 裸名（如 "use_zscore"）按启用处理补 =1；"use_zscore=0" 形式原样透传（run_ablation.ps1 用这种）
+        cmd += f" --{item}" if "=" in item else f" --{item}=1"
     proc = subprocess.run(cmd, shell=True, capture_output=True, text=True,
                           encoding="utf-8", errors="replace")
     stdout = proc.stdout
