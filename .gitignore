@@ -1,0 +1,10 @@
+# Python 缓存
+__pycache__/
+*.pyc
+
+# IDE 设置
+.vscode/
+
+# 会话临时产物（论文文本抽取 / 工作流脚本副本，别入库）
+_paper_text.txt
+_workflow_resume_tmp.js
