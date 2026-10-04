@@ -1,0 +1,48 @@
+# SpectralZero · 代码库约定
+
+> 给跑实验 / 改代码的人和 AI 看的硬约定。超参口径以 `论文版基线_改动说明.md` 为准。
+> 背景：2026-10 硬盘损毁，实验数据 / 日志 / 权重全部丢失，本仓库是唯一幸存上下文。
+
+## 一、红线（违反 = 实验静默作废）
+
+1. **创新开关必须显式声明**。`use_zscore` / `use_balanced_sampler` / `use_unseen_negatives` / `dynamic_fusion` 的代码默认值全是 **True**（`hyper.get(key, True)`）——config 缺 key 会静默启用创新。跑论文基线前逐项确认全为 false；新 config 必须写全。
+2. **`lambda_clip` 是 InfoNCE 权重** = 论文 Eq.(7) 的 `1 − λ_loss`（`L_total = λ_loss·L_CE + (1−λ_loss)·L_InfoNCE`）。从论文抄超参先换算。
+3. **LongKou 的 `lambda_clip=0.0` 不能直接跑**：InfoNCE 权重为 0 时两个投影头和光谱支路零梯度，但测试走 argmax 余弦相似度（`spectral_ratio=0.6`），结果必挂。跑 WHHL 前先定口径（试 0.6 / 1.0 小跑对照），结论记进实验记录。
+4. **三数据集超参不互换**：`spectral_ratio` 0.5 / 0.2 / 0.6，`lambda_clip` 0.6 / 0.6 / 0.0，`patch_size` 15 / 11 / 13，lr、epochs、logit_scale 初值各不同。
+5. **`batch_size` 因显存下调必须记录**。论文 4090 24GB 用 1024；本机 RTX 4060 Laptop 8GB。
+6. **评估是纯开集**：unseen 类全像素作测试、seen 类精度从未评（`test_seen_loader` 是死参数）。报的 "unseen OA" 不要和 seen 精度混着比。
+7. **OA/AA 只打 stdout**，日志文件只留 per-AA 行——直接跑 `main.py` 必须把 stdout 重定向保存，否则主指标丢失。
+
+## 二、踩坑表
+
+| 位置 | 坑 |
+|---|---|
+| utils.py:78 | `get_train_test_num` 整数分支循环内改写 `train_num`，一个类配额不足会级联拉低其后所有类（长尾实验配额失真） |
+| utils.py:49-83 | `train_num` 三态：`<1` 比例（内含 `least=15` 与 `+50` 硬阈值），`==1` 每类 1 个，`>1` 固定数 |
+| utils.py:96 | `split_gt` 的 `test_list` 传而不用；seen = 全像素 − 训练，unseen = 全像素（不对称） |
+| utils.py:128 | `fix_label` 就地改写传入的 label dict |
+| model_sz.py:146 | `torch.squeeze` 无维度修饰，batch=1 崩；测试端 `continue` 丢样本且 pre/tar 零槽位被 eval 记成 class-0 答对 |
+| model_sz.py:191 | `logit_scale` 初值按数据集（LongKou 0.17，其余 0.1），且无 CLIP 的 `clamp(max=100)` |
+| model_sz.py:257 | `clip_loss` 两套正样本：`use_unseen_negatives=true` → 真类列（列空间=全部文本）；`false` → batch 对角 arange。切换时对比口径变化 |
+| datasets.py:153 | `radiation_noise` 是空操作（`randint(0,1)` 恒 0），config 的 `radiation_augmentation: true` 从未生效 |
+| datasets.py:105 | `ValueError` 少 `raise`；`DATASETS_CONFIG` 死字典且缺 LongKou |
+| run_honest_eval.py:42 | `--ablation` 传裸名会 argparse 崩，必须 `--flag=value` 形式 |
+| pipeline.py:7 | `CUDA_LAUNCH_BLOCKING=1` 调试残留，拖慢训练 |
+| extract_text/extract_demo.py:23 | `.cuda()` 硬编码，忽略 config 的 `device` |
+| config/* | 死配置（改了没任何作用）：`use_logit_adjust` `use_virtual_prototypes` `dropout` `multi_args` `dataroot` |
+
+## 三、命令
+
+```bash
+conda activate SpectralZero          # Python 3.12 + PyTorch 2.11 cu128
+python main.py --dataset Indian      # 训练入口（默认 Houston）
+python run_honest_eval.py --dataset Indian --seeds 42 --epochs 20 --checkpoints 5 --ablation "use_zscore=0"
+.\run_ablation.ps1                   # 消融批跑
+python make_longtail_caps.py         # 生成按类训练配额上限 JSON
+python run_longtail_batch.py         # 长尾批跑；analyze_longtail*.py / analyze_perclass.py 出分析
+```
+
+**运行前置（2026-10 时缺失，需重下）**：
+
+- `data/`：Indian.mat / Indian_gt.mat / Houston.mat / Houston_gt.mat / LongKou.mat / LongKou_gt.mat
+- `extract_text/ViT-L-14.pt`：CLIP 文本编码器权重
