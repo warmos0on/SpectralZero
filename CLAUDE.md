@@ -51,3 +51,13 @@ python run_longtail_batch.py         # 长尾批跑；analyze_longtail*.py / ana
 
 - `data/`：Indian.mat / Indian_gt.mat / Houston.mat / Houston_gt.mat / LongKou.mat / LongKou_gt.mat
 - `extract_text/ViT-L-14.pt`：CLIP 文本编码器权重
+
+## 四、复现对照要求（2026-10-06 用户要求）
+
+- **每个实验结果必须和论文同表对照**（论文值 vs 复现值，逐类 / OA / AA / Kappa），偏差主动标出并归因，不许只报自己的数
+- 论文评测口径：每 10 轮评测（WHHL 5 轮），**最终成绩取所有评测点中的最优**（不是最后一个）；增强 = flip + random noise；报告附学习曲线
+- 论文逐类参考（Tables IV-VI / Fig.8 / 正文）：
+  - IP：CornNotill 99.84%、Corn 100%；StoneSteTow 0.00%（Group 3）、Alfalfa 0.00%（Group 4）
+  - Houston：healthy grass / highway 100%；commercial 36.53%、soil 0.20%
+  - WHHL：water / corn 高；broad-leaf soybean、mixed weed、roads and house 失败
+  - 论文整体：OA 领先第二名 23.34 / 12.72 / 6.71 点（IP / Houston / WHHL）；IP 总 OA 97.34、AA 81.45、Kappa 0.8778

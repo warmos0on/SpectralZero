@@ -2,9 +2,19 @@
 __pycache__/
 *.pyc
 
+# 模型权重（不入库，见 archive 的 weights-vit-l14 Release 附件）
+extract_text/*.pt
+
 # IDE 设置
 .vscode/
 
-# 会话临时产物（论文文本抽取 / 工作流脚本副本，别入库）
+# 数据集（239 MB，其中 LongKou.mat 226 MB 超 GitHub 单文件上限；从 archive-full 分支取）
+data/*.mat
+
+# 会话临时产物（论文文本抽取 / 论文表格裁图 / 工作流脚本副本，别入库）
 _paper_text.txt
+_paper_tables/
+_paper_page*.png
 _workflow_resume_tmp.js
+_check_folds.py
+_run_*.sh
