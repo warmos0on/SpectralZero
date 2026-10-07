@@ -45,6 +45,10 @@ python run_honest_eval.py --dataset Indian --seeds 42 --epochs 20 --checkpoints 
 .\run_ablation.ps1                   # 消融批跑
 python make_longtail_caps.py         # 生成按类训练配额上限 JSON
 python run_longtail_batch.py         # 长尾批跑；analyze_longtail*.py / analyze_perclass.py 出分析
+
+# 远程 AutoDL 4090 上跑论文轮换折（多 seed，可断点续跑；详见 复现结果_论文折.md）
+bash run_paperfolds_seeds.sh 123 456 # 自动跳过 driver_seeds.log 里 exit=0 的折
+/root/miniconda3/bin/python extract_folds.py   # 抽结果（单类折 Kappa=nan，正则要接住）
 ```
 
 **运行前置（2026-10 时缺失，需重下）**：
@@ -61,3 +65,12 @@ python run_longtail_batch.py         # 长尾批跑；analyze_longtail*.py / ana
   - Houston：healthy grass / highway 100%；commercial 36.53%、soil 0.20%
   - WHHL：water / corn 高；broad-leaf soybean、mixed weed、roads and house 失败
   - 论文整体：OA 领先第二名 23.34 / 12.72 / 6.71 点（IP / Houston / WHHL）；IP 总 OA 97.34、AA 81.45、Kappa 0.8778
+
+### 口径三坑（2026-10-07 定，对照前逐条确认，踩任一都会让结论反过来）
+
+1. **AA 用逐类平均（class-mean），不是折平均。** 论文 AA = 16 个逐类值 ÷ 16。IP 的 **G6 是单类折**，折平均会把 G6 当 1/6 权重、系统性抬高 AA（按折平均 83.51，按类平均 81.45）。
+2. **逐类数组的顺序 = `datasets.py` 里 `label_values` 字典的键序，不是 config 的 `unseen_classes` 书写序。** 自检：IP G1 按字典序加权 OA = 93.72，与实测 OA 精确相等。**IP 只有 G1 两种顺序不同**，其余折恰好一致，极易蒙混过关。
+3. **论文报告的 OA 与它自己的逐类表不自洽**（IP 97.34 vs 反推 91.03；WHHL 76.46 vs 反推 63.38）。
+   → **不拿论文 OA 当基准**，基准取**由论文逐类值派生的加权 OA / AA**；我们自己的折平均 OA 同时报出并注明口径。
+
+> 依据见 `复现结果_论文折.md` 第一节；完整明细（9 折 × 10 评测点 + 逐类对照）也在该文件。
