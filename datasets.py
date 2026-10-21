@@ -135,7 +135,7 @@ class HyperProcess(torch.utils.data.Dataset):
         x_pos, y_pos = np.nonzero(mask)
         p = self.patch_size // 2
         self.indices = np.array([(x, y) for x, y in zip(x_pos, y_pos) if
-                                 p < x < data.shape[0] - p and p < y < data.shape[1] - p])
+                                 p <= x <= data.shape[0] - p - 1 and p <= y <= data.shape[1] - p - 1])
         self.labels = [self.label[x, y] for x, y in self.indices]
 
     @staticmethod

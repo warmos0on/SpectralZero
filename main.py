@@ -68,8 +68,14 @@ def entry(args, log: loger.Logger):
         HSI = ((HSI.astype(np.float32) - band_mean) / band_std).astype(np.float32)
 
     train_dataset = datasets.HyperProcess(HSI, train_gt, **args)
-    test_dataset = datasets.HyperProcess(HSI, test_gt, **args)
-    test_seen_dataset = datasets.HyperProcess(HSI, test_seen_gt, **args)
+    # 测试集不得带训练增强：Dataset 层的 numpy 随机不受 model.eval() 影响，
+    # 否则每个评测点都在随机扰动过的测试集上测量，「取最优评测点」会选中噪声极大值。
+    test_args = {**args,
+                 'flip_augmentation': False,
+                 'radiation_augmentation': False,
+                 'mixture_augmentation': False}
+    test_dataset = datasets.HyperProcess(HSI, test_gt, **test_args)
+    test_seen_dataset = datasets.HyperProcess(HSI, test_seen_gt, **test_args)
 
     g = torch.Generator()
     g.manual_seed(seed)
