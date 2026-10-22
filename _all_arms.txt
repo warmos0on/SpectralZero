@@ -1,0 +1,44 @@
+
+===== LongKou · seed 42 =====
+  base       3 折   fold-mean OA  72.41   class-mean AA  61.34
+  mild(0.5)  3 折   fold-mean OA  64.71   class-mean AA  65.13
+  bal(1.0)   3 折   fold-mean OA  60.79   class-mean AA  55.80
+  --- 相对 base 的逐类 Δ ---
+  类                           base mild(0.5)  bal(1.0)
+  Corn                       99.05     98.63     99.50
+  Cotton                     62.86     80.44      0.08
+  Sesame                      0.43     43.81     44.80
+  Broad-leaf soybean         96.30     63.40     64.31
+  Narrow-leaf soybean        95.78     96.19     97.25
+  Rice                       81.04     89.16     99.65
+  Water                     100.00     99.93     90.67
+  Mixed weed                 10.19      8.26      1.20
+  Roads and houses            6.40      6.33      4.76
+
+===== Indian · seed 42 =====
+  base(0.6)  6 折   fold-mean OA  93.13   class-mean AA  74.76
+  bal(1.0)   6 折   fold-mean OA  91.71   class-mean AA  71.76
+  --- 相对 base(0.6) 的逐类 Δ ---
+  类                      base(0.6)  bal(1.0)
+  Grass-trees                94.79     85.89
+  Buildings-Grass-Trees-Drives     44.82     14.77
+  Corn-notill                99.93     99.51
+  Grass-pasture-mowed       100.00    100.00
+  Corn                       99.58     97.89
+  Woods                      99.05     72.02
+  Soybean-mintill            97.19     99.39
+  Soybean-clean             100.00    100.00
+  Stone-Steel-Towers          0.00      0.00
+  Hay-windrowed              74.69     88.08
+  Wheat                     100.00     99.02
+  Alfalfa                     0.00      0.00
+  Oats                        0.00      0.00
+  Soybean-notill             93.62     97.94
+  Corn-mintill               97.83     99.64
+  Grass-pasture              94.62     94.00
+
+
+===== 汇总 =====
+LongKou mild − base : OA -7.70   AA +3.79
+LongKou bal  − base : OA -11.62   AA -5.54
+IP bal − base(0.6)  : OA -1.42   AA -3.00

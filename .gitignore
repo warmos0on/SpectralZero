@@ -31,3 +31,7 @@ _fig12_zoom.png
 _probe_lc.py
 _wf_journal.txt
 log_Indian_seed42.txt
+
+# 守护日志（运行记录，不入库）
+_autopull.log
+.autopull.lock
