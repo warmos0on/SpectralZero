@@ -1,0 +1,4 @@
+arm=bal
+sampler_power=1.0
+seed=42
+started=2026-10-22 14:42:59

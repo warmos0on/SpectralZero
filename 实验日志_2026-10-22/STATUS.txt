@@ -57,3 +57,48 @@
 2026-10-22 07:14:10 | LongKou A/B | ARM=base SEED=123 G1 开始
 2026-10-22 07:56:46 | LongKou A/B | ARM=base SEED=123 G1 完成
 2026-10-22 07:56:46 | LongKou A/B | ARM=base SEED=123 G2 开始
+2026-10-22 08:13:42 | FOLLOWUP | 等待 Phase 3 完成（runs/.done_night）
+2026-10-22 08:45:31 | LongKou A/B | ARM=base SEED=123 G2 完成
+2026-10-22 08:45:31 | LongKou A/B | ARM=base SEED=123 G3 开始
+2026-10-22 09:44:11 | LongKou A/B | ARM=base SEED=123 G3 完成
+2026-10-22 09:44:11 | LongKou A/B | ARM=base SEED=123 结束
+2026-10-22 09:44:13 | LongKou A/B | ARM=bal SEED=123 开始
+2026-10-22 09:44:13 | LongKou A/B | ARM=bal SEED=123 G1 开始
+2026-10-22 10:27:29 | LongKou A/B | ARM=bal SEED=123 G1 完成
+2026-10-22 10:27:29 | LongKou A/B | ARM=bal SEED=123 G2 开始
+2026-10-22 11:15:53 | LongKou A/B | ARM=bal SEED=123 G2 完成
+2026-10-22 11:15:53 | LongKou A/B | ARM=bal SEED=123 G3 开始
+2026-10-22 12:14:34 | LongKou A/B | ARM=bal SEED=123 G3 完成
+2026-10-22 12:14:34 | LongKou A/B | ARM=bal SEED=123 结束
+2026-10-22 12:14:34 | LongKou A/B | LongKou A/B 全部结束
+2026-10-22 12:14:34 | QUEUE | PHASE 3 结束 exit=0
+2026-10-22 12:14:34 | QUEUE | ===== 夜间队列全部结束 =====
+2026-10-22 12:14:44 | FOLLOWUP | Phase 3 已完成
+switched=2026-10-22 12:14:44
+9bcd3f8ff684192ff345a25d10d8c49c  main.py
+2026-10-22 12:14:44 | FOLLOWUP | main.py 已切换为 sampler_power 版
+2026-10-22 12:14:44 | LongKou MILD | 启动 sampler_power=0.5
+2026-10-22 12:14:44 | LongKou MILD | G1 开始
+2026-10-22 12:57:27 | LongKou MILD | G1 完成
+2026-10-22 12:57:27 | LongKou MILD | G2 开始
+2026-10-22 13:45:16 | LongKou MILD | G2 完成
+2026-10-22 13:45:16 | LongKou MILD | G3 开始
+2026-10-22 14:42:59 | LongKou MILD | G3 完成
+2026-10-22 14:42:59 | LongKou MILD | mild 全部结束
+2026-10-22 14:42:59 | FOLLOWUP | LongKou mild 结束 exit=0
+2026-10-22 14:42:59 | IP BAL | 启动
+2026-10-22 14:42:59 | IP BAL | G1 开始
+2026-10-22 14:48:08 | IP BAL | G1 完成
+2026-10-22 14:48:08 | IP BAL | G2 开始
+2026-10-22 14:53:01 | IP BAL | G2 完成
+2026-10-22 14:53:01 | IP BAL | G3 开始
+2026-10-22 14:59:19 | IP BAL | G3 完成
+2026-10-22 14:59:19 | IP BAL | G4 开始
+2026-10-22 15:05:43 | IP BAL | G4 完成
+2026-10-22 15:05:43 | IP BAL | G5 开始
+2026-10-22 15:11:53 | IP BAL | G5 完成
+2026-10-22 15:11:53 | IP BAL | G6 开始
+2026-10-22 15:18:26 | IP BAL | G6 完成
+2026-10-22 15:18:26 | IP BAL | 全部结束
+2026-10-22 15:18:26 | FOLLOWUP | Indian bal 结束 exit=0
+2026-10-22 15:18:26 | FOLLOWUP | 后续队列全部结束

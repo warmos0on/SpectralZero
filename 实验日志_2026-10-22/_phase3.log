@@ -5,3 +5,16 @@
 [start] G1 arm=base seed=123 2026-10-22 07:14:10
 [done ] G1 arm=base seed=123 2026-10-22 07:56:46
 [start] G2 arm=base seed=123 2026-10-22 07:56:46
+[done ] G2 arm=base seed=123 2026-10-22 08:45:31
+[start] G3 arm=base seed=123 2026-10-22 08:45:31
+[done ] G3 arm=base seed=123 2026-10-22 09:44:11
+
+########## ARM=bal SEED=123 2026-10-22 09:44:13 ##########
+[start] G1 arm=bal seed=123 2026-10-22 09:44:13
+[done ] G1 arm=bal seed=123 2026-10-22 10:27:29
+[start] G2 arm=bal seed=123 2026-10-22 10:27:29
+[done ] G2 arm=bal seed=123 2026-10-22 11:15:53
+[start] G3 arm=bal seed=123 2026-10-22 11:15:53
+[done ] G3 arm=bal seed=123 2026-10-22 12:14:34
+
+#### LongKou A/B 完成 2026-10-22 12:14:34 ####
