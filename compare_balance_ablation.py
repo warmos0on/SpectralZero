@@ -143,8 +143,10 @@ def main():
     print("### 四、按预登记标准的判定\n")
     per_seed = {}
     for s in seeds:
-        a = [A[(g, s)][0] for g in GROUPS if (g, s) in A]
-        b = [B[(g, s)][0] for g in GROUPS if (g, s) in B]
+        # G6 是单类折（恒 ~100），必须排除；否则它会稀释 ΔOA
+        gs = [g for g in GROUPS if g != "G6"]
+        a = [A[(g, s)][0] for g in gs if (g, s) in A]
+        b = [B[(g, s)][0] for g in gs if (g, s) in B]
         if a and b: per_seed[s] = (statistics.mean(a), statistics.mean(b))
     print("  逐 seed（折平均 OA，均排除单类折 G6）：")
     up = 0
