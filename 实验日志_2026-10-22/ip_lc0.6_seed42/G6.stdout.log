@@ -1,0 +1,222 @@
+/root/miniconda3/lib/python3.12/site-packages/torch/autograd/graph.py:744: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[epoch:    1]  Train Accuracy: 17.09314 | train sample number:   1954
+[epoch:    2]  Train Accuracy: 44.83112 | train sample number:   1954
+[epoch:    3]  Train Accuracy: 50.56295 | train sample number:   1954
+[epoch:    4]  Train Accuracy: 54.29887 | train sample number:   1954
+[epoch:    5]  Train Accuracy: 57.72774 | train sample number:   1954
+[epoch:    6]  Train Accuracy: 59.26305 | train sample number:   1954
+[epoch:    7]  Train Accuracy: 61.87308 | train sample number:   1954
+[epoch:    8]  Train Accuracy: 62.84545 | train sample number:   1954
+[epoch:    9]  Train Accuracy: 65.50665 | train sample number:   1954
+[epoch:   10]  Train Accuracy: 66.93961 | train sample number:   1954
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/utils/_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan
+[epoch:   11]  Train Accuracy: 69.80553 | train sample number:   1954
+[epoch:   12]  Train Accuracy: 71.49437 | train sample number:   1954
+[epoch:   13]  Train Accuracy: 71.64790 | train sample number:   1954
+[epoch:   14]  Train Accuracy: 72.21085 | train sample number:   1954
+[epoch:   15]  Train Accuracy: 74.15558 | train sample number:   1954
+[epoch:   16]  Train Accuracy: 75.33265 | train sample number:   1954
+[epoch:   17]  Train Accuracy: 75.99795 | train sample number:   1954
+[epoch:   18]  Train Accuracy: 77.12385 | train sample number:   1954
+[epoch:   19]  Train Accuracy: 78.35210 | train sample number:   1954
+[epoch:   20]  Train Accuracy: 79.88741 | train sample number:   1954
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/utils/_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan
+[epoch:   21]  Train Accuracy: 80.70624 | train sample number:   1954
+[epoch:   22]  Train Accuracy: 81.16684 | train sample number:   1954
+[epoch:   23]  Train Accuracy: 81.67861 | train sample number:   1954
+[epoch:   24]  Train Accuracy: 83.57216 | train sample number:   1954
+[epoch:   25]  Train Accuracy: 82.65097 | train sample number:   1954
+[epoch:   26]  Train Accuracy: 84.33982 | train sample number:   1954
+[epoch:   27]  Train Accuracy: 85.05629 | train sample number:   1954
+[epoch:   28]  Train Accuracy: 85.97748 | train sample number:   1954
+[epoch:   29]  Train Accuracy: 86.94985 | train sample number:   1954
+[epoch:   30]  Train Accuracy: 87.56397 | train sample number:   1954
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/utils/_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan
+[epoch:   31]  Train Accuracy: 87.56397 | train sample number:   1954
+[epoch:   32]  Train Accuracy: 88.07574 | train sample number:   1954
+[epoch:   33]  Train Accuracy: 88.33163 | train sample number:   1954
+[epoch:   34]  Train Accuracy: 88.84340 | train sample number:   1954
+[epoch:   35]  Train Accuracy: 90.37871 | train sample number:   1954
+[epoch:   36]  Train Accuracy: 90.94166 | train sample number:   1954
+[epoch:   37]  Train Accuracy: 90.63460 | train sample number:   1954
+[epoch:   38]  Train Accuracy: 91.65814 | train sample number:   1954
+[epoch:   39]  Train Accuracy: 91.55578 | train sample number:   1954
+[epoch:   40]  Train Accuracy: 92.16991 | train sample number:   1954
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/utils/_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan
+[epoch:   41]  Train Accuracy: 93.09110 | train sample number:   1954
+[epoch:   42]  Train Accuracy: 92.93756 | train sample number:   1954
+[epoch:   43]  Train Accuracy: 93.44933 | train sample number:   1954
+[epoch:   44]  Train Accuracy: 93.60287 | train sample number:   1954
+[epoch:   45]  Train Accuracy: 92.88639 | train sample number:   1954
+[epoch:   46]  Train Accuracy: 93.55169 | train sample number:   1954
+[epoch:   47]  Train Accuracy: 94.01228 | train sample number:   1954
+[epoch:   48]  Train Accuracy: 94.11464 | train sample number:   1954
+[epoch:   49]  Train Accuracy: 96.05937 | train sample number:   1954
+[epoch:   50]  Train Accuracy: 95.08700 | train sample number:   1954
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/utils/_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan
+[epoch:   51]  Train Accuracy: 94.47288 | train sample number:   1954
+[epoch:   52]  Train Accuracy: 95.24053 | train sample number:   1954
+[epoch:   53]  Train Accuracy: 95.54759 | train sample number:   1954
+[epoch:   54]  Train Accuracy: 96.57114 | train sample number:   1954
+[epoch:   55]  Train Accuracy: 95.70113 | train sample number:   1954
+[epoch:   56]  Train Accuracy: 96.21290 | train sample number:   1954
+[epoch:   57]  Train Accuracy: 96.46878 | train sample number:   1954
+[epoch:   58]  Train Accuracy: 96.26407 | train sample number:   1954
+[epoch:   59]  Train Accuracy: 96.31525 | train sample number:   1954
+[epoch:   60]  Train Accuracy: 97.03173 | train sample number:   1954
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/utils/_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan
+[epoch:   61]  Train Accuracy: 96.51996 | train sample number:   1954
+[epoch:   62]  Train Accuracy: 96.72467 | train sample number:   1954
+[epoch:   63]  Train Accuracy: 97.38997 | train sample number:   1954
+[epoch:   64]  Train Accuracy: 97.33879 | train sample number:   1954
+[epoch:   65]  Train Accuracy: 97.38997 | train sample number:   1954
+[epoch:   66]  Train Accuracy: 97.85056 | train sample number:   1954
+[epoch:   67]  Train Accuracy: 97.59468 | train sample number:   1954
+[epoch:   68]  Train Accuracy: 97.59468 | train sample number:   1954
+[epoch:   69]  Train Accuracy: 97.90174 | train sample number:   1954
+[epoch:   70]  Train Accuracy: 97.90174 | train sample number:   1954
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/utils/_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan
+[epoch:   71]  Train Accuracy: 97.90174 | train sample number:   1954
+[epoch:   72]  Train Accuracy: 98.20880 | train sample number:   1954
+[epoch:   73]  Train Accuracy: 98.25998 | train sample number:   1954
+[epoch:   74]  Train Accuracy: 98.20880 | train sample number:   1954
+[epoch:   75]  Train Accuracy: 98.36233 | train sample number:   1954
+[epoch:   76]  Train Accuracy: 98.61822 | train sample number:   1954
+[epoch:   77]  Train Accuracy: 98.36233 | train sample number:   1954
+[epoch:   78]  Train Accuracy: 98.31116 | train sample number:   1954
+[epoch:   79]  Train Accuracy: 98.97646 | train sample number:   1954
+[epoch:   80]  Train Accuracy: 98.72057 | train sample number:   1954
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/utils/_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan
+[epoch:   81]  Train Accuracy: 99.23234 | train sample number:   1954
+[epoch:   82]  Train Accuracy: 99.12999 | train sample number:   1954
+[epoch:   83]  Train Accuracy: 98.66940 | train sample number:   1954
+[epoch:   84]  Train Accuracy: 98.72057 | train sample number:   1954
+[epoch:   85]  Train Accuracy: 99.12999 | train sample number:   1954
+[epoch:   86]  Train Accuracy: 98.77175 | train sample number:   1954
+[epoch:   87]  Train Accuracy: 98.82293 | train sample number:   1954
+[epoch:   88]  Train Accuracy: 99.02764 | train sample number:   1954
+[epoch:   89]  Train Accuracy: 98.87410 | train sample number:   1954
+[epoch:   90]  Train Accuracy: 99.18117 | train sample number:   1954
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/utils/_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan
+[epoch:   91]  Train Accuracy: 98.92528 | train sample number:   1954
+[epoch:   92]  Train Accuracy: 99.28352 | train sample number:   1954
+[epoch:   93]  Train Accuracy: 99.23234 | train sample number:   1954
+[epoch:   94]  Train Accuracy: 99.23234 | train sample number:   1954
+[epoch:   95]  Train Accuracy: 99.43705 | train sample number:   1954
+[epoch:   96]  Train Accuracy: 99.12999 | train sample number:   1954
+[epoch:   97]  Train Accuracy: 99.23234 | train sample number:   1954
+[epoch:   98]  Train Accuracy: 99.43705 | train sample number:   1954
+[epoch:   99]  Train Accuracy: 99.43705 | train sample number:   1954
+[epoch:  100]  Train Accuracy: 99.48823 | train sample number:   1954
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+/root/miniconda3/lib/python3.12/site-packages/sklearn/utils/_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan

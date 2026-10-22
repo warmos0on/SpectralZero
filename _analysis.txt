@@ -1,0 +1,51 @@
+########## LongKou A/B · seed 42 ##########
+
+=== LongKou base  [_remote_runs/lk_base_seed42] ===
+  G1: 点数=10 最优OA= 96.87 AA= 87.30 κ= 0.93846  Corn=99.05 Cotton=62.86 Water=100.00
+  G2: 点数=10 最优OA= 90.27 AA= 59.26 κ= 0.69068  Sesame= 0.43 Broad-leaf soy=96.30 Rice=81.04
+  G3: 点数=10 最优OA= 30.08 AA= 37.46 κ=-0.00098  Narrow-leaf so=95.78 Mixed weed=10.19 Roads and hous= 6.40
+  >> fold-mean OA =  72.41   class-mean AA =  61.34  (类数 9)
+
+=== LongKou bal  [_remote_runs/lk_bal_seed42] ===
+  G1: 点数=10 最优OA= 86.54 AA= 63.42 κ= 0.73681  Corn=99.50 Cotton= 0.08 Water=90.67
+  G2: 点数=10 最优OA= 68.92 AA= 69.59 κ= 0.39431  Sesame=44.80 Broad-leaf soy=64.31 Rice=99.65
+  G3: 点数=10 最优OA= 26.90 AA= 34.41 κ=-0.03942  Narrow-leaf so=97.25 Mixed weed= 1.20 Roads and hous= 4.76
+  >> fold-mean OA =  60.79   class-mean AA =  55.80  (类数 9)
+
+>>> Δ(bal − base):  fold-mean OA -11.62   class-mean AA -5.54
+
+  逐类 Δ(bal − base):
+    G1 Corn                   base  99.05 → bal  99.50    +0.45
+    G1 Cotton                 base  62.86 → bal   0.08   -62.78
+    G1 Water                  base 100.00 → bal  90.67    -9.33
+    G2 Sesame                 base   0.43 → bal  44.80   +44.37
+    G2 Broad-leaf soybean     base  96.30 → bal  64.31   -31.99
+    G2 Rice                   base  81.04 → bal  99.65   +18.61
+    G3 Narrow-leaf soybean    base  95.78 → bal  97.25    +1.47
+    G3 Mixed weed             base  10.19 → bal   1.20    -8.99
+    G3 Roads and houses       base   6.40 → bal   4.76    -1.64
+
+
+########## IP λ 裁决 · seed 42 ##########
+
+=== IP λ=0.4  [_remote_runs/ip_lc0.4_seed42] ===
+  G1: 点数=10 最优OA= 94.20 AA= 87.81 κ=  0.9037  Corn-notill=99.30 Woods=99.68 Hay-windrowed=64.44
+  G2: 点数=10 最优OA= 90.93 AA= 77.42 κ= 0.80634  Grass-trees=91.37 Buildings-Gras=42.49 Soybean-mintil=98.41
+  G3: 点数=10 最优OA= 87.28 AA= 33.33 κ=     0.0  Grass-pasture-= 0.00 Stone-Steel-To= 0.00 Corn-mintill=100.00
+  G4: 点数=10 最优OA= 90.60 AA= 64.73 κ= 0.80781  Corn=99.16 Alfalfa= 0.00 Grass-pasture=95.03
+  G5: 点数=10 最优OA= 95.49 AA= 65.50 κ= 0.86188  Wheat=100.00 Oats= 0.00 Soybean-notill=96.50
+  G6: 点数=10 最优OA=100.00 AA=100.00 κ=     nan  Soybean-clean=100.00
+  >> fold-mean OA =  93.08   class-mean AA =  67.90  (类数 16)
+
+=== IP λ=0.6  [_remote_runs/ip_lc0.6_seed42] ===
+  G1: 点数=10 最优OA= 95.77 AA= 91.22 κ= 0.93025  Corn-notill=99.93 Woods=99.05 Hay-windrowed=74.69
+  G2: 点数=10 最优OA= 91.04 AA= 78.93 κ= 0.81185  Grass-trees=94.79 Buildings-Gras=44.82 Soybean-mintil=97.19
+  G3: 点数=10 最优OA= 88.33 AA= 65.94 κ= 0.30267  Grass-pasture-=100.00 Stone-Steel-To= 0.00 Corn-mintill=97.83
+  G4: 点数=10 最优OA= 90.47 AA= 64.73 κ= 0.80645  Corn=99.58 Alfalfa= 0.00 Grass-pasture=94.62
+  G5: 点数=10 最优OA= 93.15 AA= 64.54 κ= 0.79946  Wheat=100.00 Oats= 0.00 Soybean-notill=93.62
+  G6: 点数=10 最优OA=100.00 AA=100.00 κ=     nan  Soybean-clean=100.00
+  >> fold-mean OA =  93.13   class-mean AA =  74.76  (类数 16)
+
+>>> Δ(0.4 − 0.6):  fold-mean OA -0.04   class-mean AA -6.86
+>>> 论文 IP class-mean AA = 81.45
+    0.4 的偏差 -13.55   0.6 的偏差 -6.69

@@ -1,0 +1,22 @@
+[10-22 02:41:48] [INFO]: unseen OA is 29.80, unseen AA is 38.04, kappa is 0.03602
+[10-22 02:41:48] [INFO]: unseen per AA [100.    12.58   1.54], kappa is 0.03602
+[10-22 02:47:29] [INFO]: unseen OA is 26.83, unseen AA is 34.87, kappa is -0.01931
+[10-22 02:47:29] [INFO]: unseen per AA [99.35  3.75  1.52], kappa is -0.01931
+[10-22 02:53:17] [INFO]: unseen OA is 26.14, unseen AA is 34.07, kappa is -0.03669
+[10-22 02:53:17] [INFO]: unseen per AA [98.58  1.93  1.7 ], kappa is -0.03669
+[10-22 02:58:58] [INFO]: unseen OA is 27.11, unseen AA is 34.96, kappa is -0.03073
+[10-22 02:58:58] [INFO]: unseen per AA [98.12  4.25  2.53], kappa is -0.03073
+[10-22 03:04:40] [INFO]: unseen OA is 29.12, unseen AA is 36.93, kappa is -0.00605
+[10-22 03:04:40] [INFO]: unseen per AA [98.05  9.03  3.71], kappa is -0.00605
+[10-22 03:10:20] [INFO]: unseen OA is 29.93, unseen AA is 37.53, kappa is 0.00117
+[10-22 03:10:20] [INFO]: unseen per AA [97.16 10.23  5.21], kappa is 0.00117
+[10-22 03:16:00] [INFO]: unseen OA is 29.83, unseen AA is 37.36, kappa is -0.00237
+[10-22 03:16:00] [INFO]: unseen per AA [96.53 10.15  5.4 ], kappa is -0.00237
+[10-22 03:21:44] [INFO]: unseen OA is 29.99, unseen AA is 37.48, kappa is -0.00125
+[10-22 03:21:44] [INFO]: unseen per AA [96.48 10.14  5.81], kappa is -0.00125
+[10-22 03:27:30] [INFO]: unseen OA is 30.08, unseen AA is 37.46, kappa is -0.00098
+[10-22 03:27:30] [INFO]: unseen per AA [95.78 10.19  6.4 ], kappa is -0.00098
+[10-22 03:33:12] [INFO]: unseen OA is 29.60, unseen AA is 36.87, kappa is -0.00971
+[10-22 03:33:12] [INFO]: unseen per AA [94.65  9.54  6.43], kappa is -0.00971
+[10-22 03:33:12] [CRITICAL]: Current experment have been finished.
+

@@ -18,3 +18,16 @@ _paper_page*.png
 _workflow_resume_tmp.js
 _check_folds.py
 _run_*.sh
+
+# 本地旧配置复刻运行目录（含 933MB 权重副本）
+_run_oldregime/
+
+# 论文版运行的完整工作树（含 898MB 权重副本）
+_run_paper/
+
+# 中间产物：300dpi 校图 / 调试脚本 / 工作流日志
+_verify/
+_fig12_zoom.png
+_probe_lc.py
+_wf_journal.txt
+log_Indian_seed42.txt

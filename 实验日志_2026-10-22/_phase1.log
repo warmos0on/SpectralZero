@@ -1,0 +1,20 @@
+#### LongKou A/B 启动 2026-10-22 01:04:42 seeds=42 ####
+  预检通过
+
+########## ARM=base SEED=42 2026-10-22 01:04:44 ##########
+[start] G1 arm=base seed=42 2026-10-22 01:04:44
+[done ] G1 arm=base seed=42 2026-10-22 01:47:51
+[start] G2 arm=base seed=42 2026-10-22 01:47:51
+[done ] G2 arm=base seed=42 2026-10-22 02:35:43
+[start] G3 arm=base seed=42 2026-10-22 02:35:43
+[done ] G3 arm=base seed=42 2026-10-22 03:33:14
+
+########## ARM=bal SEED=42 2026-10-22 03:33:15 ##########
+[start] G1 arm=bal seed=42 2026-10-22 03:33:15
+[done ] G1 arm=bal seed=42 2026-10-22 04:16:11
+[start] G2 arm=bal seed=42 2026-10-22 04:16:11
+[done ] G2 arm=bal seed=42 2026-10-22 05:04:08
+[start] G3 arm=bal seed=42 2026-10-22 05:04:08
+[done ] G3 arm=bal seed=42 2026-10-22 06:02:11
+
+#### LongKou A/B 完成 2026-10-22 06:02:11 ####

@@ -1,0 +1,4 @@
+arm=mild
+sampler_power=0.5
+seed=42
+started=2026-10-22 12:14:44

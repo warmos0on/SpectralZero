@@ -1,0 +1,112 @@
+/root/miniconda3/lib/python3.12/site-packages/torch/autograd/graph.py:744: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[epoch:    1]  Train Accuracy: 15.59361 | train sample number:  25286
+[epoch:    2]  Train Accuracy: 10.38915 | train sample number:  25286
+[epoch:    3]  Train Accuracy: 9.80780 | train sample number:  25286
+[epoch:    4]  Train Accuracy: 10.34960 | train sample number:  25286
+[epoch:    5]  Train Accuracy: 12.20834 | train sample number:  25286
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 90.76, unseen AA is 63.28, kappa is 0.71503
+unseen per AA [ 0.13 94.21 95.5 ], kappa is 0.71503
+[epoch:    6]  Train Accuracy: 14.19362 | train sample number:  25286
+[epoch:    7]  Train Accuracy: 15.84671 | train sample number:  25286
+[epoch:    8]  Train Accuracy: 19.07775 | train sample number:  25286
+[epoch:    9]  Train Accuracy: 20.29186 | train sample number:  25286
+[epoch:   10]  Train Accuracy: 21.97263 | train sample number:  25286
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 85.79, unseen AA is 61.66, kappa is 0.6054
+unseen per AA [ 0.86 87.9  96.24], kappa is 0.6054
+[epoch:   11]  Train Accuracy: 22.70426 | train sample number:  25286
+[epoch:   12]  Train Accuracy: 23.59804 | train sample number:  25286
+[epoch:   13]  Train Accuracy: 23.19465 | train sample number:  25286
+[epoch:   14]  Train Accuracy: 23.46358 | train sample number:  25286
+[epoch:   15]  Train Accuracy: 24.45622 | train sample number:  25286
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 86.98, unseen AA is 62.46, kappa is 0.63008
+unseen per AA [ 0.79 89.15 97.44], kappa is 0.63008
+[epoch:   16]  Train Accuracy: 24.61046 | train sample number:  25286
+[epoch:   17]  Train Accuracy: 24.93079 | train sample number:  25286
+[epoch:   18]  Train Accuracy: 24.75283 | train sample number:  25286
+[epoch:   19]  Train Accuracy: 25.38163 | train sample number:  25286
+[epoch:   20]  Train Accuracy: 26.15281 | train sample number:  25286
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 81.86, unseen AA is 60.83, kappa is 0.53275
+unseen per AA [ 1.81 82.68 97.99], kappa is 0.53275
+[epoch:   21]  Train Accuracy: 25.87598 | train sample number:  25286
+[epoch:   22]  Train Accuracy: 26.61552 | train sample number:  25286
+[epoch:   23]  Train Accuracy: 26.42964 | train sample number:  25286
+[epoch:   24]  Train Accuracy: 26.25564 | train sample number:  25286
+[epoch:   25]  Train Accuracy: 26.93190 | train sample number:  25286
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 80.02, unseen AA is 60.32, kappa is 0.50094
+unseen per AA [ 2.28 80.3  98.39], kappa is 0.50094
+[epoch:   26]  Train Accuracy: 27.44206 | train sample number:  25286
+[epoch:   27]  Train Accuracy: 27.18500 | train sample number:  25286
+[epoch:   28]  Train Accuracy: 27.27596 | train sample number:  25286
+[epoch:   29]  Train Accuracy: 26.56015 | train sample number:  25286
+[epoch:   30]  Train Accuracy: 27.29574 | train sample number:  25286
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 75.88, unseen AA is 58.70, kappa is 0.43666
+unseen per AA [ 2.51 75.17 98.44], kappa is 0.43666
+[epoch:   31]  Train Accuracy: 27.41042 | train sample number:  25286
+[epoch:   32]  Train Accuracy: 27.57652 | train sample number:  25286
+[epoch:   33]  Train Accuracy: 27.54489 | train sample number:  25286
+[epoch:   34]  Train Accuracy: 27.57257 | train sample number:  25286
+[epoch:   35]  Train Accuracy: 27.56071 | train sample number:  25286
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 67.67, unseen AA is 55.47, kappa is 0.33219
+unseen per AA [ 2.97 65.01 98.44], kappa is 0.33219
+[epoch:   36]  Train Accuracy: 27.58443 | train sample number:  25286
+[epoch:   37]  Train Accuracy: 27.56466 | train sample number:  25286
+[epoch:   38]  Train Accuracy: 28.25674 | train sample number:  25286
+[epoch:   39]  Train Accuracy: 26.10535 | train sample number:  25286
+[epoch:   40]  Train Accuracy: 27.00308 | train sample number:  25286
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 68.70, unseen AA is 55.64, kappa is 0.34245
+unseen per AA [ 2.11 66.3  98.52], kappa is 0.34245
+[epoch:   41]  Train Accuracy: 27.37879 | train sample number:  25286
+[epoch:   42]  Train Accuracy: 28.58103 | train sample number:  25286
+[epoch:   43]  Train Accuracy: 27.45393 | train sample number:  25286
+[epoch:   44]  Train Accuracy: 28.59290 | train sample number:  25286
+[epoch:   45]  Train Accuracy: 27.12964 | train sample number:  25286
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 67.08, unseen AA is 54.96, kappa is 0.32419
+unseen per AA [ 2.31 64.35 98.24], kappa is 0.32419
+[epoch:   46]  Train Accuracy: 27.63189 | train sample number:  25286
+[epoch:   47]  Train Accuracy: 27.20873 | train sample number:  25286
+[epoch:   48]  Train Accuracy: 27.51720 | train sample number:  25286
+[epoch:   49]  Train Accuracy: 27.42229 | train sample number:  25286
+[epoch:   50]  Train Accuracy: 27.47370 | train sample number:  25286
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 64.17, unseen AA is 53.87, kappa is 0.29457
+unseen per AA [ 2.84 60.77 98.01], kappa is 0.29457

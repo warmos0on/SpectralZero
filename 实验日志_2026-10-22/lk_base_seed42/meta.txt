@@ -1,0 +1,7 @@
+arm=base
+seed=42
+git=nogit
+python=3.12.3
+torch=2.3.0+cu121 12.1
+started=2026-10-22 01:04:44
+extra=none

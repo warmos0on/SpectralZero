@@ -1,0 +1,5 @@
+arm=lc0.4
+lambda_clip=0.4
+seed=42
+git=nogit
+started=2026-10-22 06:02:11

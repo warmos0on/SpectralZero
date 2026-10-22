@@ -1,0 +1,26 @@
+LongKou 类平衡采样 A/B —— 逐 seed
+seed  arm       fold-mean OA   class-mean AA
+42    base             72.41           61.34
+42    bal              60.79           55.80
+123   base             73.76           62.14
+123   bal              70.81           61.93
+
+Δ(bal − base) 逐 seed
+  seed 42:  OA  -11.62    AA   -5.54
+  seed 123:  OA   -2.95    AA   -0.21
+
+两 seed 汇总（mean ± std）
+  base  OA  73.08 ±  0.68   AA  61.74 ±  0.40
+  bal   OA  65.80 ±  5.01   AA  58.87 ±  3.06
+
+逐类（两 seed 平均）
+类                           base     bal       Δ
+Corn                       98.25   99.27   +1.03
+Cotton                     66.69   38.30  -28.39
+Sesame                      0.25   22.46  +22.21
+Broad-leaf soybean         97.40   79.26  -18.14
+Narrow-leaf soybean        78.53   92.76  +14.22
+Rice                       78.34   97.58  +19.23
+Water                     100.00   95.34   -4.66
+Mixed weed                 32.84    0.79  -32.05
+Roads and houses            3.35    4.05   +0.71
