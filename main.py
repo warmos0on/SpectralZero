@@ -83,7 +83,8 @@ def entry(args, log: loger.Logger):
         # 类别平衡采样：按训练样本数反比加权，缓解类别极度不均衡
         train_labels = np.array(train_dataset.labels, dtype=np.int64)
         class_counts = np.bincount(train_labels - 1, minlength=seen_max).astype(np.float64)
-        sample_weights = 1.0 / class_counts[train_labels - 1]
+        sample_weights = 1.0 / np.power(class_counts[train_labels - 1],
+                                        float(args.get("sampler_power", 1.0)))
         sampler = torch.utils.data.WeightedRandomSampler(
             sample_weights, num_samples=len(train_labels), replacement=True, generator=g)
         train_loader = torch.utils.data.DataLoader(
@@ -149,6 +150,8 @@ if __name__ == "__main__":
     args.add_argument("--checkpoints", type=int, default=None)
     args.add_argument("--use_zscore", type=int, default=None)
     args.add_argument("--use_balanced_sampler", type=int, default=None)
+    args.add_argument("--sampler_power", type=float, default=None,
+                      help="平衡采样的逆频指数：1.0=全量逆频(默认)；0.5=温和版(1/sqrt(n))")
     args.add_argument("--use_unseen_negatives", type=int, default=None)
     args.add_argument("--dynamic_fusion", type=int, default=None)
     args.add_argument("--train_cap", type=str, default=None, help="per-class training count cap JSON (long-tail ablation)")
@@ -168,6 +171,8 @@ if __name__ == "__main__":
             params[flag] = bool(args[flag])
     if args["dynamic_fusion"] is not None:
         params["dynamic_fusion"] = bool(args["dynamic_fusion"])
+    if args["sampler_power"] is not None:
+        params["sampler_power"] = args["sampler_power"]
     if args["train_cap"] is not None:
         params["train_cap"] = args["train_cap"]
     # 日志文件名加上 seed 和 group 方便区分
