@@ -11,6 +11,15 @@ PY=/root/miniconda3/bin/python
 SEEDS=("$@"); [ ${#SEEDS[@]} -eq 0 ] && SEEDS=(42)
 
 LK=config/LongKou.json
+# 幂等：先把 lambda_clip 归位到文档值 0.0 再备份。否则上次被 SIGKILL 打断留下的 1.0
+# 会被当成「原始值」备份，之后永远还原不回 0.0；而 preflight 恰恰期望 1.0，检测不到漂移。
+$PY - "$LK" <<'PY'
+import json, sys
+p = sys.argv[1]
+d = json.load(open(p))
+d['lambda_clip'] = 0.0
+json.dump(d, open(p, 'w'), indent=2)
+PY
 cp "$LK" /tmp/lk_config.bak
 restore_lk () { cp /tmp/lk_config.bak "$LK"; }
 trap restore_lk EXIT
@@ -28,7 +37,9 @@ preflight () {
     got=$($PY -c "import json;print(json.load(open('$LK'))['$key'])")
     [ "$got" != "$want" ] && { echo "  ✗ $key=$got (应 $want)"; bad=1; }
   done
-  for f in dynamic_fusion use_zscore use_unseen_negatives use_logit_adjust use_virtual_prototypes; do
+  # use_balanced_sampler 必须查：它是本次唯一被操纵的开关，base 臂靠它保持 false；
+  # 若它为 true，base 与 bal 完全相同，A/B 会退化成 A/A 而预检仍打印「通过」。
+  for f in dynamic_fusion use_zscore use_unseen_negatives use_balanced_sampler use_logit_adjust use_virtual_prototypes; do
     got=$($PY -c "import json;print(json.load(open('$LK'))['$f'])")
     [ "$got" != "False" ] && { echo "  ✗ $f=$got (应 False)"; bad=1; }
   done

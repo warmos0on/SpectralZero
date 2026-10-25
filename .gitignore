@@ -19,8 +19,11 @@ _workflow_resume_tmp.js
 _check_folds.py
 _run_*.sh
 
-# 本地旧配置复刻运行目录（含 933MB 权重副本）
-_run_oldregime/
+# 本地旧配置复刻运行目录：只排除大件（891MB 权重副本 / 234MB 数据 / 缓存）。
+# logs_base/ 与 logs/ 是 analyze_balanced_sampler.py 唯一的 A 组输入，必须入库。
+_run_oldregime/extract_text/
+_run_oldregime/data/
+_run_oldregime/__pycache__/
 
 # 论文版运行的完整工作树（含 898MB 权重副本）
 _run_paper/

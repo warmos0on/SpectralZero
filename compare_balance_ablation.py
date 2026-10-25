@@ -8,6 +8,11 @@
 import re, os, sys, glob, statistics, collections
 import numpy as np
 
+# Windows 默认 GBK 控制台 print 不了「⚠️」等字符，直接抛 UnicodeEncodeError；
+# 统一改走 UTF-8，避免分析在默认终端下崩掉。
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 OA_RE = re.compile(r"unseen OA is ([-\d.]+), unseen AA is ([-\d.]+), kappa is (\S+)")
 AA_RE = re.compile(r"per AA \[([^\]]*)\]")
 
@@ -36,16 +41,23 @@ def fold_of_hash(h):
     return None
 
 def parse_dir(d):
-    """-> {(fold, seed): (oa, aa, per[list])}，每折取所有评测点中的最优（论文协议）"""
-    out = {}
+    """-> ({(fold, seed): (oa, aa, per[list])}, [未跑完的日志名])
+
+    每折取所有评测点中的最优（论文协议）。只接受跑完的日志（含 loger 的 CRITICAL
+    完成行）：中途崩溃的日志若参与「取最优」，截断轨迹能靠早期尖峰赢过训练完整的折。
+    """
+    out, partial = {}, []
     for f in glob.glob(os.path.join(d, "log_Indian_seed*_g*.txt")):
         m = re.match(r"log_Indian_seed(\d+)_g([0-9a-f]{4})\.txt", os.path.basename(f))
         if not m: continue
         seed, h = int(m.group(1)), m.group(2)
         g = fold_of_hash(h)
         if g is None: continue
+        text = open(f, encoding="utf-8", errors="replace").read()
+        if "Current experment have been finished" not in text:
+            partial.append(os.path.basename(f)); continue
         pts, cur = [], None
-        for line in open(f, encoding="utf-8", errors="replace"):
+        for line in text.splitlines():
             mo = OA_RE.search(line)
             if mo:
                 if cur: pts.append(cur)
@@ -59,7 +71,7 @@ def parse_dir(d):
         if cur: pts.append(cur)
         if pts:
             out[(g, seed)] = tuple(max(pts, key=lambda p: p[0]))
-    return out
+    return out, partial
 
 def pixel_counts():
     import scipy.io as io
@@ -92,11 +104,25 @@ GROUPS_CLASSES = {g: [c.strip() for c in s.split(",")] for g, s in GROUPS.items(
 
 def main():
     seeds = [42, 123, 456]
-    A = parse_dir("logs_base")
-    B = parse_dir("logs_bal")
+    A, A_part = parse_dir("logs_base")
+    B, B_part = parse_dir("logs_bal")
     print(f"解析到：A(base) {len(A)} 条 · B(bal) {len(B)} 条   （期望各 18 条 = 6 折 × 3 seed）\n")
+    if A_part or B_part:
+        print(f"⚠️ 跳过未跑完的日志 {len(A_part) + len(B_part)} 个（缺完成标记）："
+              f"{sorted(A_part + B_part)}\n")
     if not A or not B:
         print("⚠️ 数据不全，先跑完再分析"); return
+
+    # 配对比较要求两侧覆盖同一组 (折, seed)；否则 Δ 是两套折集之差
+    common = sorted(set(A) & set(B))
+    only_a, only_b = sorted(set(A) - set(B)), sorted(set(B) - set(A))
+    if only_a or only_b:
+        print(f"⚠️ A/B 覆盖不一致：仅在 A {only_a}，仅在 B {only_b}；"
+              f"以下只用共同 {len(common)} 条配对\n")
+    if not common:
+        print("⚠️ 没有共同的 (折, seed)，无法做配对比较"); return
+    A = {k: A[k] for k in common}
+    B = {k: B[k] for k in common}
 
     px = pixel_counts()
     pfA, cvA = summarize("A", A, seeds)
@@ -143,12 +169,12 @@ def main():
     print("### 四、按预登记标准的判定\n")
     per_seed = {}
     for s in seeds:
-        # G6 是单类折（恒 ~100），必须排除；否则它会稀释 ΔOA
-        gs = [g for g in GROUPS if g != "G6"]
-        a = [A[(g, s)][0] for g in gs if (g, s) in A]
-        b = [B[(g, s)][0] for g in gs if (g, s) in B]
+        # 与第二节 agg() 用同一组折（含单类折 G6）。G6 两臂都恒 ~100，排除它会让折平均 Δ
+        # 被乘上 6/5（实测比值恒为 1.200），且同一份输出里出现两个不同的 ΔOA。
+        a = [A[(g, s)][0] for g in GROUPS if (g, s) in A]
+        b = [B[(g, s)][0] for g in GROUPS if (g, s) in B]
         if a and b: per_seed[s] = (statistics.mean(a), statistics.mean(b))
-    print("  逐 seed（折平均 OA，均排除单类折 G6）：")
+    print("  逐 seed（折平均 OA，含单类折 G6；排除 G6 会把 Δ 机械放大 6/5）：")
     up = 0
     for s, (a, b) in per_seed.items():
         d = b - a

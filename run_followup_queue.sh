@@ -18,15 +18,12 @@ status "等待 Phase 3 完成（runs/.done_night）"
 while [ ! -f runs/.done_night ]; do sleep 60; done
 status "Phase 3 已完成"
 
-# 切换代码：默认行为与旧版完全一致（power=1.0），仅新增 --sampler_power
-if [ -f main_power.py ]; then
-  cp main.py main_pre_power.bak
-  cp main_power.py main.py
-  { echo "switched=$(date '+%F %T')"; md5sum main.py; } >> runs/STATUS.txt
-  status "main.py 已切换为 sampler_power 版"
-else
-  status "!! 未找到 main_power.py，中止"; exit 2
+# main.py 已内置 --sampler_power（6f69fed），不再切换源码：
+# 原实现依赖未入库的 main_power.py（干净 checkout 上直接中止），且覆盖 main.py 后无法回滚。
+if ! grep -q -- "--sampler_power" main.py; then
+  status "!! main.py 不支持 --sampler_power，中止（需 6f69fed 或更新）"; exit 2
 fi
+status "main.py 已支持 --sampler_power，无需切换"
 
 bash run_lk_mild.sh 42 >> runs/_followup_lkmild.log 2>&1
 status "LongKou mild 结束 exit=$?"

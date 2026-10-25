@@ -28,7 +28,12 @@ LOGDIR="logs_${ARM}"
 mkdir -p runs "$LOGDIR"
 DRIVER="runs/driver_${ARM}.log"
 touch "$DRIVER"
-mv log_*.txt "$LOGDIR"/ 2>/dev/null    # 清走遗留，避免挪错
+mv log_Indian_*.txt "$LOGDIR"/ 2>/dev/null    # 清走遗留（只搬本数据集，别扫别人）
+
+# 留痕：A/B 只差一个开关，事后必须能证明用的是同一份代码与 config
+CODES="main.py datasets.py model_sz.py pipeline.py utils.py eval.py"
+md5sum $CODES > "runs/code_md5_${ARM}.txt"
+cp config/Indian.json "runs/config_used_${ARM}.json"
 
 echo "ARM=$ARM   SEEDS=${SEEDS[*]}   EXTRA=${EXTRA[*]:-none}"
 echo "已有进度: $(grep -c '^\[done ' "$DRIVER") 折"
@@ -38,12 +43,12 @@ is_done () { grep -q "^\[done \] $1 .*exit=0" "$DRIVER"; }
 run_fold () {  # $1=group $2=unseen $3=seed
   local tag="Indian_$1_seed$3_${ARM}"
   if is_done "$tag"; then echo "[skip ] $tag  （已完成）"; return 0; fi
-  echo "[start] $tag  $(date '+%F %H:%M:%S')"
+  echo "[start] $tag  $(date '+%F %H:%M:%S')" | tee -a "$DRIVER"
   $PY -u main.py --dataset Indian --seed "$3" --unseen "$2" \
       ${EXTRA[@]+"${EXTRA[@]}"} > "runs/${tag}.log" 2>&1
   local rc=$?
-  mv log_*.txt "$LOGDIR"/ 2>/dev/null
-  echo "[done ] $tag  $(date '+%F %H:%M:%S')  exit=$rc"
+  mv log_Indian_*.txt "$LOGDIR"/ 2>/dev/null
+  echo "[done ] $tag  $(date '+%F %H:%M:%S')  exit=$rc" | tee -a "$DRIVER"
 }
 
 for SEED in "${SEEDS[@]}"; do

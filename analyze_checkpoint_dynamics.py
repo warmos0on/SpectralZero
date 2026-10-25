@@ -11,12 +11,24 @@
 import re, statistics, sys
 from pathlib import Path
 
+# Windows 默认 GBK 控制台 print 不了「−」(U+2212) 等字符，直接抛 UnicodeEncodeError；
+# 统一改走 UTF-8，避免分析在默认终端下崩掉。
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 SRC = Path(__file__).with_name("复现结果_论文折.md")
 FOLD_RE = re.compile(r"^### (IP|WHHL) (G\d)")
 ROW_RE = re.compile(r"^\|\s*\*{0,2}(\d+)\*{0,2}\s*\|\s*\*{0,2}([\d.]+)\*{0,2}\s*\|\s*\*{0,2}([\d.]+)")
+# 单类折的压缩行，如「| 1–10 | 100.00 | 100.00 | nan | 100.00 |」
+ROW_RANGE_RE = re.compile(r"^\|\s*\d+\s*[–-]\s*\d+\s*\|")
 
 def parse():
-    folds, cur = {}, None
+    """-> (可分析折, 评测点不足被丢弃的折, 压缩行折)
+
+    压缩行折（单类折）没有逐点轨迹，按协议不计入统计；但仍要报出来，
+    否则 9 折悄悄变成 8 折而汇总行仍按 8 折给结论。
+    """
+    folds, cur, compressed = {}, None, []
     for line in SRC.read_text(encoding="utf-8").splitlines():
         m = FOLD_RE.match(line)
         if m:
@@ -27,15 +39,25 @@ def parse():
             r = ROW_RE.match(line)
             if r:
                 folds[cur].append((int(r.group(1)), float(r.group(2)), float(r.group(3))))
-    return {k: v for k, v in folds.items() if len(v) >= 2}
+            elif ROW_RANGE_RE.match(line) and not folds[cur]:
+                compressed.append(cur)
+    kept = {k: v for k, v in folds.items() if len(v) >= 2}
+    dropped = [k for k, v in folds.items()
+               if len(v) < 2 and k not in kept and k not in compressed]
+    return kept, dropped, compressed
 
 def main():
-    folds = parse()
+    folds, dropped, compressed = parse()
     if not folds:
         print("解析失败：检查 §三 表格式"); sys.exit(1)
 
     print("=" * 100)
     print("### 逐折轨迹（seed 42，口径 = 每 10 轮/WHHL 每 5 轮一个评测点）\n")
+    if compressed:
+        print(f"  ℹ️ 压缩行折（单类，无逐点轨迹，按协议不计入）：{compressed}")
+    if dropped:
+        print(f"  ⚠️ 评测点不足 2 个、未计入统计的折：{dropped}")
+    print()
     hdr = f"{'折':10s}{'点数':>5s}{'最优点#':>8s}{'最优OA':>9s}{'末点OA':>9s}{'best−last':>11s}{'相邻|ΔOA|':>11s}{'后5点斜率':>11s}"
     print(hdr); print("-" * len(hdr))
 
@@ -108,12 +130,19 @@ def main():
     print(f"    实测 = {statistics.mean(rng):.2f}   独立抽样(iid 正态 n=10) 理论 ≈ 3.08")
     print(f"    实测 {'>' if statistics.mean(rng) > 3.08 else '<'} 3.08 ⇒ "
           f"{'分布比正态更散（存在低位离群点）' if statistics.mean(rng) > 3.08 else '比正态更集中'}")
-    print(f"    配合上一格 (max−mean)/sd = {statistics.mean(r1):.2f} < 1.54（iid 理论值）")
-    print(f"    ⇒ 两个量都不符合「独立噪声」画像。轨迹更像**成簇的水平跳变**：")
-    print(f"      模型在一段时间停在一个水平，偶尔整体跳到另一个水平（见 IP G1：多数点在 84 附近、")
-    print(f"      第 2 点跳到 93.7、末两点掉到 75–76）。")
-    print(f"      含义：「取最优」选中的是**水平跳变的高位**，属系统性不稳，")
-    print(f"            不是重复测量就能平均掉的随机噪声。")
+    m1, mr = statistics.mean(r1), statistics.mean(rng)
+    print(f"    配合上一格 (max−mean)/sd = {m1:.2f} vs 1.54（iid 理论值）")
+    if m1 < 1.54 and mr > 3.08:
+        print(f"    ⇒ 两个量都不符合「独立噪声」画像。轨迹更像**成簇的水平跳变**：")
+        print(f"      模型在一段时间停在一个水平，偶尔整体跳到另一个水平。")
+        print(f"      含义：「取最优」选中的是**水平跳变的高位**，属系统性不稳，")
+        print(f"            不是重复测量就能平均掉的随机噪声。")
+    elif m1 >= 1.54:
+        print(f"    ⇒ (max−mean)/sd ≥ iid 理论值：「取最优」的红利与**噪声极值**相当，")
+        print(f"      不能据此推断存在系统性水平跳变。")
+    else:
+        print(f"    ⇒ 极差/sd = {mr:.2f} 未超过 iid 理论值 3.08，轨迹比独立抽样更集中；")
+        print(f"      「成簇跳变」的解释不成立，需结合相邻点的相关性另行判断。")
 
     print(f"\n  解读：末点若普遍低于中位数 → 后期在退化（过拟合/漂移）；")
     print(f"        平均 best−last 越大 → 「取最优」这条协议吃到的红利越多。")

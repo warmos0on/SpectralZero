@@ -6,6 +6,14 @@ PY=/root/miniconda3/bin/python
 SEEDS=("$@"); [ ${#SEEDS[@]} -eq 0 ] && SEEDS=(42)
 
 LK=config/LongKou.json
+# 幂等：先归位到文档值 0.0 再备份，避免上次被 kill 留下的 1.0 被当成原始值（同 run_lk_ab.sh）
+$PY - "$LK" <<'PY'
+import json, sys
+p = sys.argv[1]
+d = json.load(open(p))
+d['lambda_clip'] = 0.0
+json.dump(d, open(p, 'w'), indent=2)
+PY
 cp "$LK" /tmp/lk_config.bak
 restore_lk () { cp /tmp/lk_config.bak "$LK"; }
 trap restore_lk EXIT
@@ -14,7 +22,14 @@ CODES="main.py datasets.py model_sz.py pipeline.py utils.py eval.py"
 mkdir -p runs
 
 sed -i 's/"lambda_clip": 0.0/"lambda_clip": 1.0/' "$LK"
-status "启动 sampler_power=0.5"
+# 红线 3：λ=0 必挂。sed 对空格敏感，失配时是空操作 —— 开跑前必须读回确认。
+GOT=$($PY -c "import json;print(json.load(open('$LK'))['lambda_clip'])")
+if [ "$GOT" != "1.0" ]; then
+  status "!! lambda_clip=$GOT（应 1.0），中止"
+  echo "!! lambda_clip=$GOT（应 1.0），中止" >&2
+  exit 2
+fi
+status "启动 sampler_power=0.5（lambda_clip=1.0 已确认）"
 
 for SEED in "${SEEDS[@]}"; do
   OUT="runs/lk_mild_seed${SEED}"; mkdir -p "$OUT"
