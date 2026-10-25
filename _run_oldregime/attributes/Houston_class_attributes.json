@@ -1,0 +1,77 @@
+{
+  "Healthy grass": {
+    "shape": "open areas with uniform texture",
+    "object type": "natural grass in good condition",
+    "color": "green"
+  },
+  "Commercial": {
+    "shape": "areas with regular layouts",
+    "object type": "commercial buildings and facilities",
+    "color": "varied"
+  },
+  "Parking Lot 1": {
+    "shape": "flat paved areas",
+    "object type": "paved parking lots",
+    "color": "gray"
+  },
+  "Parking Lot 2": {
+    "shape": "flat unpaved areas",
+    "object type": "unpaved parking lots",
+    "color": "light yellow"
+  },
+  "Stressed grass": {
+    "shape": "open areas with uneven texture",
+    "object type": "natural grass under stress",
+    "color": "yellowish-green"
+  },
+  "Highways": {
+    "shape": "linear structures of greater width",
+    "object type": "major highways",
+    "color": "dark gray"
+  },
+  "Trees": {
+    "shape": "areas with dense canopy and rough texture",
+    "object type": "various tree species",
+    "color": "dark green"
+  },
+  "Synthetic grass": {
+    "shape": "open areas with uniform texture",
+    "object type": "artificial grass surfaces",
+    "color": "green"
+  },
+  "Water": {
+    "shape": "continuous flat areas",
+    "object type": "bodies of water",
+    "color": "blue"
+  },
+  "Residential": {
+    "shape": "areas with irregular layouts",
+    "object type": "residential buildings and yards",
+    "color": "varied"
+  },
+  "Soil": {
+    "shape": "bare ground with variable texture",
+    "object type": "exposed soil surfaces",
+    "color": "light brown"
+  },
+  "Railways": {
+    "shape": "linear structures with parallel tracks",
+    "object type": "railroad tracks",
+    "color": "gray"
+  },
+  "Tennis Court": {
+    "shape": "rectangular flat areas",
+    "object type": "tennis courts",
+    "color": "green or red"
+  },
+  "Running Track": {
+    "shape": "oval flat areas",
+    "object type": "athletic running tracks",
+    "color": "red"
+  },
+  "Road": {
+    "shape": "linear structures of moderate width",
+    "object type": "standard roads",
+    "color": "gray"
+  }
+}

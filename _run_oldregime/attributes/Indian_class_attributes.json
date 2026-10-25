@@ -1,0 +1,98 @@
+{
+  "Corn-notill": {
+    "crop_type": "corn",
+    "tillage": "notill",
+    "vegetation_color": "green",
+    "land_surface": "flat"
+  },
+  "Soybean-mintill": {
+    "crop_type": "soybean",
+    "tillage": "mintill",
+    "vegetation_color": "green",
+    "land_surface": "undulating"
+  },
+  "Woods": {
+    "vegetation_type": "forest",
+    "vegetation_density": "dense",
+    "vegetation_color": "green",
+    "land_surface": "varied"
+  },
+  "Grass-trees": {
+    "land_type": "open_area",
+    "vegetation_type": "grass_and_trees",
+    "vegetation_arrangement": "ordered",
+    "vegetation_color": "green"
+  },
+  "Corn-mintill": {
+    "crop_type": "corn",
+    "tillage": "mintill",
+    "vegetation_color": "green",
+    "land_surface": "undulating"
+  },
+  "Grass-pasture": {
+    "land_type": "grazing_land",
+    "vegetation_type": "grass",
+    "vegetation_height": "short",
+    "vegetation_color": "green"
+  },
+  "Buildings-Grass-Trees-Drives": {
+    "land_type": "diverse_environment",
+    "urban_elements": "buildings",
+    "natural_elements": "grass_and_trees",
+    "artificial_features": "driveways"
+  },
+  "Hay-windrowed": {
+  "land_type": "agricultural_field",
+  "hay_arrangement": "linear",
+  "land_surface": "flat",
+  "vegetation_color": "golden"
+  },
+  "Soybean-notill": {
+    "crop_type": "soybean",
+    "tillage": "notill",
+    "vegetation_color": "green",
+    "land_surface": "flat"
+  },
+  "Wheat": {
+    "crop_type": "wheat",
+    "vegetation_color": "golden",
+    "wheat_arrangement": "linear",
+    "land_surface": "undulating"
+  },
+  "Alfalfa": {
+    "crop_type": "alfalfa",
+    "vegetation_color": "green",
+    "vegetation_height": "medium",
+    "land_surface": "varied"
+  },
+  "Corn": {
+    "crop_type": "corn",
+    "vegetation_color": "green",
+    "land_surface": "flat",
+    "vegetation_height": "medium"
+  },
+  "Grass-pasture-mowed": {
+    "land_type": "mowed_pasture",
+    "vegetation_type": "grass",
+    "vegetation_height": "short",
+    "vegetation_color": "green"
+  },
+  "Oats": {
+    "crop_type": "oats",
+    "vegetation_color": "green",
+    "vegetation_height": "medium",
+    "land_surface": "flat"
+  },
+  "Soybean-clean": {
+    "crop_type": "soybean",
+    "vegetation_color": "green",
+    "tillage": "clean",
+    "land_surface": "flat"
+  },
+  "Stone-Steel-Towers": {
+    "land_type": "industrial_area",
+    "structures": "stone_and_steel_towers",
+    "structures_color": "gray",
+    "land_surface": "varied"
+  }
+}

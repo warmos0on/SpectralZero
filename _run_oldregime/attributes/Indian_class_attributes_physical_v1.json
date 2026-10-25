@@ -1,0 +1,98 @@
+{
+  "Corn-notill": {
+    "spectral_reflectance": "strong near infrared reflectance from dense corn canopy",
+    "phenology": "mature corn with high biomass",
+    "soil_background": "no till soil covered with crop residue",
+    "canopy_structure": "dense parallel rows of broad corn leaves"
+  },
+  "Soybean-mintill": {
+    "spectral_reflectance": "moderate near infrared reflectance from soybean canopy",
+    "phenology": "growing soybean with some ground exposed",
+    "soil_background": "minimum tilled soil with partial residue",
+    "canopy_structure": "broad leaf soybean rows"
+  },
+  "Woods": {
+    "spectral_reflectance": "strong near infrared reflectance from dense forest canopy",
+    "phenology": "multi layer mature forest",
+    "soil_background": "forest floor with litter and little bare soil",
+    "canopy_structure": "dense tree crowns with rough texture"
+  },
+  "Grass-trees": {
+    "spectral_reflectance": "mixed reflectance from grass and tree crowns",
+    "phenology": "grassland with scattered trees",
+    "soil_background": "grass covered ground with leaf litter",
+    "canopy_structure": "tree crowns above open grass"
+  },
+  "Corn-mintill": {
+    "spectral_reflectance": "moderate near infrared reflectance from corn canopy",
+    "phenology": "growing corn with partial soil exposure",
+    "soil_background": "minimum tilled soil with some residue",
+    "canopy_structure": "rows of broad corn leaves"
+  },
+  "Grass-pasture": {
+    "spectral_reflectance": "moderate near infrared reflectance from grassland",
+    "phenology": "grazed grass with patchy cover",
+    "soil_background": "exposed soil patches from grazing",
+    "canopy_structure": "low uniform grass cover"
+  },
+  "Buildings-Grass-Trees-Drives": {
+    "spectral_reflectance": "mixed reflectance from buildings and vegetation",
+    "phenology": "vegetation patches among built surfaces",
+    "soil_background": "paved driveways yards and grass lawns",
+    "canopy_structure": "scattered tree canopies around buildings"
+  },
+  "Hay-windrowed": {
+    "spectral_reflectance": "elevated visible reflectance from drying cut hay",
+    "phenology": "cut hay drying in windrows",
+    "soil_background": "exposed soil between hay rows",
+    "canopy_structure": "linear windrows of cut vegetation"
+  },
+  "Soybean-notill": {
+    "spectral_reflectance": "moderate near infrared reflectance from soybean canopy",
+    "phenology": "leafy soybean at early growth",
+    "soil_background": "no till soil with residue cover",
+    "canopy_structure": "broad leaf soybean rows"
+  },
+  "Wheat": {
+    "spectral_reflectance": "high visible reflectance from dry senesced wheat",
+    "phenology": "mature wheat turned golden and dry",
+    "soil_background": "dry soil with harvested stubble",
+    "canopy_structure": "dense narrow leaf grain rows"
+  },
+  "Alfalfa": {
+    "spectral_reflectance": "strong near infrared reflectance from dense alfalfa",
+    "phenology": "leafy alfalfa regrowth after cutting",
+    "soil_background": "moist soil under dense cover",
+    "canopy_structure": "uniform dense low leafy canopy"
+  },
+  "Corn": {
+    "spectral_reflectance": "strong near infrared reflectance from healthy corn",
+    "phenology": "vigorous corn at peak growing season",
+    "soil_background": "clean tilled bare soil visible between rows",
+    "canopy_structure": "dense broad leaf corn rows"
+  },
+  "Grass-pasture-mowed": {
+    "spectral_reflectance": "moderate near infrared reflectance from short grass",
+    "phenology": "recently mowed grass stubble",
+    "soil_background": "trimmed stubble with little soil exposed",
+    "canopy_structure": "very short uniform grass"
+  },
+  "Oats": {
+    "spectral_reflectance": "moderate visible reflectance from senesced oats",
+    "phenology": "mature oats with dry pale seed heads",
+    "soil_background": "dry soil beneath oat plants",
+    "canopy_structure": "narrow leaf grain rows"
+  },
+  "Soybean-clean": {
+    "spectral_reflectance": "moderate near infrared reflectance from dense soybean",
+    "phenology": "full canopy soybean at late growth",
+    "soil_background": "clean tilled bare soil",
+    "canopy_structure": "dense broad leaf soybean canopy"
+  },
+  "Stone-Steel-Towers": {
+    "spectral_reflectance": "weak near infrared reflectance from stone and metal",
+    "phenology": "no vegetation, artificial tower structures",
+    "soil_background": "bare ground around tower bases",
+    "canopy_structure": "no plant canopy, rigid tower geometry"
+  }
+}

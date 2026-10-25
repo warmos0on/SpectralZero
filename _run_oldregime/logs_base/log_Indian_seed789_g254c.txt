@@ -1,0 +1,10 @@
+[10-15 18:20:14] [INFO]: unseen OA is 88.52, unseen AA is 66.13, kappa is 0.31439
+[10-15 18:20:14] [INFO]: unseen per AA [100.     0.    98.38], kappa is 0.31439
+[10-15 18:20:28] [INFO]: unseen OA is 86.35, unseen AA is 65.30, kappa is 0.29883
+[10-15 18:20:28] [INFO]: unseen per AA [100.     0.    95.89], kappa is 0.29883
+[10-15 18:20:41] [INFO]: unseen OA is 75.73, unseen AA is 63.44, kappa is 0.28806
+[10-15 18:20:41] [INFO]: unseen per AA [100.     7.53  82.79], kappa is 0.28806
+[10-15 18:20:55] [INFO]: unseen OA is 76.81, unseen AA is 68.29, kappa is 0.36271
+[10-15 18:20:55] [INFO]: unseen per AA [100.    22.58  82.29], kappa is 0.36271
+[10-15 18:20:55] [CRITICAL]: Current experment have been finished.
+

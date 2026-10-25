@@ -1,0 +1,18 @@
+
+########## 旧配置 · 只加平衡采样 · SEED 42 ##########
+[start] Indian_G1_seed42_oldbase  2026-10-15 01:53:21
+[done ] Indian_G1_seed42_oldbase  2026-10-15 01:54:19  exit=0
+[start] Indian_G2_seed42_oldbase  2026-10-15 01:54:19
+[done ] Indian_G2_seed42_oldbase  2026-10-15 01:55:14  exit=0
+[start] Indian_G3_seed42_oldbase  2026-10-15 01:55:14
+[done ] Indian_G3_seed42_oldbase  2026-10-15 01:56:21  exit=0
+[start] Indian_G4_seed42_oldbase  2026-10-15 01:56:21
+[done ] Indian_G4_seed42_oldbase  2026-10-15 01:57:28  exit=0
+[start] Indian_G5_seed42_oldbase  2026-10-15 01:57:28
+[done ] Indian_G5_seed42_oldbase  2026-10-15 01:58:32  exit=0
+[start] Indian_G6_seed42_oldbase  2026-10-15 01:58:32
+[done ] Indian_G6_seed42_oldbase  2026-10-15 01:59:39  exit=0
+[seed 42 完成]  2026-10-15 01:59:40
+
+########## 全部完成 ##########
+loger 明细: logs_base/    stdout: runs/

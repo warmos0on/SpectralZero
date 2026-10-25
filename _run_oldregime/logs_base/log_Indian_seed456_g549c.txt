@@ -1,0 +1,10 @@
+[10-15 02:27:20] [INFO]: unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+[10-15 02:27:20] [INFO]: unseen per AA [100.], kappa is nan
+[10-15 02:27:35] [INFO]: unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+[10-15 02:27:35] [INFO]: unseen per AA [100.], kappa is nan
+[10-15 02:27:50] [INFO]: unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+[10-15 02:27:50] [INFO]: unseen per AA [100.], kappa is nan
+[10-15 02:28:05] [INFO]: unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+[10-15 02:28:05] [INFO]: unseen per AA [100.], kappa is nan
+[10-15 02:28:05] [CRITICAL]: Current experment have been finished.
+

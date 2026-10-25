@@ -1,0 +1,66 @@
+
+########## 旧配置 · 只加平衡采样 · SEED 123 ##########
+[start] Indian_G1_seed123_oldbal  2026-10-15 02:28:07
+[done ] Indian_G1_seed123_oldbal  2026-10-15 02:29:06  exit=0
+[start] Indian_G2_seed123_oldbal  2026-10-15 02:29:06
+[done ] Indian_G2_seed123_oldbal  2026-10-15 02:30:04  exit=0
+[start] Indian_G3_seed123_oldbal  2026-10-15 02:30:04
+[done ] Indian_G3_seed123_oldbal  2026-10-15 02:31:12  exit=0
+[start] Indian_G4_seed123_oldbal  2026-10-15 02:31:12
+[done ] Indian_G4_seed123_oldbal  2026-10-15 02:32:21  exit=0
+[start] Indian_G5_seed123_oldbal  2026-10-15 02:32:21
+[done ] Indian_G5_seed123_oldbal  2026-10-15 02:33:28  exit=0
+[start] Indian_G6_seed123_oldbal  2026-10-15 02:33:28
+[done ] Indian_G6_seed123_oldbal  2026-10-15 02:34:38  exit=0
+[seed 123 完成]  2026-10-15 02:34:38
+
+########## 旧配置 · 只加平衡采样 · SEED 456 ##########
+[start] Indian_G1_seed456_oldbal  2026-10-15 02:34:38
+[done ] Indian_G1_seed456_oldbal  2026-10-15 02:35:38  exit=0
+[start] Indian_G2_seed456_oldbal  2026-10-15 02:35:38
+[done ] Indian_G2_seed456_oldbal  2026-10-15 02:36:35  exit=0
+[start] Indian_G3_seed456_oldbal  2026-10-15 02:36:35
+[done ] Indian_G3_seed456_oldbal  2026-10-15 02:37:44  exit=0
+[start] Indian_G4_seed456_oldbal  2026-10-15 02:37:44
+[done ] Indian_G4_seed456_oldbal  2026-10-15 02:38:54  exit=0
+[start] Indian_G5_seed456_oldbal  2026-10-15 02:38:54
+[done ] Indian_G5_seed456_oldbal  2026-10-15 02:40:02  exit=0
+[start] Indian_G6_seed456_oldbal  2026-10-15 02:40:02
+[done ] Indian_G6_seed456_oldbal  2026-10-15 02:41:12  exit=0
+[seed 456 完成]  2026-10-15 02:41:12
+
+########## 全部完成 ##########
+loger 明细: logs/    stdout: runs/
+
+########## 旧配置 · 只加平衡采样 · SEED 789 ##########
+[start] Indian_G1_seed789_oldbal  2026-10-15 18:29:38
+[done ] Indian_G1_seed789_oldbal  2026-10-15 18:30:28  exit=0
+[start] Indian_G2_seed789_oldbal  2026-10-15 18:30:28
+[done ] Indian_G2_seed789_oldbal  2026-10-15 18:31:18  exit=0
+[start] Indian_G3_seed789_oldbal  2026-10-15 18:31:18
+[done ] Indian_G3_seed789_oldbal  2026-10-15 18:32:17  exit=0
+[start] Indian_G4_seed789_oldbal  2026-10-15 18:32:17
+[done ] Indian_G4_seed789_oldbal  2026-10-15 18:33:18  exit=0
+[start] Indian_G5_seed789_oldbal  2026-10-15 18:33:18
+[done ] Indian_G5_seed789_oldbal  2026-10-15 18:34:16  exit=0
+[start] Indian_G6_seed789_oldbal  2026-10-15 18:34:17
+[done ] Indian_G6_seed789_oldbal  2026-10-15 18:35:18  exit=0
+[seed 789 完成]  2026-10-15 18:35:18
+
+########## 旧配置 · 只加平衡采样 · SEED 2024 ##########
+[start] Indian_G1_seed2024_oldbal  2026-10-15 18:35:18
+[done ] Indian_G1_seed2024_oldbal  2026-10-15 18:36:09  exit=0
+[start] Indian_G2_seed2024_oldbal  2026-10-15 18:36:09
+[done ] Indian_G2_seed2024_oldbal  2026-10-15 18:36:59  exit=0
+[start] Indian_G3_seed2024_oldbal  2026-10-15 18:36:59
+[done ] Indian_G3_seed2024_oldbal  2026-10-15 18:37:58  exit=0
+[start] Indian_G4_seed2024_oldbal  2026-10-15 18:37:59
+[done ] Indian_G4_seed2024_oldbal  2026-10-15 18:38:59  exit=0
+[start] Indian_G5_seed2024_oldbal  2026-10-15 18:38:59
+[done ] Indian_G5_seed2024_oldbal  2026-10-15 18:39:57  exit=0
+[start] Indian_G6_seed2024_oldbal  2026-10-15 18:39:57
+[done ] Indian_G6_seed2024_oldbal  2026-10-15 18:40:59  exit=0
+[seed 2024 完成]  2026-10-15 18:40:59
+
+########## 全部完成 ##########
+loger 明细: logs/    stdout: runs/

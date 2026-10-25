@@ -1,0 +1,68 @@
+[epoch:    1]  Train Accuracy: 27.39018 | train sample number:   1935
+[epoch:    2]  Train Accuracy: 47.70026 | train sample number:   1935
+[epoch:    3]  Train Accuracy: 56.95090 | train sample number:   1935
+[epoch:    4]  Train Accuracy: 62.84238 | train sample number:   1935
+[epoch:    5]  Train Accuracy: 66.77003 | train sample number:   1935
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+C:\Users\ASUS\.conda\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\ASUS\.conda\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\ASUS\.conda\envs\SpectralZero\Lib\site-packages\sklearn\utils\_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan
+[epoch:    6]  Train Accuracy: 71.78295 | train sample number:   1935
+[epoch:    7]  Train Accuracy: 74.98708 | train sample number:   1935
+[epoch:    8]  Train Accuracy: 78.19121 | train sample number:   1935
+[epoch:    9]  Train Accuracy: 80.87855 | train sample number:   1935
+[epoch:   10]  Train Accuracy: 82.32558 | train sample number:   1935
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+C:\Users\ASUS\.conda\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\ASUS\.conda\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\ASUS\.conda\envs\SpectralZero\Lib\site-packages\sklearn\utils\_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan
+[epoch:   11]  Train Accuracy: 84.96124 | train sample number:   1935
+[epoch:   12]  Train Accuracy: 87.54522 | train sample number:   1935
+[epoch:   13]  Train Accuracy: 88.26873 | train sample number:   1935
+[epoch:   14]  Train Accuracy: 89.04393 | train sample number:   1935
+[epoch:   15]  Train Accuracy: 90.54264 | train sample number:   1935
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+C:\Users\ASUS\.conda\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\ASUS\.conda\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\ASUS\.conda\envs\SpectralZero\Lib\site-packages\sklearn\utils\_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan
+[epoch:   16]  Train Accuracy: 91.78295 | train sample number:   1935
+[epoch:   17]  Train Accuracy: 92.66150 | train sample number:   1935
+[epoch:   18]  Train Accuracy: 92.35142 | train sample number:   1935
+[epoch:   19]  Train Accuracy: 93.38501 | train sample number:   1935
+[epoch:   20]  Train Accuracy: 93.33333 | train sample number:   1935
+
+[阅卷诊断] 测试集的真实标签种类有: [0]
+[阅卷诊断] 模型实际预测出的标签种类有: [0]
+
+C:\Users\ASUS\.conda\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\ASUS\.conda\envs\SpectralZero\Lib\site-packages\sklearn\metrics\_classification.py:614: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+C:\Users\ASUS\.conda\envs\SpectralZero\Lib\site-packages\sklearn\utils\_param_validation.py:218: UndefinedMetricWarning: `y1`, `y2` and `labels` have only one label in common. `cohen_kappa_score` is undefined and set to the value defined by the the `replace_undefined_by` param, which is set to nan.
+  return func(*args, **kwargs)
+unseen OA is 100.00, unseen AA is 100.00, kappa is nan
+unseen per AA [100.], kappa is nan

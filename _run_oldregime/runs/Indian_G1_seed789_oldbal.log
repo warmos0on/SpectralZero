@@ -1,0 +1,44 @@
+[epoch:    1]  Train Accuracy: 32.30120 | train sample number:   1421
+[epoch:    2]  Train Accuracy: 55.31316 | train sample number:   1421
+[epoch:    3]  Train Accuracy: 67.55806 | train sample number:   1421
+[epoch:    4]  Train Accuracy: 70.72484 | train sample number:   1421
+[epoch:    5]  Train Accuracy: 73.25827 | train sample number:   1421
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 81.90, unseen AA is 71.08, kappa is 0.701
+unseen per AA [98.95 81.03 33.26], kappa is 0.701
+[epoch:    6]  Train Accuracy: 77.33990 | train sample number:   1421
+[epoch:    7]  Train Accuracy: 79.87333 | train sample number:   1421
+[epoch:    8]  Train Accuracy: 80.64743 | train sample number:   1421
+[epoch:    9]  Train Accuracy: 82.68825 | train sample number:   1421
+[epoch:   10]  Train Accuracy: 83.25123 | train sample number:   1421
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 89.15, unseen AA is 76.19, kappa is 0.81423
+unseen per AA [99.86 99.84 28.87], kappa is 0.81423
+[epoch:   11]  Train Accuracy: 86.98100 | train sample number:   1421
+[epoch:   12]  Train Accuracy: 86.41802 | train sample number:   1421
+[epoch:   13]  Train Accuracy: 87.96622 | train sample number:   1421
+[epoch:   14]  Train Accuracy: 88.52920 | train sample number:   1421
+[epoch:   15]  Train Accuracy: 91.97748 | train sample number:   1421
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 82.78, unseen AA is 77.56, kappa is 0.72511
+unseen per AA [99.65 71.94 61.09], kappa is 0.72511
+[epoch:   16]  Train Accuracy: 91.97748 | train sample number:   1421
+[epoch:   17]  Train Accuracy: 93.87755 | train sample number:   1421
+[epoch:   18]  Train Accuracy: 94.44053 | train sample number:   1421
+[epoch:   19]  Train Accuracy: 94.93315 | train sample number:   1421
+[epoch:   20]  Train Accuracy: 95.21464 | train sample number:   1421
+
+[阅卷诊断] 测试集的真实标签种类有: [0 1 2]
+[阅卷诊断] 模型实际预测出的标签种类有: [0 1 2]
+
+unseen OA is 80.42, unseen AA is 74.92, kappa is 0.68895
+unseen per AA [99.86 66.96 57.95], kappa is 0.68895
